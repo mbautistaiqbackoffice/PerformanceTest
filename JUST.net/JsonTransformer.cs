@@ -48,7 +48,8 @@ namespace JUST
             var result = new JArray();
             var items = transformerArray.ToArray();
 
-            for (int i = 0; i < items.Length; i++)
+            int itemsLength = items.Length;
+            for (int i = 0; i < itemsLength; i++)
             {
                 var transformer = items[i];
 
@@ -95,7 +96,8 @@ namespace JUST
 
             bool isLoop = false;
 
-            for (int i = 0; i < tokens.Length; i++)
+            int tokensLength = tokens.Length;
+            for (int i = 0; i < tokensLength; i++)
             {
                 JToken childToken = tokens[i];
 
@@ -104,7 +106,8 @@ namespace JUST
                     List<object> itemsToAdd = new List<object>();
                     JToken[] childTokens = childToken.Children().ToArray();
 
-                    for (int j = 0; j < childTokens.Length; j++)
+                    int childTokensLength = childTokens.Length;
+                    for (int j = 0; j < childTokensLength; j++)
                     {
                         JToken arrEl = childTokens[j];
 
@@ -131,7 +134,8 @@ namespace JUST
                         JArray values = property.Value as JArray;
                         JToken[] arrayValues = values.Children().ToArray();
 
-                        for (int j = 0; j < arrayValues.Length; j++)
+                        int arrayValuesLength = arrayValues.Length;
+                        for (int j = 0; j < arrayValuesLength; j++)
                         {
                             JToken arrayValue = arrayValues[j];
 
@@ -227,8 +231,9 @@ namespace JUST
                                 tokenToForm = new List<JToken>();
                             }
                             var childTokens = childToken.Children().ToArray();
-
-                            for (int j = 0; j < childTokens.Length; j++)
+                            
+                            int childTokensLength = childTokens.Length;
+                            for (int j = 0; j < childTokensLength; j++)
                             {
                                 JToken grandChildToken = childTokens[j];
                                 tokenToForm.Add(grandChildToken.DeepClone());
@@ -300,7 +305,8 @@ namespace JUST
 
                             JToken[] elements = array.ToArray();
 
-                            for (int j = 0; j < elements.Length; j++)
+                            int elementsLength = elements.Length;
+                            for (int j = 0; j < elementsLength; j++)
                             {
                                 if (arrayToForm == null)
                                     arrayToForm = new JArray();
@@ -311,7 +317,8 @@ namespace JUST
 
                                 var clonedTokens = clonedToken.Children().ToArray();
 
-                                for (int k = 0; k < clonedTokens.Length; k++)
+                                int clonedTokensLength = clonedTokens.Length;
+                                for (int k = 0; k < clonedTokensLength; k++)
                                 {
                                     JToken replacedProperty = clonedTokens[k];
                                     arrayToForm.Add(replacedProperty);
@@ -350,7 +357,8 @@ namespace JUST
                     {
                         JToken[] copyChildren = selectedToken.Children().ToArray();
 
-                        for (int j = 0; j < copyChildren.Length; j++)
+                        int copyChildrenLength = copyChildren.Length;
+                        for (int j = 0; j < copyChildrenLength; j++)
                         {
                             JToken copyChild = copyChildren[j];
                             JProperty property = copyChild as JProperty;
@@ -374,7 +382,8 @@ namespace JUST
 
                         JToken[] copyChildren = tokenToReplace.Value.Children().ToArray();
 
-                        for (int i = 0; i < copyChildren.Length; i++)
+                        int copyChildrenLength = copyChildren.Length;
+                        for (int i = 0; i < copyChildrenLength; i++)
                         {
                             JToken copyChild = copyChildren[i];
 
@@ -419,7 +428,8 @@ namespace JUST
 
                     JToken[] childTokens = token.Children().ToArray();
 
-                    for (int j = 0; j < childTokens.Length; j++)
+                    int childTokensLength = childTokens.Length;
+                    for (int j = 0; j < childTokensLength; j++)
                     {
                         JProperty childToken = (JProperty)childTokens[j];
                         (parentToken as JObject).Add(childToken.Name, childToken.Value);
@@ -647,7 +657,8 @@ namespace JUST
             string dllName = string.Empty;
             int i = 0;
 
-            for (int j = 0; j < parameters.Length; j++)
+            int parametersLength = parameters.Length;
+            for (int j = 0; j < parametersLength; j++)
             {
                 object parameter = parameters[j];
 
@@ -683,6 +694,7 @@ namespace JUST
             int startBrackettCount = 0;
             int endBrackettCount = 0;
 
+            int totalStringLength = totalString.Length;
             for (int i = startIndex; i < totalString.Length; i++)
             {
                 if (totalString[i] == '(')

@@ -11,9 +11,6 @@ namespace ArrayPerformance
         static void Main(string[] args)
         {
             PeformanceArray.Test();
-
-            Console.WriteLine("Completed");
-            Console.ReadLine();
         }
     }
 }

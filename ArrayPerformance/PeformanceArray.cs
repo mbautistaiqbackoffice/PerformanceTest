@@ -16,7 +16,7 @@ namespace ArrayPerformance
         public static void Test()
         {
             bool parseArray = false;
-            int[] arraySizes = { 100, 1000 };
+            int[] arraySizes = { 100 };
 
             parseArray = false;
             NewMethod(parseArray, arraySizes);
