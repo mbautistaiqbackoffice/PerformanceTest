@@ -1,0 +1,393 @@
+{
+  "vendor": {
+
+    //=====================================
+    // Fields for POST method
+    //=====================================
+
+    "#ifgroup(#exists($.achaccountnumber))": {
+      "cac:PayeeFinancialAccount": {
+        "cbc:ID": "#valueof($.achaccountnumber)"
+      }
+    },
+
+    "#ifgroup(#exists($.achaccounttype))": {
+      "vendor_ach_account_type": "#valueof($.achaccounttype)"
+    },
+
+    "#ifgroup(#exists($.achbankroutingnumber))": {
+      "vendor_ach_bank_routing_number": "#valueof($.achbankroutingnumber)"
+    },
+
+    "#ifgroup(#exists($.achenabled))": {
+      "vendor_achenabled": "#valueof($.achenabled)"
+    },
+
+    "#ifgroup(#exists($.achremittancetype))": {
+      "vendor_ach_remittance_type": "#valueof($.achremittancetype)"
+    },
+
+    "#ifgroup(#exists($.billingtype))": {
+      "vendor_billing_type": "#valueof($.billingtype)"
+    },
+
+    "#ifgroup(#exists($.comments))": {
+      "cac:EventComment": { "cbc:Comment": "#valueof($.comments)" }
+    },
+
+    "#ifgroup(#exists($.contactinfo.contact))": {
+      "vendor_contact_info": {
+        "vendor_contact": {
+
+          "#ifgroup(#exists($.contactinfo.contact.cellphone))": {
+            "vendor_cellphone": "#valueof($.contactinfo.contact.cellphone)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.companyname))": {
+            "vendor_company_name": "#valueof($.contactinfo.contact.companyname)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.contactname))": {
+            "vendor_contact_name": "#valueof($.contactinfo.contact.contactname)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.email1))": {
+            "vendor_email1": "#valueof($.contactinfo.contact.email1)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.email2))": {
+            "vendor_email2": "#valueof($.contactinfo.contact.email2)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.fax))": {
+            "vendor_fax": "#valueof($.contactinfo.contact.fax)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.firstname))": {
+            "vendor_first_name": "#valueof($.contactinfo.contact.firstname)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.initial))": {
+            "vendor_initial": "#valueof($.contactinfo.contact.initial)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.lastname))": {
+            "vendor_last_name": "#valueof($.contactinfo.contact.lastname)"
+          },
+
+          "vendor_mail_address": {
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.address1))": {
+              "vendor_address1": "#valueof($.contactinfo.contact.mailaddress.address1)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.address2))": {
+              "vendor_address2": "#valueof($.contactinfo.contact.mailaddress.address2)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.city))": {
+              "vendor_city": "#valueof($.contactinfo.contact.mailaddress.city)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.country))": {
+              "vendor_country": "#valueof($.contactinfo.contact.mailaddress.country)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.isocountrycode))": {
+              "vendor_iso_country_code": "#valueof($.contactinfo.contact.mailaddress.isocountrycode)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.latitude))": {
+              "vendor_latitude": "#valueof($.contactinfo.contact.mailaddress.latitude)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.longitude))": {
+              "vendor_longitude": "#valueof($.contactinfo.contact.mailaddress.longitude)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.state))": {
+              "vendor_state": "#valueof($.contactinfo.contact.mailaddress.state)"
+            },
+
+            "#ifgroup(#exists($.contactinfo.contact.mailaddress.zip))": {
+              "vendor_zip": "#valueof($.contactinfo.contact.mailaddress.zip)"
+            }
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.pager))": {
+            "vendor_pager": "#valueof($.contactinfo.contact.pager)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.phone1))": {
+            "vendor_phone1": "#valueof($.contactinfo.contact.phone1)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.phone2))": {
+            "vendor_phone2": "#valueof($.contactinfo.contact.phone2)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.prefix))": {
+            "vendor_prefix": "#valueof($.contactinfo.contact.prefix)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.printas))": {
+            "vendor_print_as": "#valueof($.contactinfo.contact.printas)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.status))": {
+            "vendor_status": "#valueof($.contactinfo.contact.status)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.taxable))": {
+            "vendor_taxable": "#valueof($.contactinfo.contact.taxable)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.taxgroup))": {
+            "vendor_taxgroup": "#valueof($.contactinfo.contact.taxgroup)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.taxid))": {
+            "vendor_taxid": "#valueof($.contactinfo.contact.taxid)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.url1))": {
+            "vendor_url1": "#valueof($.contactinfo.contact.url1)"
+          },
+
+          "#ifgroup(#exists($.contactinfo.contact.url2))": {
+            "vendor_url2": "#valueof($.contactinfo.contact.url2)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.contactlist.contactitem))": {
+
+      "vendor_contact_list": {
+        "vendor_contact_item": {
+
+          "#loop($.contactlist.contactitem)": {
+            "vendor_category": "#currentvalueatpath($.category)",
+            "vendor_contact_name": "#currentvalueatpath($.contactname)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.contactto1099.contactname))": {
+      "vendor_contact_to_1099": {
+        "vendor_contact_name": "#valueof($.contactto1099.contactname)"
+      }
+    },
+
+    "#ifgroup(#exists($.creditlimit))": {
+      "cbc:CreditLineAmount": "#valueof($.creditlimit)"
+    },
+
+    "#ifgroup(#exists($.currency))": {
+      "cbc:CurrencyCode": "#valueof($.currency)"
+    },
+
+    "#ifgroup(#exists($.displaytermdiscount))": {
+      "vendor_display_term_discount": "#valueof($.displaytermdiscount)"
+    },
+
+    "#ifgroup(#exists($.displocacctnocheck))": {
+      "vendor_disploc_acct_no_check": "#valueof($.displocacctnocheck)"
+    },
+
+    "#ifgroup(#exists($.donotcutcheck))": {
+      "vendor_do_not_cut_check": "#valueof($.donotcutcheck)"
+    },
+
+    "#ifgroup(#exists($.form1099box))": {
+      "cac:TaxCategoryType": {
+        "cac:TaxCategory": "#valueof($.form1099box)"
+      }
+    },
+
+    "#ifgroup(#exists($.form1099type))": {
+      "cac:ApplicableTaxCategory": {
+        "cbc:ID": "#valueof($.form1099type)"
+      }
+    },
+
+    "#ifgroup(#exists($.glaccountno))": {
+      "vendor_gl_account_no": "#valueof($.glaccountno)"
+    },
+
+    "#ifgroup(#exists($.mergepaymentreq))": {
+      "vendor_merge_payment_req": "#valueof($.mergepaymentreq)"
+    },
+
+    "#ifgroup(#exists($.name))": {
+      "cbc:Name": "#valueof($.name)"
+    },
+
+    "#ifgroup(#exists($.name1099))": {
+      "cac:TaxCategory": {
+        "cbc:ID": "#valueof($.name1099)"
+      }
+    },
+
+    "#ifgroup(#exists($.offsetglaccountno))": {
+      "cbc:AccountingCostCode": "#valueof($.offsetglaccountno)"
+    },
+
+    "#ifgroup(#exists($.onetime))": {
+      "cbc:OneTimeChargeType": "#valueof($.onetime)"
+    },
+
+    "#ifgroup(#exists($.onhold))": {
+      "cac:CurrentStatus": {
+        "cbc:ConditionCode": "#valueof($.onhold)"
+      }
+    },
+
+    "#ifgroup(#exists($.parentid))": {
+      "cbc:PrimaryAccountNumberID": "#valueof($.parentid)"
+    },
+
+    "#ifgroup(#exists($.paymentnotify))": {
+      "vendor_payment_notify": "#valueof($.paymentnotify)"
+    },
+
+    "#ifgroup(#exists($.paymethod))": {
+      "vendor_pay_method": "#valueof($.paymethod)"
+    },
+
+    "#ifgroup(#exists($.payto.contactname))": {
+      "vendor_payto": {
+        "cac:PayeeParty": {
+          "cac:PartyName": { "cbc:Name": "#valueof($.payto.contactname)" }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.primary.contactname))": {
+      "vendor_primary": {
+        "vendor_contact_name": "#valueof($.primary.contactname)"
+      }
+    },
+
+    "#ifgroup(#exists($.returnto.contactname))": {
+      "vendor_return_to": {
+        "cac:SellerSupplierParty": {
+          "cac:Party": {
+            "cac:PartyName": {
+              "cbc:Name": "#valueof($.returnto.contactname)"
+            }
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.status))": {
+      "cac:Status": {
+        "cbc:ConditionCode": "#valueof($.status)"
+      }
+    },
+
+    "#ifgroup(#exists($.supdocid))": {
+      "cac:AdditionalDocumentReference": {
+        "cbc:ID": "#valueof($.supdocid)"
+      }
+
+    },
+
+    "#ifgroup(#exists($.taxid))": {
+      "vendor_tax_id": {
+        "cac:TaxCategory": {
+          "cbc:ID": "#valueof($.taxid)"
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.termname))": {
+      "cac:PaymentTerms": {
+        "cbc:Note": "#valueof($.termname)"
+      }
+    },
+
+    "#ifgroup(#exists($.vendoraccountno))": {
+      "vendor_vendor_account_no": "#valueof($.vendoraccountno)"
+    },
+
+    "#ifgroup(#exists($.vendorid))": {
+      "cbc:CompanyID": "#valueof($.vendorid)"
+    },
+
+    "#ifgroup(#exists($.vendtype))": {
+      "vendor_vend_type": "#valueof($.vendtype)"
+    },
+
+    //=====================================
+    // Addt'l fields for GET method
+    //=====================================
+
+    "#ifgroup(#exists($.accountlabel))": {
+      "vendor_account_label": "#valueof($.accountlabel)"
+    },
+
+    "#ifgroup(#exists($.checkenabled))": {
+      "vendor_check_enabled": "#valueof($.checkenabled)"
+    },
+
+    "#ifgroup(#exists($.form1099))": {
+      "vendor_form_1099": "#valueof($.form1099)"
+    },
+
+    "#ifgroup(#exists($.pmplusemail))": {
+      "vendor_pm_plus_email": "#valueof($.pmplusemail)"
+    },
+
+    "#ifgroup(#exists($.pmplusfax))": {
+      "vendor_pm_plus_fax": "#valueof($.pmplusfax)"
+    },
+
+    "#ifgroup(#exists($.pmplusremittancetype))": {
+      "vendor_pm_plus_remittance_type": "#valueof($.pmplusremittancetype)"
+    },
+
+    "#ifgroup(#exists($.recordno))": {
+      "vendor_record_no": "#valueof($.recordno)"
+    },
+
+    "#ifgroup(#exists($.servicestate))": {
+      "vendor_service_state": "#valueof($.servicestate)"
+    },
+
+    "#ifgroup(#exists($.totaldue))": {
+      "vendor_total_due": "#valueof($.totaldue)"
+    },
+
+    "#ifgroup(#exists($.visibility.visibility_type))": {
+      "vendor_visibility": {
+        "vendor_visibility_type": "#valueof($.visibility.visibility_type)"
+      }
+    },
+
+    "#ifgroup(#exists($.whenmodified))": {
+      "vendor_when_modified": "#valueof($.whenmodified)"
+    },
+
+    "#ifgroup(#exists($.wireaccountnumber))": {
+      "vendor_wire_account_number": "#valueof($.wireaccountnumber)"
+    },
+
+    "#ifgroup(#exists($.wireaccounttype))": {
+      "vendor_wire_account_type": "#valueof($.wireaccounttype)"
+    },
+
+    "#ifgroup(#exists($.wirebankname))": {
+      "vendor_wire_bank_name": "#valueof($.wirebankname)"
+    },
+
+    "#ifgroup(#exists($.wirebankroutingnumber))": {
+      "vendor_wire_bank_routing_number": "#valueof($.wirebankroutingnumber)"
+    },
+
+    "#ifgroup(#exists($.wireenabled))": {
+      "vendor_wireenabled": "#valueof($.wireenabled)"
+    }
+  }
+}

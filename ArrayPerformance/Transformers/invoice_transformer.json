@@ -1,0 +1,251 @@
+{
+  "invoice": {
+
+    //=====================================
+    // Fields for POST method
+    //=====================================
+
+    "#ifgroup(#exists($.action))": {
+      "cbc:StatusCode": "#valueof($.action)"
+    },
+
+    "#ifgroup(#exists($.basecurr))": {
+      "cbc:PricingCurrencyCode": "#valueof($.basecurr)"
+    },
+
+    "invoice_batch_key": "#valueof($.batchkey)",
+
+    "#ifgroup(#exists($.billto.contactname))": {
+      "cac:BillToParty": {
+        "cac:Contact": {
+          "cbc:Name": "#valueof($.billto.contactname)"
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.currency))": {
+      "cbc:CurrencyCode": "#valueof($.currency)"
+    },
+
+    "#ifgroup(#exists($.customerid))": {
+      "cac:CustomerParty": { "cbc:CustomerAssignedAccountID": "#valueof($.customerid)" }
+    },
+
+    "#ifgroup(#exists($.datecreated))": {
+      "invoice_date_created": {
+        "cbc:Date": "#concat(#concat(#concat(#valueof($.datecreated.year),-),#concat(#valueof($.datecreated.month),-)),#valueof($.datecreated.day))"
+      }
+    },
+
+    "#ifgroup(#exists($.datedue))": {
+      "invoice_date_due": {
+        "cbc:Date": "#concat(#concat(#concat(#valueof($.datedue.year),-),#concat(#valueof($.datedue.month),-)),#valueof($.datedue.day))"
+      }
+    },
+
+    "#ifgroup(#exists($.dateposted))": {
+      "invoice_date_posted": {
+        "cbc:Date": "#concat(#concat(#concat(#valueof($.dateposted.year),-),#concat(#valueof($.dateposted.month),-)),#valueof($.dateposted.day))"
+      }
+    },
+
+    "#ifgroup(#exists($.description))": {
+      "cbc:Note": "#valueof($.description)"
+    },
+
+    "#ifgroup(#exists($.exchrate))": {
+      "cac:PricingExchangeRate": {
+        "cbc:SourceCurrencyBaseRate": "#valueof($.exchrate)",
+        "cbc:cbc:SourceCurrencyCode": "#valueof($.exchratetype)",
+        "cbc:Date": "#concat(#concat(#concat(#valueof($.exchratedate.year),-),#concat(#valueof($.exchratedate.month),-)),#valueof($.exchratedate.day))"
+      }
+    },
+
+    "#ifgroup(#exists($.externalid))": {
+      "invoice_external_id": {
+        "cbc:ID": "#valueof($.externalid)"
+      }
+    },
+
+    "#ifgroup(#exists($.invoiceitems.lineitem))": {
+
+      "cac:InvoiceLine": {
+        "invoice_line_item": {
+
+          "#loop($.invoiceitems.lineitem)": {
+
+            "invoice_account_label": {
+              "cbc:AccountingCostCode": "#currentvalueatpath($.accountlabel)"
+            },
+
+            "cac:DocumentDistribution": {
+              "cbc:DocumentTypeCode": "#currentvalueatpath($.allocationid)"
+            },
+
+            "cbc:Amount": "#currentvalueatpath($.amount)",
+
+            "cac:ClassificationCategory": { "cbc:CodeValue": "#currentvalueatpath($.classid)" },
+
+            "cac:Contract": { "cbc:ID": "#currentvalueatpath($.contractid)" },
+
+            "cac:CustomerParty": { "cbc:CustomerAssignedAccountID": "#currentvalueatpath($.customerid)" },
+
+            "cac:FinancialAccount": { "cbc:ID": "#currentvalueatpath($.defrevaccount)" },
+
+            "cac:Party": {
+              "cac:PartyIdentification": { "cbc:ID": "#currentvalueatpath($.departmentid)" }
+            },
+
+            "cbc:IdentificationID": "#currentvalueatpath($.employeeid)",
+
+            "invoice_gl_account_no": {
+              "cbc:AccountingCostCode": "#currentvalueatpath($.glaccountno)"
+            },
+
+            "cbc:ID": "#currentvalueatpath($.itemid)",
+
+            "cac:AdditionalDocumentReference": {
+              "cbc:ID": "#currentvalueatpath($.key)"
+            },
+
+            "cac:PhysicalLocation": {
+              "cbc:ID": "#currentvalueatpath($.locationid)"
+            },
+
+            "cbc:Note": "#valueof($.memo)",
+
+            "invoice_offset_gl_account_no": {
+              "cbc:AccountingCostCode": "#currentvalueatpath($.offsetglaccountno)"
+            },
+
+            "cac:ProjectReference": {
+              "cbc:ID": "#currentvalueatpath($.projectid)"
+            },
+
+            "invoice_rev_recend_date": {
+              "cbc:Date": "#concat(#concat(#concat(#valueof($.revrecenddate.year),-),#concat(#valueof($.revrecenddate.month),-)),#valueof($.revrecenddate.day))"
+            },
+
+            "invoice_rev_rec_start_date": {
+              "cbc:Date": "#concat(#concat(#concat(#valueof($.revrecstartdate.year),-),#concat(#valueof($.revrecstartdate.month),-)),#valueof($.revrecstartdate.day))"
+            },
+
+            "invoice_rev_rec_template": "#currentvalueatpath($.revrectemplate)",
+
+            "invoice_total_due": {
+              "cbc:PriceAmount": "#currentvalueatpath($.totaldue)"
+            },
+
+            "invoice_total_paid": {
+              "cbc:PaidAmount": "#currentvalueatpath($.totalpaid)"
+            },
+
+            "cbc:CompanyID": "#currentvalueatpath($.vendorid)",
+
+            "cac:StorageLocation": {
+              "cbc:ID": "#currentvalueatpath($.warehouseid)"
+            },
+
+            "invoice_id": "#currentvalueatpath($.id)",
+
+            "invoice_trx_amount": "#currentvalueatpath($.trx_amount)",
+
+            "invoice_trx_total_paid": "#currentvalueatpath($.trx_totalpaid)",
+
+            "invoice_vendor_key": "#currentvalueatpath($.vendorkey)",
+
+            "invoice_warehouse_key": "#currentvalueatpath($.warehousekey)"
+          }
+        }
+      }
+    }
+  },
+
+  "#ifgroup(#exists($.invoiceno))": {
+    "invoice_invoice_no": "#valueof($.invoiceno)"
+  },
+
+  "#ifgroup(#exists($.nogl))": {
+    "cbc:AccountingCostCode": "#valueof($.nogl)"
+  },
+
+  "#ifgroup(#exists($.ponumber))": {
+    "cac:OrderReference": {
+      "cbc:ID": "#valueof($.ponumber)"
+    }
+  },
+
+  "#ifgroup(#exists($.shipto.contactname)": {
+    "cac:DeliveryAddress": {
+      "cbc:MarkAttention": "#valueof($.shipto.contactname)"
+    }
+  },
+
+  "#ifgroup(#exists($.state))": {
+    "invoice_invoice_state": "#valueof($.state)"
+  },
+
+  "#ifgroup(#exists($.shipto.supdocid))": {
+    "cac:AdditionalDocumentReference": {
+      "cbc:ID": "#valueof($.shipto.supdocid)"
+    }
+  },
+
+  "#ifgroup(#exists($.termname))": {
+    "cac:PaymentTerms": {
+      "cbc:Note": "#valueof($.termname)"
+    }
+  },
+
+  "#ifgroup(#exists($.totalamount))": {
+    "invoice_total_amount": "#valueof($.totalamount)"
+  },
+
+  "#ifgroup(#exists($.totaldue))": {
+    "invoice_total_due": "#valueof($.totaldue)"
+  },
+
+  "#ifgroup(#exists($.totalpaid))": {
+    "invoice_total_paid": "#valueof($.totalpaid)"
+  },
+
+  "#ifgroup(#exists($.totalselected))": {
+    "invoice_total_selected": "#valueof($.totalselected)"
+  },
+
+  //=====================================
+  // Addt'l fields for GET method
+  //=====================================
+
+  "#ifgroup(#exists($.datepaid))": {
+    "invoice_date_paid": {
+      "cbc:Date": "#concat(#concat(#concat(#valueof($.datepaid.year),-),#concat(#valueof($.datepaid.month),-)),#valueof($.datepaid.day))"
+    }
+  },
+
+  "#ifgroup(#exists($.key))": {
+    "cac:AdditionalDocumentReference": {
+      "cbc:ID": "#valueof($.key)"
+    }
+  },
+
+  "#ifgroup(#exists($.trx_totalamount))": {
+    "invoice_trx_total_amount": "#valueof($.trx_totalamount)"
+  },
+
+  "#ifgroup(#exists($.trx_totaldue))": {
+    "invoice_trx_total_due": "#valueof($.trx_totaldue)"
+  },
+
+  "#ifgroup(#exists($.trx_totalpaid))": {
+    "invoice_trx_total_paid": "#valueof($.trx_totalpaid)"
+  },
+
+  "#ifgroup(#exists($.trx_totalselected))": {
+    "invoice_trx_total_selected": "#valueof($.trx_totalselected)"
+  },
+
+  "#ifgroup(#exists($.whenmodified))": {
+    "invoice_when_modified": "#valueof($.whenmodified)"
+  }
+}

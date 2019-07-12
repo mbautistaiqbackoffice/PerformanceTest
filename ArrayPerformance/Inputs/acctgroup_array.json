@@ -1,0 +1,20 @@
+[
+  {
+    "APPLYASOF": "string",
+    "ASOF": "string",
+    "CREATEDBY": 0,
+    "DBCR": "string",
+    "HOWCREATED": "string",
+    "ISKPI": true,
+    "ISLEAF": "string",
+    "MEMBERTYPE": "string",
+    "MODIFIEDBY": 0,
+    "NAME": "string",
+    "NORMAL_BALANCE": "string",
+    "RECORDNO": 0,
+    "TITLE": "string",
+    "TOTALTITLE": "string",
+    "WHENCREATED": "2019-07-09T23:06:09.397Z",
+    "WHENMODIFIED": "2019-07-09T23:06:09.397Z"
+  }
+]

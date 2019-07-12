@@ -1,0 +1,80 @@
+[
+  {
+    "basecurr": "CAD",
+    "batchkey": 0,
+    "billto": {
+      "contactname": "string"
+    },
+    "currency": "CAD",
+    "customerid": "string",
+    "datecreated": {
+      "day": "string",
+      "month": "string",
+      "year": "string"
+    },
+    "datedue": {
+      "day": "string",
+      "month": "string",
+      "year": "string"
+    },
+    "datepaid": {
+      "day": "string",
+      "month": "string",
+      "year": "string"
+    },
+    "dateposted": {
+      "day": "string",
+      "month": "string",
+      "year": "string"
+    },
+    "description": "string",
+    "invoiceitems": {
+      "lineitem": [
+        {
+          "accountlabel": "string",
+          "amount": "string",
+          "billable": true,
+          "classkey": 0,
+          "contractkey": "string",
+          "currency": "string",
+          "customerkey": "string",
+          "departmentid": "string",
+          "employeekey": "string",
+          "glaccountno": "string",
+          "itemkey": "string",
+          "key": 0,
+          "line_num": 0,
+          "locationid": "string",
+          "memo": "string",
+          "offsetglaccountno": "string",
+          "projectkey": "string",
+          "totaldue": "string",
+          "totalpaid": 0,
+          "trx_amount": "string",
+          "trx_totaldue": "string",
+          "trx_totalpaid": 0,
+          "vendorkey": "string",
+          "warehousekey": "string"
+        }
+      ]
+    },
+    "invoiceno": "string",
+    "key": 0,
+    "ponumber": "string",
+    "shipto": {
+      "contactname": "string"
+    },
+    "state": "string",
+    "supdocid": "string",
+    "termname": "string",
+    "totalamount": 0,
+    "totaldue": 0,
+    "totalpaid": 0,
+    "totalselected": 0,
+    "trx_totalamount": 0,
+    "trx_totaldue": 0,
+    "trx_totalpaid": 0,
+    "trx_totalselected": 0,
+    "whenmodified": "2019-07-09T23:06:42.712Z"
+  }
+]

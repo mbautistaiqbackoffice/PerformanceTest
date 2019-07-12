@@ -1,0 +1,289 @@
+{
+  "glacctgrp": {
+
+    //=====================================
+    // Fields for POST method
+    //=====================================
+
+    "#ifgroup(#exists($.ASOF))": {
+      "glacctgrp_as_of": "#valueof($.ASOF)"
+    },
+
+    "#ifgroup(#exists($.CLASSID))": {
+      "glacctgrp_class_id": "#valueof($.CLASSID)"
+    },
+
+    "#ifgroup(#exists($.CUSTOMERID))": {
+      "glacctgrp_customer_id": "#valueof($.CUSTOMERID)"
+    },
+
+    "#ifgroup(#exists($.DBCR))": {
+      "glacctgrp_dbcr": "#valueof($.DBCR)"
+    },
+
+    "#ifgroup(#exists($.DEPTNO))": {
+      "glacctgrp_dept_no": "#valueof($.DEPTNO)"
+    },
+
+    "#ifgroup(#exists($.EMPLOYEEID))": {
+      "glacctgrp_employee_id": "#valueof($.EMPLOYEEID)"
+    },
+
+    "#ifgroup(#exists($.FILTERCLASS))": {
+      "glacctgrp_filter_class": "#valueof($.FILTERCLASS)"
+    },
+
+    "#ifgroup(#exists($.FILTERCUSTOMER))": {
+      "glacctgrp_filter_customer": "#valueof($.FILTERCUSTOMER)"
+    },
+
+    "#ifgroup(#exists($.FILTERDEPT))": {
+      "glacctgrp_filter_dept": "#valueof($.FILTERDEPT)"
+    },
+
+    "#ifgroup(#exists($.FILTEREMPLOYEE))": {
+      "glacctgrp_filter_employee": "#valueof($.FILTEREMPLOYEE)"
+    },
+
+    "#ifgroup(#exists($.FILTERGLDIM))": {
+      "glacctgrp_filter_gldim": "#valueof($.FILTERGLDIM)"
+    },
+
+    "#ifgroup(#exists($.FILTERITEM))": {
+      "glacctgrp_filter_item": "#valueof($.FILTERITEM)"
+    },
+
+    "#ifgroup(#exists($.FILTERLOC))": {
+      "glacctgrp_filter_loc": "#valueof($.FILTERLOC)"
+    },
+
+    "#ifgroup(#exists($.FILTERPROJECT))": {
+      "glacctgrp_filter_project": "#valueof($.FILTERPROJECT)"
+    },
+
+    "#ifgroup(#exists($.FILTERVENDOR))": {
+      "glacctgrp_filter_vendor": "#valueof($.FILTERVENDOR)"
+    },
+
+    "#ifgroup(#exists($.GLACCTGRPS.lineItemGLACCTGRPS))": {
+
+      "glacctgrp_glacctgrps": {
+        "glacctgrp_line_item_glacctgrps": {
+
+          "#loop($.GLACCTGRPS.lineItemGLACCTGRPS)": {
+            "glacctgrp_child_name": "#currentvalueatpath($.CHILDNAME)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.GLACCTRANGES.lineItemGLACCTRANGES))": {
+
+      "glacctgrp_glacctranges": {
+        "glacctgrp_line_item_glacctranges": {
+
+          "#loop($.GLACCTRANGES.lineItemGLACCTRANGES)": {
+            "glacctgrp_range_from": "#currentvalueatpath($.RANGEFROM)",
+            "glacctgrp_range_to": "#currentvalueatpath($.RANGETO)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.GLCATGRPS.lineItemGLCATGRPS))": {
+
+      "glacctgrp_glcatgrps": {
+        "glacctgrp_line_item_glcatgrps": {
+
+          "#loop($.GLCATGRPS.lineItemGLCATGRPS)": {
+            "glacctgrp_category_name": "#currentvalueatpath($.CATEGORYNAME)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.GLCOMPGRPS.lineItemGLCOMPGRPS))": {
+
+      "glacctgrp_glcompgrps": {
+        "glacctgrp_line_item_glcompgrps": {
+
+          "#loop($.GLCOMPGRPS.lineItemGLCOMPGRPS)": {
+            "glacctgrp_display_as": "#currentvalueatpath($.DISPLAYAS)",
+            "glacctgrp_lhs_acct_grp_name": "#currentvalueatpath($.LHSACCTGRPNAME)",
+            "glacctgrp_lhs_acct_no": "#currentvalueatpath($.LHSACCTNO)",
+            "glacctgrp_lhs_as_of": "#currentvalueatpath($.LHSASOF)",
+            "glacctgrp_lhs_const": "#currentvalueatpath($.LHSCONST)",
+            "glacctgrp_operator": "#currentvalueatpath($.OPERATOR)",
+            "glacctgrp_precision": "#currentvalueatpath($.PRECISION)",
+            "glacctgrp_rhs_acct_grp_name": "#currentvalueatpath($.RHSACCTGRPNAME)",
+            "glacctgrp_rhs_acct_no": "#currentvalueatpath($.RHSACCTNO)",
+            "glacctgrp_rhs_as_of": "#currentvalueatpath($.RHSASOF)",
+            "glacctgrp_rhs_const": "#currentvalueatpath($.RHSCONST)",
+            "glacctgrp_uom": "#currentvalueatpath($.UOM)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.GLDIM))": {
+      "glacctgrp_gldim": "#valueof($.GLDIM)"
+    },
+
+    "#ifgroup(#exists($.GLSTATACCTRANGES.lineItemGLSTATACCTRANGES))": {
+
+      "glacctgrp_glstatacctranges": {
+        "glacctgrp_line_item_glstatacctranges": {
+
+          "#loop($.GLSTATACCTRANGES.lineItemGLSTATACCTRANGES)": {
+            "glacctgrp_range_from": "#currentvalueatpath($.RANGEFROM)",
+            "glacctgrp_range_to": "#currentvalueatpath($.RANGETO)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.GLSTATCATGRPS.lineItemGLSTATCATGRPS))": {
+
+      "glacctgrp_glstatcatgrps": {
+        "glacctgrp_line_item_glstatcatgrps": {
+
+          "#loop($.GLSTATCATGRPS.lineItemGLSTATCATGRPS)": {
+            "glacctgrp_category_name": "#currentvalueatpath($.CATEGORYNAME)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.ISKPI))": {
+      "glacctgrp_is_kpi": "#valueof($.ISKPI)"
+    },
+
+    "#ifgroup(#exists($.ITEMID))": {
+      "glacctgrp_item_id": "#valueof($.ITEMID)"
+    },
+
+    "#ifgroup(#exists($.LOCNO))": {
+      "glacctgrp_loc_no": "#valueof($.LOCNO)"
+    },
+
+    "#ifgroup(#exists($.MEMBERTYPE))": {
+      "glacctgrp_member_type": "#valueof($.MEMBERTYPE)"
+    },
+
+    "#ifgroup(#exists($.NAME))": {
+      "glacctgrp_name": "#valueof($.NAME)"
+    },
+
+    "#ifgroup(#exists($.NORMAL_BALANCE))": {
+      "glacctgrp_normal_balance": "#valueof($.NORMAL_BALANCE)"
+    },
+    "#ifgroup(#exists($.PROJECTID))": {
+      "glacctgrp_project_id": "#valueof($.PROJECTID)"
+    },
+
+    "#ifgroup(#exists($.TITLE))": {
+      "glacctgrp_title": "#valueof($.TITLE)"
+    },
+
+    "#ifgroup(#exists($.TOTALTITLE))": {
+      "glacctgrp_total_title": "#valueof($.TOTALTITLE)"
+    },
+
+    "#ifgroup(#exists($.VENDORID))": {
+      "glacctgrp_vendor_id": "#valueof($.VENDORID)"
+    },
+
+    //=====================================
+    // Addt'l fields for GET method
+    //=====================================
+
+    "#ifgroup(#exists($.APPLYASOF))": {
+      "glacctgrp_apply_as_of": "#valueof($.APPLYASOF)"
+    },
+
+    "#ifgroup(#exists($.CREATEDBY))": {
+      "glacctgrp_created_by": "#valueof($.CREATEDBY)"
+    },
+
+    "#ifgroup(#exists($.GLACCTGRPS.glacctgrpmember))": {
+
+      "glacctgrp_glacctgrps": {
+        "glacctgrp_glacctgrpmember": {
+
+          "#loop($.GLACCTGRPS.glacctgrpmember)": {
+            "glacctgrp_child_key": "#currentvalueatpath($.CHILDKEY)",
+            "glacctgrp_child_name": "#currentvalueatpath($.CHILDNAME)",
+            "glacctgrp_parent_key": "#currentvalueatpath($.PARENTKEY)",
+            "glacctgrp_record_no": "#currentvalueatpath($.RECORDNO)",
+            "glacctgrp_sort_ord": "#currentvalueatpath($.SORTORD)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.GLACCTRANGES.acctrange))": {
+
+      "glacctgrp_glacctranges": {
+        "glacctgrp_acctrange": {
+
+          "#loop($.GLACCTRANGES.acctrange)": {
+            "glacctgrp_created_by": "#currentvalueatpath($.CREATEDBY)",
+            "glacctgrp_modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+            "glacctgrp_parent_key": "#currentvalueatpath($.PARENTKEY)",
+            "glacctgrp_range_from": "#currentvalueatpath($.RANGEFROM)",
+            "glacctgrp_range_from_title": "#currentvalueatpath($.RANGEFROMTITLE)",
+            "glacctgrp_range_to": "#currentvalueatpath($.RANGETO)",
+            "glacctgrp_record_no": "#currentvalueatpath($.RECORDNO)",
+            "glacctgrp_sort_ord": "#currentvalueatpath($.SORTORD)",
+            "glacctgrp_when_created": "#currentvalueatpath($.WHENCREATED)",
+            "glacctgrp_when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.GLDIMGRPGRPS.glacctgrpmember))": {
+
+      "glacctgrp_gldimgrpgrps": {
+        "glacctgrp_glacctgrpmember": {
+
+          "#loop($.GLDIMGRPGRPS.glacctgrpmember)": {
+            "glacctgrp_child_key": "#currentvalueatpath($.CHILDKEY)",
+            "glacctgrp_child_name": "#currentvalueatpath($.CHILDNAME)",
+            "glacctgrp_parent_key": "#currentvalueatpath($.PARENTKEY)",
+            "glacctgrp_record_no": "#currentvalueatpath($.RECORDNO)",
+            "glacctgrp_sort_ord": "#currentvalueatpath($.SORTORD)"
+          }
+        }
+      }
+    },
+
+    "#ifgroup(#exists($.HOWCREATED))": {
+      "glacctgrp_how_created": "#valueof($.HOWCREATED)"
+    },
+
+    "#ifgroup(#exists($.INCLUDECHILDAMT))": {
+      "glacctgrp_include_child_amt": "#valueof($.INCLUDECHILDAMT)"
+    },
+
+    "#ifgroup(#exists($.ISLEAF))": {
+      "glacctgrp_include_is_leaf": "#valueof($.ISLEAF)"
+    },
+
+    "#ifgroup(#exists($.MODIFIEDBY))": {
+      "glacctgrp_modified_by": "#valueof($.MODIFIEDBY)"
+    },
+
+    "#ifgroup(#exists($.RECORDNO))": {
+      "glacctgrp_record_no": "#valueof($.RECORDNO)"
+    },
+
+    "#ifgroup(#exists($.WHENCREATED))": {
+      "glacctgrp_when_created": "#valueof($.WHENCREATED)"
+    },
+
+    "#ifgroup(#exists($.WHENMODIFIED))": {
+      "glacctgrp_when_modified": "#valueof($.WHENMODIFIED)"
+    }
+  }
+}

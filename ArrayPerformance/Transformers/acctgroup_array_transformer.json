@@ -1,0 +1,39 @@
+{
+  "acctgroups": {
+
+    "#loop($.acctgroups)": {
+
+      "glacctgrp_apply_as_of": "#currentvalueatpath($.APPLYASOF)",
+
+      "glacctgrp_as_of": "#currentvalueatpath($.ASOF)",
+
+      "glacctgrp_created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "glacctgrp_dbcr": "#currentvalueatpath($.DBCR)",
+
+      "glacctgrp_how_created": "#currentvalueatpath($.HOWCREATED)",
+
+      "glacctgrp_is_kpi": "#currentvalueatpath($.ISKPI)",
+
+      "glacctgrp_include_is_leaf": "#currentvalueatpath($.ISLEAF)",
+
+      "glacctgrp_member_type": "#currentvalueatpath($.MEMBERTYPE)",
+
+      "glacctgrp_modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "glacctgrp_name": "#currentvalueatpath($.NAME)",
+
+      "glacctgrp_normal_balance": "#currentvalueatpath($.NORMAL_BALANCE)",
+
+      "glacctgrp_record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "glacctgrp_title": "#currentvalueatpath($.TITLE)",
+
+      "glacctgrp_total_title": "#currentvalueatpath($.TOTALTITLE)",
+
+      "glacctgrp_when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "glacctgrp_when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}
