@@ -10,7 +10,7 @@ namespace ArrayPerformance
     {
         static void Main(string[] args)
         {
-            PeformanceArray.Test();
+            PerformanceArray.Test();
 
             Console.WriteLine("COMPLETED");
             Console.ReadLine();
