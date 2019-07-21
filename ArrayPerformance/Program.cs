@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ArrayPerformance
+﻿namespace ArrayPerformance
 {
+    using System;
+
+    using BenchmarkDotNet.Running;
+
     class Program
     {
         static void Main(string[] args)
         {
-            PerformanceArray.Test();
+            //var summary = BenchmarkRunner.Run<PerformanceArray>();
 
-            Console.WriteLine("COMPLETED");
-            Console.ReadLine();
+            var performanceArray = new PerformanceArray(); 
+            performanceArray.Test();
+
+            //Console.WriteLine("COMPLETED");
+            //Console.ReadLine();
         }
     }
 }

@@ -1,105 +1,106 @@
-﻿using JUST;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ArrayPerformance
+﻿namespace ArrayPerformance
 {
-    public static class PerformanceArray
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    using BenchmarkDotNet.Attributes;
+
+    using JUST;
+
+    using Newtonsoft.Json.Linq;
+
+    [DryJob]
+    [IterationCount(10), MinIterationCount(9), MaxIterationCount(10)]
+    [RPlotExporter, RankColumn]
+    public class PerformanceArray
     {
-        public static void Test()
+        [Params(10)]
+        public int N;
+
+        [Params("acctgroup", "invoice", "vendor")]
+        public string Type;
+
+        public bool ParseArray = true;
+        public List<string> OutputList = new List<string>();
+        public static string InputJson;
+        public static string TransformerJson;
+        public static string CurrentDirectory;
+#if DEBUG
+        public static string RunMode = "Debug";
+ #else
+        public static string RunMode = "Release";
+ #endif
+
+        public void Test()
         {
-            int[] arraySizes = { 100 };
-
-            var parseArray = false;
-            NewMethod(parseArray, arraySizes);
-        }
-
-        private static void NewMethod(bool parseArray, int[] arraySizes)
-        {
-            var acctGroupJson = GetInputAndTransformFor("acctgroup", parseArray);
-            var invoiceJson = GetInputAndTransformFor("invoice", parseArray);
-            var (input, transformer) = GetInputAndTransformFor("vendor", parseArray);
-
-            foreach (var arraySize in arraySizes)
+            N = 100;
+            Type = "vendor";
+            Initialize();
+            for (var i = 1; i <= 100; ++i)
             {
-                TransformArray("acctgroups", acctGroupJson.input, acctGroupJson.transformer, arraySize, parseArray);
-                TransformArray("invoices", invoiceJson.input, invoiceJson.transformer, arraySize, parseArray);
-                TransformArray("vendors", input, transformer, arraySize, parseArray);
+                TransformTypeArray();
             }
         }
 
-        private static void TransformArray(string type, string input, string transformer, int arrayCount, bool parseArray = false)
+        [GlobalSetup]
+        public void Initialize()
         {
-            const int iteration = 100;
-            var average = 0.0;
-
-            var duration = new List<double>();
-            var watch = new Stopwatch();
-
-            GenerateArrays(ref input, arrayCount);
-
-            for (var i = 0; i < iteration; i++)
-            {
-                watch.Reset();
-                watch.Start();
-
-                var output = String.Empty;
-
-                if (parseArray)
-                {
-                    var items = JArray.Parse(input).Select(j => j.ToString()).ToArray();
-                    var outputs = new ConcurrentBag<string>();
-
-                    Parallel.ForEach(items, j =>
-                    {
-                        var tmp = JsonTransformer.Transform(transformer, j);
-                        outputs.Add(tmp);
-                    });
-
-                    output = "{ \"" + type + "\": [ " + String.Join(",", outputs) + " ] }";
-                }
-                else
-                {
-                    input = "{ \"" + type + "\": " + input + " }";
-                    output = JsonTransformer.Transform(transformer, input);
-                }
-
-                watch.Stop();
-
-                double interval = watch.ElapsedMilliseconds;
-                duration.Add(interval);
-            }
-
-            average = duration.Skip(1).Sum() / (double)iteration;
-
-            Console.WriteLine($"{type.ToLower()}|1st item|{arrayCount}|{duration.First()}");
-            Console.WriteLine($"{type.ToLower()}|AVE of items 2-{iteration:#,#}|{arrayCount}|{average}\n");
+            var s = Path.DirectorySeparatorChar;
+            CurrentDirectory = Environment.GetEnvironmentVariable("SLS_DEV_ROOT");
+            CurrentDirectory = CurrentDirectory == null ? Directory.GetCurrentDirectory() 
+                                                        : $"{CurrentDirectory}{s}Tests{s}PerformanceTest{s}ArrayPerformance{s}bin{s}{RunMode}{s}netcoreapp3.0";
+            (InputJson, TransformerJson) = GetInputAndTransformFor(Type);
+            GenerateArrays(ref InputJson);
         }
 
-        private static void GenerateArrays(ref string input, int arraySize)
+        [Benchmark]
+        public void TransformTypeArray()
+        {
+            OutputList = new List<string>();
+            if (ParseArray)
+            {
+                var items = JArray.Parse(InputJson).Select(j => j.ToString()).ToArray();
+                var outputs = new ConcurrentBag<string>();
+
+                foreach (var item in items)
+                { 
+                    outputs.Add(JsonTransformer.Transform(TransformerJson, item));
+                }
+
+                OutputList.Add($"{{ \"{Type}s\": [ " + string.Join(",", outputs) + " ] }");
+            }
+            else
+            {
+                var modifiedInput = $"{{ \"{Type}s\":" + InputJson + " }";
+                OutputList.Add(JsonTransformer.Transform(TransformerJson, modifiedInput));
+            }
+
+            File.WriteAllText(Path.Combine(CurrentDirectory,
+                                           "Outputs", $"{Type}_array.json"),
+                                           string.Join(",", OutputList));
+        }
+
+        private void GenerateArrays(ref string input)
         {
             var random = new Random();
             var seq = JArray.Parse(input).Select(j => j.ToString()).ToArray();
 
             var items = new List<string>();
 
-            for (var i = 0; i < arraySize; i++)
+            for (var i = 0; i < N; i++)
                 items.Add(seq[random.Next(0, seq.Length - 1)]);
 
-            input = "[ " + String.Join(",", items) + " ]";
+            input = "[ " + string.Join(",", items) + " ]";
         }
         
-        private static (string input, string transformer) GetInputAndTransformFor(string fileType, bool parseArray)
+        private (string input, string transformer) GetInputAndTransformFor(string fileType)
         {
-            var input = File.ReadAllText(Path.Combine($@"{Directory.GetCurrentDirectory()}", "Inputs", fileType + "_array.json"));
-            var transformerFile = fileType + (parseArray ? "_transformer.json" : "_array_transformer.json");
-            var transformer = File.ReadAllText(Path.Combine($@"{Directory.GetCurrentDirectory()}", "Transformers", transformerFile));
+            var input = File.ReadAllText(Path.Combine(CurrentDirectory, "Inputs", fileType + "_array.json"));
+            var transformerFile = fileType + (ParseArray ? "_transformer.json" : "_array_transformer.json");
+            var transformer = File.ReadAllText(Path.Combine(CurrentDirectory, "Transformers", transformerFile));
             return (input, transformer);
         }
     }

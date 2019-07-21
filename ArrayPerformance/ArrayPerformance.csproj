@@ -9,9 +9,20 @@
   </PropertyGroup>
   <PropertyGroup>
     <EnableDefaultRazorTargetAssemblyInfoAttributes>false</EnableDefaultRazorTargetAssemblyInfoAttributes>
+    <StartupObject>ArrayPerformance.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
