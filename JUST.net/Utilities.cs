@@ -1,194 +1,201 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// ReSharper disable UnusedMember.Global
 
 namespace JUST
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Newtonsoft.Json.Linq;
+
+    /// <summary>
+    ///     Utilities for the JUST.NET package.
+    /// </summary>
     public class Utilities
     {
-        public static IDictionary<string,string> FlattenJson(string inputJson)
+        /// <summary>
+        ///     Flatten a JSON string to the corresponding paths and values.
+        /// </summary>
+        /// <param name="inputJson">
+        ///     The JSON to flatten.
+        /// </param>
+        /// <returns>
+        ///     An IDictionary&lt;string,string&gt; mapping all paths to values.
+        /// </returns>
+        public static IDictionary<string, string> FlattenJson(string inputJson)
         {
-            JToken parent = JToken.Parse(inputJson);
-
-            Dictionary<string, string> result = null;
-
-            result = PopulateRecursively(parent,result);
-            
-            return result;
+            return FlattenRecursively(JToken.Parse(inputJson), null);
         }
 
-       
-
-        private static Dictionary<string, string>  PopulateRecursively(JToken parent, Dictionary<string, string> result)
+        /// <summary>
+        ///     Flattens a JSON string to the corresponding paths and values recursively.
+        /// </summary>
+        /// <param name="parent">
+        ///     The parent JToken.
+        /// </param>
+        /// <param name="result">
+        ///     The result (modified by this method).
+        /// </param>
+        /// <returns>
+        ///     The result parameter.
+        /// </returns>
+        private static Dictionary<string, string> FlattenRecursively(JToken parent, Dictionary<string, string> result)
         {
-            if (parent.HasValues)
+            if (!parent.HasValues)
+                return result;
+
+            // Note: Optimized for performance (foreach is slower)
+            for (var i = 0; i < parent.Children().Count(); ++i)
             {
-                foreach (JToken child in parent.Children())
-                {
-                    if (child is JProperty)
-                    {
-                        JProperty property = child as JProperty;
+                if (!(parent.Children()[i] is JProperty property))
+                    continue;
 
-                        if (result == null)
-                            result = new Dictionary<string, string>();
+                if (result == null)
+                    result = new Dictionary<string, string>();
 
-                        if(property.Value.HasValues)
-                        {
-                            PopulateRecursively(property.Value, result);
-                        }                                              
-                        else
-                            result.Add(property.Path, property.Value.ToString());
-                    }
-                   
-                }
+                if (property.Value.HasValues)
+                    FlattenRecursively(property.Value, result);
+                else
+                    result.Add(property.Path, property.Value.ToString());
             }
 
             return result;
         }
 
-        public static JArray GroupArray(JArray array, string groupingPropertyName, string groupedPropertyName)
+        /// <summary>
+        ///     Create an array forroup array.
+        /// </summary>
+        /// <param name="array">
+        ///     The array.
+        /// </param>
+        /// <param name="groupPropertyName">
+        ///     Name of the grouping property.
+        /// </param>
+        /// <param name="groupedPropertyName">
+        ///     Name of the grouped property.
+        /// </param>
+        /// <returns>
+        ///     A JArray.
+        /// </returns>
+        public static JArray CreateGroupArray(JArray array, string groupPropertyName, string groupedPropertyName)
         {
-
-            Dictionary<string, JArray> groupedPair = null;
-
+            var groupedPairs = new Dictionary<string, JArray>();
             if (array != null)
             {
-                foreach (JObject eachObj in array.Children())
+                var children = array.Children();
+                for (var i = 0; i < children.Count(); ++i)
                 {
-                    JToken groupToken = eachObj.SelectToken("$." + groupingPropertyName);
+                    var childObject = (JObject)children[i];
+                    var groupToken = childObject.SelectToken("$." + groupPropertyName);
+                    if (groupToken == null)
+                        continue;
 
-                    if (groupedPair == null)
-                        groupedPair = new Dictionary<string, JArray>();
+                    var valueOfGroupToken = Transformer.GetValue(groupToken);
+                    var childObjectClone = (JObject)childObject.DeepClone();
+                    childObjectClone.Remove(groupPropertyName);
 
-
-                    if (groupToken != null)
+                    JArray newArray;
+                    if (groupedPairs.ContainsKey(valueOfGroupToken.ToString()))
                     {
-                        object valueOfToken = Transformer.GetValue(groupToken);
-
-                        if (groupedPair.ContainsKey(valueOfToken.ToString()))
-                        {
-                            JArray oldArr = groupedPair[valueOfToken.ToString()];
-                            JObject clonedObj = (JObject)eachObj.DeepClone();
-                            clonedObj.Remove(groupingPropertyName);
-
-                            oldArr.Add(clonedObj);
-
-                            groupedPair[valueOfToken.ToString()] = oldArr;
-                        }
-                        else
-                        {
-                            JObject clonedObj = (JObject)eachObj.DeepClone();
-
-                            JArray newArr = new JArray();
-                            clonedObj.Remove(groupingPropertyName);
-                            newArr.Add(clonedObj);
-
-                            groupedPair.Add(valueOfToken.ToString(), newArr);
-                        }
+                        newArray = groupedPairs[valueOfGroupToken.ToString()];
+                        newArray.Add(childObjectClone);
                     }
+                    else
+                    {
+                        newArray = new JArray { childObjectClone };
+                    }
+
+                    groupedPairs[valueOfGroupToken.ToString()] = newArray;
                 }
             }
 
-            JArray resultObj = null;
-            foreach (KeyValuePair<string, JArray> pair in groupedPair)
+            JArray result = null;
+            foreach (var pair in groupedPairs)
             {
-                if (resultObj == null)
-                    resultObj = new JArray();
+                var groupObj = new JObject { { groupPropertyName, pair.Key }, { groupedPropertyName, pair.Value } };
 
-                JObject groupObj = new JObject();
-                groupObj.Add(groupingPropertyName, pair.Key);
-                groupObj.Add(groupedPropertyName, pair.Value);
+                if (result == null)
+                    result = new JArray();
 
-                resultObj.Add(groupObj);
-
+                result.Add(groupObj);
             }
 
-            return resultObj;
+            return result;
         }
 
+        /// <summary>
+        ///     Group array multiple properties.
+        /// </summary>
+        /// <param name="array">
+        ///     The array.
+        /// </param>
+        /// <param name="groupingPropertyNames">
+        ///     List of names of the grouping properties.
+        /// </param>
+        /// <param name="groupedPropertyName">
+        ///     Name of the grouped property.
+        /// </param>
+        /// <returns>
+        ///     A JArray.
+        /// </returns>
         public static JArray GroupArrayMultipleProperties(JArray array, string[] groupingPropertyNames, string groupedPropertyName)
         {
-
-            Dictionary<string, JArray> groupedPair = null;
+            var groupedPair = new Dictionary<string, JArray>();
 
             if (array != null)
             {
-                foreach (JObject eachObj in array.Children())
+                foreach (var jToken in array.Children())
                 {
-                    List<JToken> groupTokens = new List<JToken>();
+                    var eachObj = (JObject)jToken;
+                    var groupTokens = new List<JToken>();
 
-                    foreach (string groupPropertyName in groupingPropertyNames)
+                    foreach (var groupPropertyName in groupingPropertyNames)
                         groupTokens.Add(eachObj.SelectToken("$." + groupPropertyName));
 
-                    if (groupedPair == null)
-                        groupedPair = new Dictionary<string, JArray>();
+                    if (groupTokens.Count == 0)
+                        continue;
 
+                    var key = string.Empty;
 
-                    if (groupTokens.Count > 0)
+                    foreach (var valueOfToken in groupTokens.Select(Transformer.GetValue))
                     {
-                        string key = string.Empty;
-
-                        foreach (JToken groupToken in groupTokens)
-                        {
-                            object valueOfToken = Transformer.GetValue(groupToken);
-                            if (key == string.Empty)
-                                key += valueOfToken;
-                            else
-                                key += ":" + valueOfToken;
-                        }
-
-
-                        if (groupedPair.ContainsKey(key))
-                        {
-                            JArray oldArr = groupedPair[key];
-                            JObject clonedObj = (JObject)eachObj.DeepClone();
-
-                            foreach (string groupPropertyName in groupingPropertyNames)
-                                clonedObj.Remove(groupPropertyName);
-
-                            oldArr.Add(clonedObj);
-
-                            groupedPair[key] = oldArr;
-                        }
-                        else
-                        {
-                            JObject clonedObj = (JObject)eachObj.DeepClone();
-
-                            JArray newArr = new JArray();
-
-                            foreach (string groupPropertyName in groupingPropertyNames)
-                                clonedObj.Remove(groupPropertyName);
-                            newArr.Add(clonedObj);
-
-                            groupedPair.Add(key, newArr);
-                        }
+                        key += (key == string.Empty ? key : ":") + valueOfToken;
                     }
+
+                    var clonedObj = (JObject)eachObj.DeepClone();
+                    foreach (var groupPropertyName in groupingPropertyNames)
+                        clonedObj.Remove(groupPropertyName);
+
+                    JArray arr;
+                    if (groupedPair.ContainsKey(key))
+                    {
+                        arr = groupedPair[key];
+                        arr.Add(clonedObj);
+                    }
+                    else
+                    {
+                        arr = new JArray { clonedObj };
+                    }
+
+                    groupedPair[key] = arr;
                 }
             }
 
             JArray resultObj = null;
-            foreach (KeyValuePair<string, JArray> pair in groupedPair)
+            foreach (var pair in groupedPair)
             {
                 if (resultObj == null)
                     resultObj = new JArray();
 
-                JObject groupObj = new JObject();
+                var groupObj = new JObject();
+                var keys = pair.Key.Split(':');
 
-                string[] keys = pair.Key.Split(':');
-
-                int i = 0;
-                foreach (string groupPropertyName in groupingPropertyNames)
+                for (var i = 0; i < groupingPropertyNames.Length; ++i)
                 {
-                    groupObj.Add(groupPropertyName, keys[i]);
-                    i++;
+                    groupObj.Add(groupingPropertyNames[i], keys[i]);
                 }
 
                 groupObj.Add(groupedPropertyName, pair.Value);
-
                 resultObj.Add(groupObj);
-
             }
 
             return resultObj;

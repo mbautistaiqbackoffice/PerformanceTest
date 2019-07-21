@@ -14,11 +14,24 @@ This will repace the JUST and JUST.NETCore packages.</Description>
     <PackageReleaseNotes>Fixed the following issues:-
 https://github.com/WorkMaze/JUST.net/issues/26
 https://github.com/WorkMaze/JUST.net/issues/25</PackageReleaseNotes>
+    <RootNamespace>JUST</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.10" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.11" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Primitives" Version="4.3.0" />
   </ItemGroup>

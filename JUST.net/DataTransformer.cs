@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Linq;
-
+﻿// ReSharper disable UnusedMember.Global
+// ReSharper disable StringLiteralTypo
+// ReSharper disable UnusedMember.Local
 namespace JUST
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public class DataTransformer
     {
         public static string Transform(string transformer, string inputJson)
@@ -17,87 +20,79 @@ namespace JUST
 
         private static string Parse(string transformer, string inputJson, JArray array, JToken currentArrayElement)
         {
-            int startIndex = 0, index = 0;
+            var startIndex = 0;
+            int index;
 
-            while ((startIndex < transformer.Length) && (index = transformer.IndexOf('#', startIndex)) != -1)
+            while (startIndex < transformer.Length && (index = transformer.IndexOf('#', startIndex)) != -1)
             {
-                string functionString = GetFunctionString(transformer, index);
+                var functionString = GetFunctionString(transformer, index);
+                if (functionString == null)
+                    break;
 
-                if (functionString != null)
+                if (functionString.Contains("loop"))
                 {
-                    if (functionString.Contains("loop"))
-                    {
-                        string loopArgsInclusive = GetLoopArguments(index, transformer, true);
-                        string loopArgs = GetLoopArguments(index, transformer, false);
+                    var loopArgs = GetLoopArguments(index, transformer, false);
+                    var loopArgsInclusive = GetLoopArguments(index, transformer, true);
+                    var builder = new StringBuilder(transformer);
+                    builder.Remove(index - 1, loopArgsInclusive.Length + 1);
 
-                        object result = EvaluateFunction(functionString, inputJson, array, currentArrayElement, loopArgs);
-                        string evaluatedFunction = result.ToString();
-
-                        StringBuilder builder = new StringBuilder(transformer);
-                        builder.Remove(index-1, loopArgsInclusive.Length+1);
-                        builder.Insert(index-1, evaluatedFunction);
-                        transformer = builder.ToString();
-
-                        startIndex = index + evaluatedFunction.Length;
-                    }
-                    else
-                    {
-                        object result = EvaluateFunction(functionString, inputJson, array, currentArrayElement, null);
-                        string evaluatedFunction = result.ToString();
-
-                        if (!string.IsNullOrEmpty(evaluatedFunction))
-                        {
-                            StringBuilder builder = new StringBuilder(transformer);
-                            builder.Remove(index, functionString.Length);
-                            builder.Insert(index, evaluatedFunction);
-                            transformer = builder.ToString();
-
-                            startIndex = index + evaluatedFunction.Length;
-                        }
-                    }
+                    var evaluatedFunction = EvaluateFunction(functionString, inputJson, array, currentArrayElement, loopArgs).ToString();
+                    builder.Insert(index - 1, evaluatedFunction);
+                    transformer = builder.ToString();
+                    startIndex = index + evaluatedFunction.Length;
                 }
                 else
-                    break;
+                {
+                    var builder = new StringBuilder(transformer);
+                    builder.Remove(index, functionString.Length);
+
+                    var evaluatedFunction = EvaluateFunction(functionString, inputJson, array, currentArrayElement, null).ToString();
+                    if (string.IsNullOrEmpty(evaluatedFunction))
+                        continue;
+
+                    startIndex = index + evaluatedFunction.Length;
+
+                    builder.Insert(index, evaluatedFunction);
+                    transformer = builder.ToString();
+                }
             }
 
             return transformer;
         }
 
-        private static string GetLoopArguments(int startIdex, string input,bool inclusive)
+        private static string GetLoopArguments(int startIndex, string input, bool inclusive)
         {
-            string loopArgs = string.Empty;
+            var loopArgs = string.Empty;
 
-            int openBrackettCount = 0;
-            int closebrackettCount = 0;
+            var openBracketCount = 0;
+            var closeBracketCount = 0;
 
-            int bStartIndex = 0;
-            int bEndIndex = 0;
-            for (int i = startIdex; i < input.Length; i++)
+            var bracketStartIndex = 0;
+            var bracketEndIndex = 0;
+            for (var i = startIndex; i < input.Length; i++)
             {
-                char currentChar = input[i];
+                var currentChar = input[i];
 
                 if (currentChar == '{')
                 {
-                    if (openBrackettCount == 0)
-                        bStartIndex = i;
+                    if (openBracketCount == 0)
+                        bracketStartIndex = i;
 
-                    openBrackettCount++;
+                    openBracketCount++;
                 }
 
                 if (currentChar == '}')
                 {
-                    bEndIndex = i;
-                    closebrackettCount++;
+                    bracketEndIndex = i;
+                    closeBracketCount++;
                 }
-               
-                if (openBrackettCount > 0 && openBrackettCount == closebrackettCount)
-                {
-                    if(!inclusive)
-                        loopArgs = input.Substring(bStartIndex, bEndIndex - bStartIndex + 1);
-                    else
-                        loopArgs = input.Substring(startIdex, bEndIndex - startIdex + 1);
-                    break;
-                }
+
+                if (openBracketCount <= 0 || openBracketCount != closeBracketCount)
+                    continue;
+
+                var fromIndex = inclusive ? startIndex : bracketStartIndex;
+                loopArgs = input.Substring(fromIndex, bracketEndIndex - fromIndex + 1);
+                break;
             }
 
             if (inclusive && loopArgs == string.Empty)
@@ -106,113 +101,122 @@ namespace JUST
             return loopArgs;
         }
 
-        private static object EvaluateFunction(string functionString, string inputJson, JArray array, JToken currentArrayElement,
-                    string loopArgumentString)
+        private static object EvaluateFunction(string functionString,
+                                               string inputJson,
+                                               JToken array,
+                                               JToken currentArrayElement,
+                                               string loopArgumentString)
         {
-            object output = null;
-
             functionString = functionString.Trim().Substring(1);
+            var indexOfStart = functionString.IndexOf("(", StringComparison.Ordinal);
+            if (indexOfStart == -1)
+                return null;
 
-            int indexOfStart = functionString.IndexOf("(");
-
-            if (indexOfStart != -1)
+            var functionName = functionString.Substring(0, indexOfStart);
+            var argumentString = functionString.Substring(indexOfStart + 1, functionString.Length - indexOfStart - 2);
+            var arguments = ExpressionHelper.GetArguments(argumentString);
+            var listParameters = new List<object>();
+            if (arguments != null && arguments.Length > 0)
             {
-                string functionName = functionString.Substring(0, indexOfStart);
-
-                string argumentString = functionString.Substring(indexOfStart + 1, functionString.Length - indexOfStart - 2);
-
-                string[] arguments = ExpressionHelper.GetArguments(argumentString);
-
-                List<object> listParameters = new List<object>();
-
-                if (arguments != null && arguments.Length > 0)
+                foreach (var argument in arguments)
                 {
-                    foreach (string argument in arguments)
-                    {
-                        string trimmedArgument = argument;
+                    var trimmedArgument = argument;
+                    if (argument.Contains("#"))
+                        trimmedArgument = argument.Trim();
 
-                        if (argument.Contains("#"))
-                            trimmedArgument = argument.Trim();
-
-                        if (trimmedArgument.StartsWith("#"))
-                        {
-                            listParameters.Add(EvaluateFunction(trimmedArgument, inputJson, array, currentArrayElement, loopArgumentString));
-                        }
-                        else
-                        {
-                            listParameters.Add(trimmedArgument);
-                        }
-                    }
+                    if (trimmedArgument.StartsWith("#"))
+                        listParameters.Add(EvaluateFunction(trimmedArgument,
+                                                                 inputJson,
+                                                                 array,
+                                                                 currentArrayElement,
+                                                                 loopArgumentString));
+                    else
+                        listParameters.Add(trimmedArgument);
                 }
-
-                listParameters.Add(new JUSTContext(inputJson));
-                var parameters = listParameters.ToArray();
-
-                if (functionName == "loop")
-                {
-                    output = GetLoopResult(parameters, loopArgumentString);
-                }
-                else if (functionName == "currentvalue" || functionName == "currentindex" || functionName == "lastindex"
-                    || functionName == "lastvalue")
-                    output = caller("JUST.Transformer", functionName, new object[] { array, currentArrayElement });
-                else if (functionName == "currentvalueatpath" || functionName == "lastvalueatpath")
-                    output = caller("JUST.Transformer", functionName, new object[] { array, currentArrayElement, arguments[0] });
-                else if (functionName == "customfunction")
-                    output = CallCustomFunction(parameters);
-                else if (functionName == "xconcat" || functionName == "xadd" || functionName == "mathequals" || functionName == "mathgreaterthan" || functionName == "mathlessthan"
-                    || functionName == "mathgreaterthanorequalto"
-                    || functionName == "mathlessthanorequalto" || functionName == "stringcontains" ||
-                    functionName == "stringequals")
-                {
-                    object[] oParams = new object[1];
-                    oParams[0] = parameters;
-                    output = caller("JUST.Transformer", functionName, oParams);
-                }
-                else
-                    output = caller("JUST.Transformer", functionName, parameters);
             }
+
+            listParameters.Add(new JUSTContext(inputJson));
+            var parameters = listParameters.ToArray();
+
+            object output;
+            switch (functionName)
+            {
+                case "loop":
+                    output = GetLoopResult(parameters, loopArgumentString);
+                    break;
+
+                case "currentvalue":
+                case "currentindex":
+                case "lastindex":
+                case "lastvalue":
+                    output = CallMethod("JUST.Transformer", functionName, new object[] { array, currentArrayElement });
+                    break;
+
+                case "currentvalueatpath":
+                case "lastvalueatpath":
+                    output = CallMethod("JUST.Transformer", functionName, new object[] { array, currentArrayElement, arguments?[0] });
+                    break;
+
+                case "customfunction":
+                    output = CallCustomFunction(parameters);
+                    break;
+
+                case "xconcat":
+                case "xadd":
+                case "mathequals":
+                case "mathgreaterthan":
+                case "mathlessthan":
+                case "mathgreaterthanorequalto":
+                case "mathlessthanorequalto":
+                case "stringcontains":
+                case "stringequals":
+                    var oParams = new object[1];
+                    oParams[0] = parameters;
+                    output = CallMethod("JUST.Transformer", functionName, oParams);
+                    break;
+
+                default:
+                    output = CallMethod("JUST.Transformer", functionName, parameters);
+                    break;
+            }
+
             return output;
         }
 
-        private static string GetStringValue(object o)
+        private static string GetStringValue(object obj)
         {
-            if (o is JToken token)
-            {
+            if (obj is JToken token)
                 return token.ToString(Formatting.None);
-            }
-            if (o is IEnumerable<object> list)
-            {
+
+            if (obj is IEnumerable<object> list)
                 return string.Join(",", list.Select(el => el.ToString()));
-            }
-            return o.ToString();
+
+            return obj.ToString();
         }
 
-        private static string GetLoopResult(object[] parameters,string loopArgumentString)
+        private static string GetLoopResult(object[] parameters, string loopArgumentString)
         {
-            string returnString = string.Empty;
-
             if (parameters.Length < 2)
                 throw new Exception("Incorrect number of parameters for function #Loop");
 
-            JToken token = (parameters[parameters.Length - 1] as JUSTContext).Input;
-            JToken selectedToken = token.SelectToken(parameters[0].ToString());
+            var token = (parameters[parameters.Length - 1] as JUSTContext)?.Input;
+            var selectedToken = token?.SelectToken(parameters[0].ToString());
+            if (selectedToken == null)
+                return string.Empty;
 
             if (selectedToken.Type != JTokenType.Array)
                 throw new Exception("The JSONPath argument inside a #loop function must be an Array");
 
-            JArray selectedArr = selectedToken as JArray;
+            var separator = parameters.Length == 3 ? parameters[1].ToString() : Environment.NewLine;
+            var returnString = string.Empty;
 
-            string seperator = Environment.NewLine;
-
-            if (parameters.Length == 3)
-                seperator = parameters[1].ToString();
-
-            foreach (JToken arrToken in selectedToken.Children())
+            foreach (var arrToken in selectedToken.Children())
             {
-                string parsedrecord = Parse(loopArgumentString, token.ToString(Formatting.None), selectedArr, arrToken);
+                var selectedArray = selectedToken as JArray;
+                var parsedRecord = Parse(loopArgumentString, token.ToString(Formatting.None), selectedArray, arrToken);
 
-                returnString += parsedrecord.Substring(1, parsedrecord.Length - 2);
-                returnString += seperator;
+                returnString += parsedRecord.Substring(1, parsedRecord.Length - 2);
+                returnString += separator;
             }
 
             return returnString;
@@ -220,25 +224,23 @@ namespace JUST
 
         private static string GetFunctionString(string input, int startIndex)
         {
-            string functionString = string.Empty;
+            var functionString = string.Empty;
+            var bracketOpenCount = 0;
+            var bracketClosedCount = 0;
 
-            int brackettOpenCount = 0;
-            int brackettClosedCount = 0;
-
-            for(int i = startIndex; i < input.Length; i++)
+            for (var i = startIndex; i < input.Length; i++)
             {
-                char c = input[i];
+                if (input[i] == '(')
+                    bracketOpenCount++;
 
-                if (c == '(')
-                    brackettOpenCount++;
-                if (c == ')')
-                    brackettClosedCount++;
+                if (input[i] == ')')
+                    bracketClosedCount++;
 
-                if( brackettClosedCount > 0 && brackettClosedCount == brackettOpenCount)
-                {
-                    functionString = input.Substring(startIndex, i - startIndex + 1);
-                    break;
-                }
+                if (bracketClosedCount <= 0 || bracketClosedCount != bracketOpenCount)
+                    continue;
+
+                functionString = input.Substring(startIndex, i - startIndex + 1);
+                break;
             }
 
             return functionString;
@@ -246,37 +248,36 @@ namespace JUST
 
         private static object CallCustomFunction(object[] parameters)
         {
-            object[] customParameters = new object[parameters.Length - 3];
-            string functionString = string.Empty;
-            string dllName = string.Empty;
-            int i = 0;
-            foreach (object parameter in parameters)
+            var customParameters = new object[parameters.Length - 3];
+            var functionString = string.Empty;
+            var dllName = string.Empty;
+            for (var i = 0; i < parameters.Length; ++i)
             {
-                if (i == 0)
-                    dllName = parameter.ToString();
-                else if (i == 1)
-                    functionString = parameter.ToString();
-                else
-                if (i != (parameters.Length - 1))
-                    customParameters[i - 2] = parameter;
+                switch (i)
+                {
+                    case 0:
+                        dllName = parameters[i].ToString();
+                        break;
 
-                i++;
+                    case 1:
+                        functionString = parameters[i].ToString();
+                        break;
+
+                    default:
+                        if (i != parameters.Length - 1)
+                            customParameters[i - 2] = parameters[i];
+                        break;
+                }
             }
 
-            int index = functionString.LastIndexOf(".");
+            var index = functionString.LastIndexOf(".", StringComparison.Ordinal);
+            var className = functionString.Substring(0, index) + "," + dllName;
+            var functionName = functionString.Substring(index + 1, functionString.Length - index - 1);
 
-            string className = functionString.Substring(0, index);
-            string functionName = functionString.Substring(index + 1, functionString.Length - index - 1);
-
-            className = className + "," + dllName;
-
-            return caller(className, functionName, customParameters);
+            return CallMethod(className, functionName, customParameters);
         }
 
-        private static object caller(string myclass, string mymethod, object[] parameters)
-        {
-            Assembly assembly = null;
-            return ReflectionHelper.caller(assembly, myclass, mymethod, parameters, true, new JUSTContext());
-        }        
+        private static object CallMethod(string theClass, string theMethod, object[] parameters) =>
+            ReflectionHelper.caller(null, theClass, theMethod, parameters, true, new JUSTContext());
     }
 }

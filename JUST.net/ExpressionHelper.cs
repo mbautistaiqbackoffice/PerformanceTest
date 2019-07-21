@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
-namespace JUST
+﻿namespace JUST
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
     internal class ExpressionHelper
     {
-        private const string FunctionAndArgumentsRegex = "^#(.+?)[(](.*)[)]$";
+        private const string FUNCTION_AND_ARGUMENTS_REGEX = "^#(.+?)[(](.*)[)]$";
+        private static readonly Regex _CompiledFunctionRegex = new Regex(FUNCTION_AND_ARGUMENTS_REGEX, RegexOptions.Compiled);
+
+        private const string ARGUMENTS_REGEX = "\\(([^\\)]*?)\\)";
+        private static readonly Regex _CompileArgumentsRegex = new Regex(ARGUMENTS_REGEX, RegexOptions.Compiled);
 
         internal static bool TryParseFunctionNameAndArguments(string input, out string functionName, out string arguments)
         {
-            var match = new Regex(FunctionAndArgumentsRegex).Match(input);
+            var match = _CompiledFunctionRegex.Match(input);
             functionName = match.Success ? match.Groups[1].Value : input;
             arguments = match.Success ? match.Groups[2].Value : null;
             return match.Success;
@@ -17,53 +22,58 @@ namespace JUST
 
         internal static string[] GetArguments(string functionString)
         {
-            bool brackettOpen = false;
+            var arguments = new List<string>();
+            var index = -1;
 
-            List<string> arguments = null;
-            int index = 0;
+            var openParenCount = 0;
+            var closeParenCount = 0;
 
-            int openBrackettCount = 0;
-            int closebrackettCount = 0;
-
-            for (int i = 0; i < functionString.Length; i++)
+            // Original
+            var functionStringLength = functionString.Length;
+            for (var i = 0; i < functionStringLength; i++)
             {
-                char currentChar = functionString[i];
+                if (functionString[i] == '(')
+                    openParenCount++;
+                else if (functionString[i] == ')')
+                    closeParenCount++;
 
-                if (currentChar == '(')
-                    openBrackettCount++;
+                var parensOpen = openParenCount != closeParenCount;
+                if (functionString[i] != ',' || parensOpen)
+                    continue;
 
-                if (currentChar == ')')
-                    closebrackettCount++;
+                arguments.Add(functionString.Substring(index + 1, i - index - 1));
+                index = i;
+            }
 
-                if (openBrackettCount == closebrackettCount)
-                    brackettOpen = false;
-                else
-                    brackettOpen = true;
-
-                if ((currentChar == ',') && (!brackettOpen))
+            // IndexOf
+            arguments = new List<string>();
+            var nextOpenIndex = functionString.IndexOf('(');
+            while (nextOpenIndex != -1)
+            {
+                var nextCloseIndex = functionString.IndexOf(')', nextOpenIndex + 1);
+                if (nextCloseIndex != -1 && nextCloseIndex != nextOpenIndex + 1)
                 {
-                    if (arguments == null)
-                        arguments = new List<string>();
-
-                    if (index != 0)
-                        arguments.Add(functionString.Substring(index + 1, i - index - 1));
-                    else
-                        arguments.Add(functionString.Substring(index, i));
-                    index = i;
+                    var argumentsString = functionString.Substring(nextOpenIndex + 1, nextCloseIndex - nextOpenIndex - 1);
+                    var argumentList = argumentsString.Split(',');
+                    arguments.AddRange(argumentList.Select(argument => argument.TrimStart()));
                 }
 
+                if (nextCloseIndex + 1 == functionStringLength)
+                    break;
+
+                nextOpenIndex = functionString.IndexOf('(', nextCloseIndex + 1);
             }
 
-            if (index > 0)
+            // Regex
+            var match = _CompileArgumentsRegex.Match(functionString);
+            if (match.Success)
             {
-                arguments.Add(functionString.Substring(index + 1, functionString.Length - index - 1));
+                var argumentsString = match.Groups[1].Value;
+                var argumentList = argumentsString.Split(',');
+                arguments.AddRange(argumentList.Select(argument => argument.TrimStart()));
             }
-            else
-            {
-                if (arguments == null)
-                    arguments = new List<string>();
-                arguments.Add(functionString);
-            }
+
+            arguments.Add(functionString.Substring(index + 1, functionStringLength - index - 1));
 
             return arguments.ToArray();
         }

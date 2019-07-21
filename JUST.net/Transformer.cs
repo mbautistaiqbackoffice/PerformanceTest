@@ -1,49 +1,45 @@
-﻿using System;
-using System.Linq;
-using Newtonsoft.Json.Linq;
+﻿// ReSharper disable UnusedMember.Global
+// ReSharper disable IdentifierTypo
 
 namespace JUST
 {
+    using System;
+    using System.Linq;
+
+    using Newtonsoft.Json.Linq;
+
     internal class Transformer
     {
         public static object valueof(string jsonPath, JUSTContext context)
         {
-            JToken token = context.Input;
-            JToken selectedToken = token.SelectToken(jsonPath);
+            var token = context.Input;
+            var selectedToken = token.SelectToken(jsonPath);
             return GetValue(selectedToken);
         }
 
         public static bool exists(string jsonPath, JUSTContext context)
         {
-            JToken token = context.Input;
-            JToken selectedToken = token.SelectToken(jsonPath);
-
-            return selectedToken != null;
+            var token = context.Input;
+            return token.SelectToken(jsonPath) != null;
         }
 
         public static bool existsandnotempty(string jsonPath, JUSTContext context)
         {
-            JToken token = context.Input;
-            JToken selectedToken = token.SelectToken(jsonPath);
-
+            var token = context.Input;
+            var selectedToken = token.SelectToken(jsonPath);
             return selectedToken != null && selectedToken.ToString().Trim() != string.Empty;
         }
 
         public static object ifcondition(object condition, object value, object trueResult, object falseResult, JUSTContext context)
         {
-            object output = falseResult;
-
-            if (condition.ToString().ToLower() == value.ToString().ToLower())
-                output = trueResult;
-
-            return output;
+            return string.Equals(condition.ToString(), value.ToString(), StringComparison.OrdinalIgnoreCase) ? trueResult : falseResult;
         }
 
         #region string functions
 
         public static string concat(string string1, string string2, JUSTContext context)
         {
-            string string2Result = (string2 != null) ? string2 : string.Empty;
+            var string2Result = string2 ?? string.Empty;
             return string1 != null ? string1 + string2Result : string.Empty + string2Result;
         }
 
@@ -59,50 +55,24 @@ namespace JUST
             }
         }
 
-        public static int firstindexof(string stringRef, string searchString, JUSTContext context)
-        {
-            return stringRef.IndexOf(searchString, 0);
-        }
+        public static int firstindexof(string stringRef, string searchString, JUSTContext context) =>
+            stringRef.IndexOf(searchString, 0, StringComparison.Ordinal);
 
-        public static int lastindexof(string stringRef, string searchString, JUSTContext context)
-        {
-            return stringRef.LastIndexOf(searchString);
-        }
+        public static int lastindexof(string stringRef, string searchString, JUSTContext context) =>
+            stringRef.LastIndexOf(searchString, StringComparison.Ordinal);
 
-        public static string concatall(JArray parsedArray, JUSTContext context)
-        {
-            string result = null;
-
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    if (result == null)
-                        result = string.Empty;
-                    result += token.ToString();
-                }
-            }
-
-            return result;
-        }
+        public static string concatall(JArray parsedArray, JUSTContext context) =>
+            parsedArray?.Children().Aggregate(string.Empty, (current, token) => current + token);
 
         public static string concatallatpath(JArray parsedArray, string jsonPath, JUSTContext context)
         {
-            string result = null;
+            if (parsedArray == null)
+                return null;
 
-            if (parsedArray != null)
+            var result = string.Empty;
+            foreach (var token in parsedArray.Children())
             {
-
-                foreach (JToken token in parsedArray.Children())
-                {
-
-                    JToken selectedToken = token.SelectToken(jsonPath);
-
-                    if (result == null)
-                        result = string.Empty;
-
-                    result += selectedToken.ToString();
-                }
+                result += token.SelectToken(jsonPath).ToString();
             }
 
             return result;
@@ -112,220 +82,104 @@ namespace JUST
 
         #region math functions
 
+        public static object add(decimal num1, decimal num2, JUSTContext context) => TypedNumber(num1 + num2);
 
-        public static object add(decimal num1, decimal num2, JUSTContext context)
-        {
-            return TypedNumber(num1 + num2);
-        }
+        public static object subtract(decimal num1, decimal num2, JUSTContext context) => TypedNumber(num1 - num2);
 
-        public static object subtract(decimal num1, decimal num2, JUSTContext context)
-        {
-            return TypedNumber(num1 - num2);
-        }
-        public static object multiply(decimal num1, decimal num2, JUSTContext context)
-        {
-            return TypedNumber(num1 * num2);
-        }
-        public static object divide(decimal num1, decimal num2, JUSTContext context)
-        {
-            return TypedNumber(num1 / num2);
-        }
-        private static object TypedNumber(decimal number)
-        {
-            return number * 10 % 10 == 0 ? (object)Convert.ToInt32(number) : number;
-        }
+        public static object multiply(decimal num1, decimal num2, JUSTContext context) => TypedNumber(num1 * num2);
+
+        public static object divide(decimal num1, decimal num2, JUSTContext context) => TypedNumber(num1 / num2);
+
+        private static object TypedNumber(decimal number) => number * 10 % 10 == 0 ? (object)Convert.ToInt32(number) : number;
+
         #endregion
 
         #region aggregate functions
-        public static object sum(JArray parsedArray, JUSTContext context)
-        {
-            decimal result = 0;
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    result += Convert.ToDecimal(token.ToString());
-                }
-            }
 
-            return TypedNumber(result);
-        }
+        public static object sum(JArray parsedArray, JUSTContext context) =>
+            TypedNumber(parsedArray?.Children().Sum(token => Convert.ToDecimal(token.ToString())) ?? 0);
 
-        public static object sumatpath(JArray parsedArray, string jsonPath, JUSTContext context)
-        {
-            decimal result = 0;
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    JToken selectedToken = token.SelectToken(jsonPath);
-                    result += Convert.ToDecimal(selectedToken.ToString());
-                }
-            }
-
-            return TypedNumber(result);
-        }
+        public static object sumatpath(JArray parsedArray, string jsonPath, JUSTContext context) =>
+            TypedNumber(parsedArray?.Children().Sum(token => Convert.ToDecimal(token.SelectToken(jsonPath).ToString())) ?? 0);
 
         public static object average(JArray parsedArray, JUSTContext context)
         {
-            decimal result = 0;
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    result += Convert.ToDecimal(token.ToString());
-                }
-            }
+            if (parsedArray == null || parsedArray.Count == 0)
+                return TypedNumber(0);
 
+            var result = parsedArray.Children().Sum(token => Convert.ToDecimal(token.ToString()));
             return TypedNumber(result / parsedArray.Count);
         }
 
         public static object averageatpath(JArray parsedArray, string jsonPath, JUSTContext context)
         {
-            decimal result = 0;
+            if (parsedArray == null || parsedArray.Count == 0)
+                return TypedNumber(0);
 
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    JToken selectedToken = token.SelectToken(jsonPath);
-                    result += Convert.ToDecimal(selectedToken.ToString());
-                }
-            }
-
+            var result = parsedArray.Children().Sum(token => Convert.ToDecimal(token.SelectToken(jsonPath).ToString()));
             return TypedNumber(result / parsedArray.Count);
         }
 
-        public static object max(JArray parsedArray, JUSTContext context)
-        {
-            decimal result = 0;
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    decimal thisValue = Convert.ToDecimal(token.ToString());
-                    result = Math.Max(result, thisValue);
-                }
-            }
+        public static object max(JArray parsedArray, JUSTContext context) =>
+            TypedNumber(parsedArray?.Children().Select(token => Convert.ToDecimal(token.ToString())).Concat(new decimal[] { 0 }).Max()
+                        ?? 0);
 
-            return TypedNumber(result);
-        }
+        public static object maxatpath(JArray parsedArray, string jsonPath, JUSTContext context) =>
+            TypedNumber(parsedArray?.Children().Select(token => Convert.ToDecimal(token.SelectToken(jsonPath).ToString()))
+                                   .Concat(new decimal[] { 0 }).Max()
+                        ?? 0);
 
-        public static object maxatpath(JArray parsedArray, string jsonPath, JUSTContext context)
-        {
-            decimal result = 0;
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    JToken selectedToken = token.SelectToken(jsonPath);
-                    decimal thisValue = Convert.ToDecimal(selectedToken.ToString());
-                    result = Math.Max(result, thisValue);
-                }
-            }
-
-            return TypedNumber(result);
-        }
-
-        public static object min(JArray parsedArray, JUSTContext context)
-        {
-            decimal result = decimal.MaxValue;
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    decimal thisValue = Convert.ToDecimal(token.ToString());
-                    result = Math.Min(result, thisValue);
-                }
-            }
-
-            return TypedNumber(result);
-        }
+        public static object min(JArray parsedArray, JUSTContext context) =>
+            TypedNumber(parsedArray?.Children().Select(token => Convert.ToDecimal(token.ToString())).Concat(new[] { decimal.MaxValue })
+                                   .Min()
+                        ?? decimal.MaxValue);
 
         public static object minatpath(JArray parsedArray, string jsonPath, JUSTContext context)
         {
-            decimal result = decimal.MaxValue;
-
-            if (parsedArray != null)
-            {
-                foreach (JToken token in parsedArray.Children())
-                {
-                    JToken selectedToken = token.SelectToken(jsonPath);
-                    decimal thisValue = Convert.ToDecimal(selectedToken.ToString());
-                    result = Math.Min(result, thisValue);
-                }
-            }
-
-            return TypedNumber(result);
+            return TypedNumber(parsedArray?.Children().Select(token => Convert.ToDecimal(token.SelectToken(jsonPath).ToString()))
+                                          .Concat(new[] { decimal.MaxValue }).Min()
+                               ?? decimal.MaxValue);
         }
 
-        public static int arraylength(string array, JUSTContext context)
-        {
-            JArray parsedArray = JArray.Parse(array);
-            return parsedArray.Count;
-        }
+        public static int arraylength(string array, JUSTContext context) => JArray.Parse(array).Count;
 
         #endregion
 
         #region arraylooping
-        public static object currentvalue(JArray array, JToken currentElement)
-        {
-            return GetValue(currentElement);
-        }
 
-        public static int currentindex(JArray array, JToken currentElement)
-        {
-            return array.IndexOf(currentElement);
-        }
-        
-        public static object lastvalue(JArray array, JToken currentElement)
-        {
-            return GetValue(array.Last);
-        }
+        public static object currentvalue(JArray array, JToken currentElement) => GetValue(currentElement);
 
-        public static int lastindex(JArray array, JToken currentElement)
-        {
-            return array.Count - 1;
-        }
+        public static int currentindex(JArray array, JToken currentElement) => array.IndexOf(currentElement);
 
-        public static object currentvalueatpath(JArray array, JToken currentElement, string jsonPath)
-        {
-            JToken selectedToken = currentElement.SelectToken(jsonPath);
+        public static object lastvalue(JArray array, JToken currentElement) => GetValue(array.Last);
 
-            return GetValue(selectedToken);
-        }
+        public static int lastindex(JArray array, JToken currentElement) => array.Count - 1;
 
-        public static object lastvalueatpath(JArray array, JToken currentElement, string jsonPath)
-        {
-            JToken selectedToken = array.Last.SelectToken(jsonPath);
+        public static object currentvalueatpath(JArray array, JToken currentElement, string jsonPath) =>
+            GetValue(currentElement.SelectToken(jsonPath));
 
-            return GetValue(selectedToken);
-        }
+        public static object lastvalueatpath(JArray array, JToken currentElement, string jsonPath) =>
+            GetValue(array.Last.SelectToken(jsonPath));
+
         #endregion
 
         #region Constants
 
-        public static string constant_comma(string none, JUSTContext context)
-        {
-            return ",";
-        }
+        public static string constant_comma(string none, JUSTContext context) => ",";
 
-        public static string constant_hash(string none, JUSTContext context)
-        {
-            return "#";
-        }
+        public static string constant_hash(string none, JUSTContext context) => "#";
 
         #endregion
 
         #region Variable parameter functions
+
         public static string xconcat(object[] list)
         {
-            string result = string.Empty;
-
-            for (int i = 0; i < list.Length - 1; i++)
+            var result = string.Empty;
+            foreach (var item in list)
             {
-                if (list[i] != null)
-                    result += list[i].ToString();
+                if (item != null)
+                    result += item;
             }
 
             return result;
@@ -333,213 +187,144 @@ namespace JUST
 
         public static object xadd(object[] list)
         {
-            JUSTContext context = list[list.Length - 1] as JUSTContext;
+            var context = list[list.Length - 1] as JUSTContext;
+            var evaluationMode = context?.EvaluationMode ?? EvaluationMode.FallbackToDefault;
             decimal add = 0;
-            for (int i = 0; i < list.Length - 1; i++)
+            foreach (var item in list)
             {
-                if (list[i] != null)
-                    add += (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[i], context.EvaluationMode);
+                if (item != null)
+                    add += (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), item, evaluationMode);
             }
 
             return TypedNumber(add);
         }
+
         #endregion
 
         public static object GetValue(JToken selectedToken)
         {
-            object output = null;
-            if (selectedToken != null)
+            if (selectedToken == null)
+                return null;
+
+            switch (selectedToken.Type)
             {
-                switch (selectedToken.Type)
-                {
-                    case JTokenType.Object:
-                        output = selectedToken; // JsonConvert.SerializeObject(selectedToken);
-                        break;
-                    case JTokenType.Array:
-                        output = selectedToken.Values<object>().ToArray(); //selectedToken.ToString();
-                        break;
-                    case JTokenType.Integer:
-                        output = selectedToken.ToObject<Int64>();
-                        break;
-                    case JTokenType.Float:
-                        output = selectedToken.ToObject<float>();
-                        break;
-                    case JTokenType.String:
-                        output = selectedToken.ToString();
-                        break;
-                    case JTokenType.Boolean:
-                        output = selectedToken.ToObject<bool>();
-                        break;
-                    case JTokenType.Date:
-                        DateTime value = Convert.ToDateTime(selectedToken.Value<DateTime>());
-                        output = value.ToString("yyyy-MM-ddTHH:mm:ssZ");
-                        break;
-                    case JTokenType.Raw:
-                        break;
-                    case JTokenType.Bytes:
-                        break;
-                    case JTokenType.Guid:
-                        break;
-                    case JTokenType.Uri:
-                        break;
-                    case JTokenType.TimeSpan:
-                        break;
-                    case JTokenType.Undefined:
-                    case JTokenType.Constructor:
-                    case JTokenType.Property:
-                    case JTokenType.Comment:
-                    case JTokenType.Null:
-                    case JTokenType.None:
-                        break;
-                    default:
-                        break;
-                }
+                case JTokenType.Object:
+                    return selectedToken; // JsonConvert.SerializeObject(selectedToken);
+
+                case JTokenType.Array:
+                    return selectedToken.Values<object>().ToArray(); //selectedToken.ToString();
+
+                case JTokenType.Integer:
+                    return selectedToken.ToObject<long>();
+
+                case JTokenType.Float:
+                    return selectedToken.ToObject<float>();
+
+                case JTokenType.String:
+                    return selectedToken.ToString();
+
+                case JTokenType.Boolean:
+                    return selectedToken.ToObject<bool>();
+
+                case JTokenType.Date:
+                    var value = Convert.ToDateTime(selectedToken.Value<DateTime>());
+                    return value.ToString("yyyy-MM-ddTHH:mm:ssZ");
+
+                case JTokenType.Raw:
+                case JTokenType.Bytes:
+                case JTokenType.Guid:
+                case JTokenType.Uri:
+                case JTokenType.TimeSpan:
+                case JTokenType.Undefined:
+                case JTokenType.Constructor:
+                case JTokenType.Property:
+                case JTokenType.Comment:
+                case JTokenType.Null:
+                case JTokenType.None:
+                    return null;
+
+                default:
+                    return null;
             }
-            return output;
         }
 
         #region grouparrayby
+
         public static JArray grouparrayby(string jsonPath, string groupingElement, string groupedElement, JUSTContext context)
         {
-            JArray result;
-            JToken inObj = context.Input;
-            JArray arr = (JArray)inObj.SelectToken(jsonPath);
+            var arr = (JArray)context.Input.SelectToken(jsonPath);
             if (!groupingElement.Contains(":"))
-            {
-                result = Utilities.GroupArray(arr, groupingElement, groupedElement);
-            }
-            else
-            {
-                string[] groupingElements = groupingElement.Split(':');
-                result = Utilities.GroupArrayMultipleProperties(arr, groupingElements, groupedElement);
-            }
-            return result;
+                return Utilities.CreateGroupArray(arr, groupingElement, groupedElement);
+
+            var groupingElements = groupingElement.Split(':');
+            return Utilities.GroupArrayMultipleProperties(arr, groupingElements, groupedElement);
         }
 
         #endregion
 
         #region operators
-        public static bool stringequals(object[] list)
-        {
-            bool result = false;
 
-            if (list.Length >= 2)
-            {
-                if (list[0].ToString().Equals(list[1].ToString()))
-                    result = true;
-            }
+        public static bool stringequals(object[] list) => list.Length >= 2 && list[0].ToString().Equals(list[1].ToString());
 
-            return result;
-        }
-
-        public static bool stringcontains(object[] list)
-        {
-            bool result = false;
-
-            if (list.Length >= 2)
-            {
-                if (list[0].ToString().Contains(list[1].ToString()))
-                    result = true;
-            }
-
-            return result;
-        }
+        public static bool stringcontains(object[] list) => list.Length >= 2 && list[0].ToString().Contains(list[1].ToString());
 
         public static bool mathequals(object[] list)
         {
-            bool result = false;
-
-            if (list.Length >= 2)
-            {
-                decimal lshDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[0], EvaluationMode.Strict);
-                decimal rhsDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[1], EvaluationMode.Strict);
-
-                result = lshDecimal == rhsDecimal;
-            }
-
-            return result;
+            var (lshDecimal, rhsDecimal, isValid) = GetOperands(list);
+            return isValid && lshDecimal == rhsDecimal;
         }
 
         public static bool mathgreaterthan(object[] list)
         {
-            bool result = false;
-            if (list.Length >= 2)
-            {
-                decimal lshDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[0], EvaluationMode.Strict);
-                decimal rhsDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[1], EvaluationMode.Strict);
-
-                result = lshDecimal > rhsDecimal;
-            }
-
-            return result;
+            var (lshDecimal, rhsDecimal, isValid) = GetOperands(list);
+            return isValid && lshDecimal > rhsDecimal;
         }
 
         public static bool mathlessthan(object[] list)
         {
-            bool result = false;
-            if (list.Length >= 2)
-            {
-                decimal lshDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[0], EvaluationMode.Strict);
-                decimal rhsDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[1], EvaluationMode.Strict);
-
-                result = lshDecimal < rhsDecimal;
-            }
-
-            return result;
+            var (lshDecimal, rhsDecimal, isValid) = GetOperands(list);
+            return isValid && lshDecimal < rhsDecimal;
         }
 
         public static bool mathgreaterthanorequalto(object[] list)
         {
-            bool result = false;
-            if (list.Length >= 2)
-            {
-                decimal lshDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[0], EvaluationMode.Strict);
-                decimal rhsDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[1], EvaluationMode.Strict);
-
-                result = lshDecimal >= rhsDecimal;
-            }
-
-            return result;
+            var (lshDecimal, rhsDecimal, isValid) = GetOperands(list);
+            return isValid && lshDecimal >= rhsDecimal;
         }
 
         public static bool mathlessthanorequalto(object[] list)
         {
-            bool result = false;
-            if (list.Length >= 2)
-            {
-                decimal lshDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[0], EvaluationMode.Strict);
-                decimal rhsDecimal = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[1], EvaluationMode.Strict);
-
-                result = lshDecimal <= rhsDecimal;
-            }
-
-            return result;
+            var (lshDecimal, rhsDecimal, isValid) = GetOperands(list);
+            return isValid && lshDecimal <= rhsDecimal;
         }
+
+        private static (decimal lshDecimal, decimal rhsDecimal, bool isValid) GetOperands(object[] list)
+        {
+            if (list.Length < 2)
+                return (0, 0, false);
+
+            var lhs = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[0], EvaluationMode.Strict);
+            var rhs = (decimal)ReflectionHelper.GetTypedValue(typeof(decimal), list[1], EvaluationMode.Strict);
+
+            return (lhs, rhs, true);
+        }
+
         #endregion
 
-        public static object tointeger(object val, JUSTContext context)
-        {
-            return ReflectionHelper.GetTypedValue(typeof(int), val, context.EvaluationMode);
-        }
+        public static object tointeger(object val, JUSTContext context) =>
+            ReflectionHelper.GetTypedValue(typeof(int), val, context.EvaluationMode);
 
-        public static object tostring(object val, JUSTContext context)
-        {
-            return ReflectionHelper.GetTypedValue(typeof(string), val, context.EvaluationMode);
-        }
+        public static object tostring(object val, JUSTContext context) =>
+            ReflectionHelper.GetTypedValue(typeof(string), val, context.EvaluationMode);
 
-        public static object toboolean(object val, JUSTContext context)
-        {
-            return ReflectionHelper.GetTypedValue(typeof(bool), val, context.EvaluationMode);
-        }
+        public static object toboolean(object val, JUSTContext context) =>
+            ReflectionHelper.GetTypedValue(typeof(bool), val, context.EvaluationMode);
 
-        public static decimal todecimal(object val, JUSTContext context)
-        {
-            return decimal.Round((decimal)ReflectionHelper.GetTypedValue(typeof(decimal), val, context.EvaluationMode), context.DefaultDecimalPlaces);
-        }
+        public static decimal todecimal(object val, JUSTContext context) =>
+            decimal.Round((decimal)ReflectionHelper.GetTypedValue(typeof(decimal), val, context.EvaluationMode),
+                          context.DefaultDecimalPlaces);
 
-        public static decimal round(decimal val, int decimalPlaces, JUSTContext context)
-        {
-            return decimal.Round(val, decimalPlaces, MidpointRounding.AwayFromZero);
-        }
+        public static decimal round(decimal val, int decimalPlaces, JUSTContext context) =>
+            decimal.Round(val, decimalPlaces, MidpointRounding.AwayFromZero);
     }
 }
