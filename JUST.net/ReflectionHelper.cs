@@ -1,10 +1,14 @@
 ﻿// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+
+// ReSharper disable StringLiteralTypo
+// ReSharper disable InconsistentlySynchronizedField
 namespace JUST
 {
     #region Usings
 
     using System;
-    using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.ComponentModel;
     using System.Globalization;
     using System.IO;
@@ -12,13 +16,16 @@ namespace JUST
     using System.Reflection;
     using System.Text.RegularExpressions;
 
+    using Newtonsoft.Json.Linq;
+
     #endregion
 
     internal static class ReflectionHelper
     {
         private const string EXTERNAL_ASSEMBLY_REGEX = "([\\w.]+)[:]{2}([\\w.]+)[:]{0,2}([\\w.]*)";
         internal static readonly Regex ExternalAssemblyRegex = new Regex(EXTERNAL_ASSEMBLY_REGEX, RegexOptions.Compiled);
-        private static readonly Dictionary<string, (Type, MethodInfo)> _Types = new Dictionary<string, (Type, MethodInfo)>();
+        private static readonly ConcurrentDictionary<string, MethodInfo> _Types = new ConcurrentDictionary<string, MethodInfo>();
+        private static readonly ConcurrentDictionary<Type, object> _Instances = new ConcurrentDictionary<Type, object>();
 
         internal static object caller(Assembly assembly,
                                       string myClass,
@@ -27,29 +34,90 @@ namespace JUST
                                       bool convertParameters,
                                       JUSTContext context)
         {
+            if (myClass.Equals("JUST.Transformer"))
+            {
+                // Avoid reflection where possible
+                switch (myMethod)
+                {
+                    case "concat":
+                        return Transformer.concat(parameters[0] as string, parameters[1] as string, parameters[2] as JUSTContext);
+
+                    case "concatall":
+                        return Transformer.concatall(parameters[0] as JArray, parameters[1] as JUSTContext);
+
+                    case "concatallatpath":
+                        return Transformer.concatallatpath(parameters[0] as JArray, parameters[1] as string, parameters[2] as JUSTContext);
+
+                    case "currentvalue":
+                        return Transformer.currentvalue(parameters[0] as JArray, parameters[1] as JToken);
+
+                    case "currentvalueatpath":
+                        return Transformer.currentvalueatpath(parameters[0] as JArray, parameters[1] as JToken, parameters[2] as string);
+
+                    case "exists":
+                        return Transformer.exists(parameters[0] as string, parameters[1] as JUSTContext);
+
+                    case "existsandnotempty":
+                        return Transformer.existsandnotempty(parameters[0] as string, parameters[1] as JUSTContext);
+
+                    case "firstindexof":
+                        return Transformer.firstindexof(parameters[0] as string, parameters[1] as string, parameters[2] as JUSTContext);
+                    
+                    case "grouparrayby":
+                        return Transformer.grouparrayby(parameters[0] as string, parameters[1] as string, parameters[2] as string, parameters[3] as JUSTContext);
+
+                    case "ifcondition":
+                        return Transformer.ifcondition(parameters[0],
+                                                       parameters[1],
+                                                       parameters[2],
+                                                       parameters[3],
+                                                       parameters[4] as JUSTContext);
+
+                    case "lastindex":
+                        return Transformer.lastindex(parameters[0] as JArray, parameters[1] as JToken);
+                    
+                    case "lastindexof":
+                        return Transformer.lastindexof(parameters[0] as string, parameters[1] as string, parameters[2] as JUSTContext);
+                    
+                    case "lastvalue":
+                        return Transformer.lastvalue(parameters[0] as JArray, parameters[1] as JToken);
+
+                    case "lastvalueatpath":
+                        return Transformer.lastvalueatpath(parameters[0] as JArray, parameters[1] as JToken, parameters[2] as string);
+                    
+                    case "stringcontains":
+                        return Transformer.stringcontains(parameters[0] as object[]);
+
+                    case "stringequals":
+                        return Transformer.stringequals(parameters[0] as object[]);
+
+                    case "valueof":
+                        return Transformer.valueof(parameters[0] as string, parameters[1] as JUSTContext);
+
+                    case "xconcat":
+                        return Transformer.xconcat(parameters[0] as object[]);
+                }
+            }
+
             var typeKey = $"{(assembly == null ? string.Empty : assembly.FullName)}-{myClass}-{myMethod}";
 
-            Type type;
             MethodInfo methodInfo;
             if (_Types.ContainsKey(typeKey))
             {
-                type = _Types[typeKey].Item1;
-                methodInfo = _Types[typeKey].Item2;
+                methodInfo = _Types[typeKey];
             }
             else
             {
-                type = assembly?.GetType(myClass) ?? Type.GetType(myClass);
+                var type = assembly?.GetType(myClass) ?? Type.GetType(myClass);
                 methodInfo = type.GetTypeInfo().GetMethod(myMethod);
-                _Types.Add(typeKey, (type, methodInfo));
+                _Types.TryAdd(typeKey, methodInfo);
             }
-
-            var instance = type != null && methodInfo != null && !methodInfo.IsStatic ? Activator.CreateInstance(type) : null;
 
             try
             {
                 return InvokeCustomMethod(methodInfo, parameters, convertParameters, context);
             }
-            catch
+            catch (Exception ex)
             {
                 var mode = context.EvaluationMode;
                 if (mode == EvaluationMode.Strict)
@@ -60,7 +128,7 @@ namespace JUST
 
         internal static object InvokeCustomMethod(MethodInfo methodInfo, object[] parameters, bool convertParameters, JUSTContext context)
         {
-            var instance = !methodInfo.IsStatic & methodInfo.DeclaringType != null ? Activator.CreateInstance(methodInfo.DeclaringType) : null;
+            var instance = !methodInfo.IsStatic & methodInfo.DeclaringType != null ? GetInstance(methodInfo.DeclaringType) : null;
 
             if (!convertParameters)
                 return methodInfo.Invoke(instance, parameters);
@@ -70,6 +138,23 @@ namespace JUST
             return methodInfo.Invoke(instance,
                                      parameterInfos.Select((t, i) => GetTypedValue(t.ParameterType, parameters[i], context.EvaluationMode))
                                                    .ToArray());
+        }
+
+        private static object GetInstance(Type type, object val = null)
+        {
+            if (type == null)
+                return null;
+
+            if (!_Instances.ContainsKey(type))
+            {
+                lock (_Instances)
+                {
+                    var instance = val == null ? Activator.CreateInstance(type) : Activator.CreateInstance(type, val);
+                    _Instances.TryAdd(type, instance);
+                }
+            }
+
+            return _Instances[type];
         }
 
         internal static object CallExternalAssembly(string functionName, object[] parameters, JUSTContext context)
@@ -170,8 +255,9 @@ namespace JUST
                                                              null);
                     if (method == null)
                         method = pType.GetConstructor(new[] { val.GetType() });
+
                     if (method?.IsConstructor ?? false)
-                        typedValue = Activator.CreateInstance(pType, val);
+                        typedValue = GetInstance(pType, val);
                     else
                         typedValue = method?.Invoke(null, new[] { val }) ?? (typeof(string) == pType ? val.ToString() : val);
                 }
@@ -187,6 +273,6 @@ namespace JUST
             return typedValue;
         }
 
-        private static object GetDefaultValue(Type t) => t.IsValueType ? Activator.CreateInstance(t) : null;
+        private static object GetDefaultValue(Type t) => GetInstance(t);
     }
 }

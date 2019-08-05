@@ -1,81 +1,66 @@
 ﻿namespace JUST
 {
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text.RegularExpressions;
 
     internal class ExpressionHelper
     {
-        private const string FUNCTION_AND_ARGUMENTS_REGEX = "^#(.+?)[(](.*)[)]$";
-        private static readonly Regex _CompiledFunctionRegex = new Regex(FUNCTION_AND_ARGUMENTS_REGEX, RegexOptions.Compiled);
-
-        private const string ARGUMENTS_REGEX = "\\(([^\\)]*?)\\)";
-        private static readonly Regex _CompileArgumentsRegex = new Regex(ARGUMENTS_REGEX, RegexOptions.Compiled);
+        private static readonly ConcurrentDictionary<string, string[]> _ArgumentCache = new ConcurrentDictionary<string, string[]>();
 
         internal static bool TryParseFunctionNameAndArguments(string input, out string functionName, out string arguments)
         {
-            var match = _CompiledFunctionRegex.Match(input);
-            functionName = match.Success ? match.Groups[1].Value : input;
-            arguments = match.Success ? match.Groups[2].Value : null;
-            return match.Success;
+            var openParenIndex = input?.IndexOf('(') ?? -1;
+            if (input == null || (input.StartsWith("#") && input.EndsWith(")") && openParenIndex == -1))
+            {
+                functionName = input;
+                arguments = null;
+                return false;
+            }
+
+            functionName = input.Substring(1, openParenIndex - 1);
+            arguments = input.Substring(openParenIndex + 1, input.Length - openParenIndex - 2);
+            return true;
         }
 
         internal static string[] GetArguments(string functionString)
         {
-            var arguments = new List<string>();
-            var index = -1;
+            // ReSharper disable once InconsistentlySynchronizedField
+            if (_ArgumentCache.TryGetValue(functionString, out var cachedArguments))
+                return cachedArguments;
 
-            var openParenCount = 0;
-            var closeParenCount = 0;
-
-            // Original
-            var functionStringLength = functionString.Length;
-            for (var i = 0; i < functionStringLength; i++)
+            lock (_ArgumentCache)
             {
-                if (functionString[i] == '(')
-                    openParenCount++;
-                else if (functionString[i] == ')')
-                    closeParenCount++;
+                if (_ArgumentCache.TryGetValue(functionString, out cachedArguments))
+                    return cachedArguments;
 
-                var parensOpen = openParenCount != closeParenCount;
-                if (functionString[i] != ',' || parensOpen)
-                    continue;
+                var arguments = new List<string>();
+                var index = -1;
 
-                arguments.Add(functionString.Substring(index + 1, i - index - 1));
-                index = i;
-            }
+                var openParenCount = 0;
+                var closeParenCount = 0;
 
-            // IndexOf
-            arguments = new List<string>();
-            var nextOpenIndex = functionString.IndexOf('(');
-            while (nextOpenIndex != -1)
-            {
-                var nextCloseIndex = functionString.IndexOf(')', nextOpenIndex + 1);
-                if (nextCloseIndex != -1 && nextCloseIndex != nextOpenIndex + 1)
+                for (var i = 0; i < functionString.Length; i++)
                 {
-                    var argumentsString = functionString.Substring(nextOpenIndex + 1, nextCloseIndex - nextOpenIndex - 1);
-                    var argumentList = argumentsString.Split(',');
-                    arguments.AddRange(argumentList.Select(argument => argument.TrimStart()));
+                    var currentChar = functionString[i];
+
+                    if (currentChar == '(')
+                        openParenCount++;
+                    else if (currentChar == ')')
+                        closeParenCount++;
+
+                    var parensOpen = openParenCount != closeParenCount;
+                    if (currentChar != ',' || parensOpen)
+                        continue;
+
+                    arguments.Add(functionString.Substring(index + 1, i - index - 1));
+                    index = i;
                 }
 
-                if (nextCloseIndex + 1 == functionStringLength)
-                    break;
+                arguments.Add(functionString.Substring(index + 1, functionString.Length - index - 1));
 
-                nextOpenIndex = functionString.IndexOf('(', nextCloseIndex + 1);
+                _ArgumentCache.TryAdd(functionString, arguments.ToArray());
+                return arguments.ToArray();
             }
-
-            // Regex
-            var match = _CompileArgumentsRegex.Match(functionString);
-            if (match.Success)
-            {
-                var argumentsString = match.Groups[1].Value;
-                var argumentList = argumentsString.Split(',');
-                arguments.AddRange(argumentList.Select(argument => argument.TrimStart()));
-            }
-
-            arguments.Add(functionString.Substring(index + 1, functionStringLength - index - 1));
-
-            return arguments.ToArray();
         }
     }
 }

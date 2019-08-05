@@ -1,5 +1,6 @@
 ﻿// ReSharper disable UnusedMember.Global
 // ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
 
 namespace JUST
 {
@@ -39,8 +40,7 @@ namespace JUST
 
         public static string concat(string string1, string string2, JUSTContext context)
         {
-            var string2Result = string2 ?? string.Empty;
-            return string1 != null ? string1 + string2Result : string.Empty + string2Result;
+            return string1 != null ? string1 + (string2 ?? string.Empty) : string2;
         }
 
         public static string substring(string stringRef, int startIndex, int length, JUSTContext context)

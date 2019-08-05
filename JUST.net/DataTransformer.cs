@@ -64,34 +64,34 @@ namespace JUST
         {
             var loopArgs = string.Empty;
 
-            var openBracketCount = 0;
-            var closeBracketCount = 0;
+            var openBraceCount = 0;
+            var closeBraceCount = 0;
 
-            var bracketStartIndex = 0;
-            var bracketEndIndex = 0;
+            var braceStartIndex = 0;
+            var braceEndIndex = 0;
             for (var i = startIndex; i < input.Length; i++)
             {
                 var currentChar = input[i];
 
                 if (currentChar == '{')
                 {
-                    if (openBracketCount == 0)
-                        bracketStartIndex = i;
+                    if (openBraceCount == 0)
+                        braceStartIndex = i;
 
-                    openBracketCount++;
+                    openBraceCount++;
                 }
 
                 if (currentChar == '}')
                 {
-                    bracketEndIndex = i;
-                    closeBracketCount++;
+                    braceEndIndex = i;
+                    closeBraceCount++;
                 }
 
-                if (openBracketCount <= 0 || openBracketCount != closeBracketCount)
+                if (openBraceCount <= 0 || openBraceCount != closeBraceCount)
                     continue;
 
-                var fromIndex = inclusive ? startIndex : bracketStartIndex;
-                loopArgs = input.Substring(fromIndex, bracketEndIndex - fromIndex + 1);
+                var fromIndex = inclusive ? startIndex : braceStartIndex;
+                loopArgs = input.Substring(fromIndex, braceEndIndex - fromIndex + 1);
                 break;
             }
 
@@ -225,18 +225,18 @@ namespace JUST
         private static string GetFunctionString(string input, int startIndex)
         {
             var functionString = string.Empty;
-            var bracketOpenCount = 0;
-            var bracketClosedCount = 0;
+            var parenOpenCount = 0;
+            var parenClosedCount = 0;
 
             for (var i = startIndex; i < input.Length; i++)
             {
                 if (input[i] == '(')
-                    bracketOpenCount++;
+                    parenOpenCount++;
 
                 if (input[i] == ')')
-                    bracketClosedCount++;
+                    parenClosedCount++;
 
-                if (bracketClosedCount <= 0 || bracketClosedCount != bracketOpenCount)
+                if (parenClosedCount <= 0 || parenClosedCount != parenOpenCount)
                     continue;
 
                 functionString = input.Substring(startIndex, i - startIndex + 1);

@@ -175,7 +175,7 @@
     }
   },
 
-  "#ifgroup(#exists($.shipto.contactname)": {
+  "#ifgroup(#exists($.shipto.contactname))": {
     "cac:DeliveryAddress": {
       "cbc:MarkAttention": "#valueof($.shipto.contactname)"
     }

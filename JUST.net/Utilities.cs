@@ -7,6 +7,8 @@ namespace JUST
 
     using Newtonsoft.Json.Linq;
 
+    //using Newtonsoft.Json.Linq;
+
     /// <summary>
     ///     Utilities for the JUST.NET package.
     /// </summary>
@@ -21,10 +23,7 @@ namespace JUST
         /// <returns>
         ///     An IDictionary&lt;string,string&gt; mapping all paths to values.
         /// </returns>
-        public static IDictionary<string, string> FlattenJson(string inputJson)
-        {
-            return FlattenRecursively(JToken.Parse(inputJson), null);
-        }
+        public static IDictionary<string, string> FlattenJson(string inputJson) => FlattenRecursively(JToken.Parse(inputJson), null);
 
         /// <summary>
         ///     Flattens a JSON string to the corresponding paths and values recursively.
@@ -43,14 +42,15 @@ namespace JUST
             if (!parent.HasValues)
                 return result;
 
+            if (result == null)
+                result = new Dictionary<string, string>();
+
             // Note: Optimized for performance (foreach is slower)
-            for (var i = 0; i < parent.Children().Count(); ++i)
+            var count = parent.Children().Count();
+            for (var i = 0; i < count; ++i)
             {
                 if (!(parent.Children()[i] is JProperty property))
                     continue;
-
-                if (result == null)
-                    result = new Dictionary<string, string>();
 
                 if (property.Value.HasValues)
                     FlattenRecursively(property.Value, result);
@@ -62,7 +62,7 @@ namespace JUST
         }
 
         /// <summary>
-        ///     Create an array forroup array.
+        ///     Create an array for group array.
         /// </summary>
         /// <param name="array">
         ///     The array.
