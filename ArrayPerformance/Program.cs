@@ -10,9 +10,9 @@
         static void Main(string[] args)
         {
             //var summary = BenchmarkRunner.Run<PerformanceArray>();
-            
-            //var performanceArray = new PerformanceArray();
-            //performanceArray.Test();
+
+            var performanceArray = new PerformanceArray();
+            performanceArray.Test();
 
             //TransformNonExistingFields();
 
