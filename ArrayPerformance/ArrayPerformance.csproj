@@ -62,4 +62,12 @@
       <Name>JUST.net</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Inputs\test_non_existing.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Transformers\test_non_existing_transformer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
