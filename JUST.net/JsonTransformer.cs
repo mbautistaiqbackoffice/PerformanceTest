@@ -403,7 +403,7 @@ namespace JUST
                                 {
                                     var input = ((JUSTContext)parameters.Last()).Input;
                                     if (currentArrayElement != null && functionName != "valueof")
-                                        ((JUSTContext)parameters.Last()).Input = JsonConvert.SerializeObject(currentArrayElement);
+                                        ((JUSTContext)parameters.Last()).Input = currentArrayElement;
 
                                     output = ReflectionHelper.caller(null,
                                                                      "JUST.Transformer",
@@ -507,7 +507,7 @@ namespace JUST
                                          ref List<JToken> tokensToForm)
         {
             ExpressionHelper.TryParseFunctionNameAndArguments(property.Name, out var functionName, out var functionString);
-            var functionResult = ParseFunction(functionString, inputJson, null, null, localContext);
+            var functionResult = ParseFunction(functionString, inputJson, parentArray, currentArrayToken, localContext);
             bool result;
 
             try

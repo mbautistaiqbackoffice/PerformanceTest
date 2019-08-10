@@ -63,11 +63,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Inputs\test_non_existing.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Inputs\test_array.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Transformers\test_non_existing_transformer.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Transformers\test_array_transformer.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

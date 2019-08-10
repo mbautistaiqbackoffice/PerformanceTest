@@ -1,4 +1,5 @@
 ﻿// ReSharper disable StringLiteralTypo
+// ReSharper disable CommentTypo
 
 namespace ArrayPerformance
 {
@@ -27,8 +28,8 @@ namespace ArrayPerformance
 
         [Params("acctgroup", "invoice", "vendor")]
         public string Type;
-        private readonly string[] _types = { "acctgroup", "invoice", "vendor" };
-
+        private readonly string[] _types = { "test" };
+        //private readonly string[] _types = { "acctgroup", "invoice", "vendor" };
         public bool ParseArray = true;
         public ConcurrentBag<string> OutputList = new ConcurrentBag<string>();
         public ConcurrentDictionary<string, JToken> TransformerTokens = new ConcurrentDictionary<string, JToken>();
