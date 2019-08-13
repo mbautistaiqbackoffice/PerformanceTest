@@ -1,0 +1,47 @@
+{
+  "warehouses": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "cac:Address": {
+
+        "cac:PhysicalLocation": {
+
+          "cbc:ID": "#currentvalueatpath($.LOC.LOCATIONID)"
+        }
+      },
+      
+      "cac:PhysicalLocation": {
+
+        "cbc:ID": "#currentvalueatpath($.LOCATIONID)"
+      },
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "cbc:Name": "#currentvalueatpath($.NAME)",
+
+      "cac:OrderReference": {
+
+        "cbc:ID": "#currentvalueatpath($.RECORDNO)"
+      },
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.STATUS)"
+      },
+
+      "used_in_gl": "#currentvalueatpath($.USEDINGL)",
+
+      "cac:StorageLocation": {
+
+        "cbc:ID": "#currentvalueatpath($.WAREHOUSEID)"
+      },
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

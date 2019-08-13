@@ -1,0 +1,38 @@
+{
+  "ap-account-labels": {
+
+    "#loop($.items)": {
+
+      "account_label": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.ACCOUNTLABEL)"
+      },
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "gl_account_no": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.GLACCOUNTNO)"
+      },
+
+      "gl_account_title": "#currentvalueatpath($.GLACCOUNTTITLE)",
+
+      "is_tax": "#currentvalueatpath($.ISTAX)",
+
+      "cbc:AccountingCostCode": "#currentvalueatpath($.OFFSETGLACCOUNTNO)",
+
+      "offset_gl_account_title": "#currentvalueatpath($.OFFSETGLACCOUNTTITLE)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.STATUS)"
+      },
+
+      "subtotal": "#currentvalueatpath($.SUBTOTAL)",
+
+      "taxable": "#currentvalueatpath($.TAXABLE)"
+    }
+  }
+}

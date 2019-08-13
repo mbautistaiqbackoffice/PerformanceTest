@@ -1,0 +1,129 @@
+{
+  "recurring-order-entry-transactions": {
+
+    "#loop($.items)": {
+
+      "account_type": "#currentvalueatpath($.ACCOUNTTYPE)",
+
+      "bank_account_id": "#currentvalueatpath($.BANKACCOUNTID)",
+
+      "bank_account_no": "#currentvalueatpath($.BANKACCOUNTNO)",
+
+      "bank_name": "#currentvalueatpath($.BANKNAME)",
+
+      "base_curr": "#currentvalueatpath($.BASECURR)",
+
+      "billto_contact_name": "#currentvalueatpath($.BILLTO.CONTACTNAME)",
+
+      "bill_to_key": "#currentvalueatpath($.BILLTOKEY)",
+
+      "contact_contact_name": "#currentvalueatpath($.CONTACT.CONTACTNAME)",
+
+      "contact_key": "#currentvalueatpath($.CONTACTKEY)",
+
+      "contract_desc": "#currentvalueatpath($.CONTRACTDESC)",
+
+      "contract_id": "#currentvalueatpath($.CONTRACTID)",
+
+      "currency": "#currentvalueatpath($.CURRENCY)",
+
+      "cust_entity": "#currentvalueatpath($.CUSTENTITY)",
+
+      "customer_id": "#currentvalueatpath($.CUSTOMERID)",
+
+      "customer_name": "#currentvalueatpath($.CUSTOMERNAME)",
+
+      "department_id": "#currentvalueatpath($.DEPARTMENTID)",
+
+      "department_name": "#currentvalueatpath($.DEPARTMENTNAME)",
+
+      "dept_key": "#currentvalueatpath($.DEPTKEY)",
+
+      "description": "#currentvalueatpath($.DESCRIPTION)",
+
+      "doc_hdr_no": "#currentvalueatpath($.DOCHDRNO)",
+
+      "doc_id": "#currentvalueatpath($.DOCID)",
+
+      "doc_par_key": "#currentvalueatpath($.DOCPARKEY)",
+
+      "doc_status": "#currentvalueatpath($.DOCSTATUS)",
+
+      "end_date": "#currentvalueatpath($.ENDDATE)",
+
+      "entity": "#currentvalueatpath($.ENTITY)",
+
+      "exch_rate": "#currentvalueatpath($.EXCHRATE)",
+
+      "exch_rate_date": "#currentvalueatpath($.EXCHRATEDATE)",
+
+      "exch_rate_types_name": "#currentvalueatpath($.EXCHRATETYPES.NAME)",
+
+      "exch_rate_type_id": "#currentvalueatpath($.EXCH_RATE_TYPE_ID)",
+
+      "exec_count": "#currentvalueatpath($.EXECCOUNT)",
+
+      "frequency": "#currentvalueatpath($.FREQUENCY)",
+
+      "interval": "#currentvalueatpath($.INTERVAL)",
+
+      "last_exec_date": "#currentvalueatpath($.LASTEXECDATE)",
+
+      "last_payment_result": "#currentvalueatpath($.LASTPAYMENTRESULT)",
+
+      "location_id": "#currentvalueatpath($.LOCATIONID)",
+
+      "location_key": "#currentvalueatpath($.LOCATIONKEY)",
+
+      "location_name": "#currentvalueatpath($.LOCATIONNAME)",
+
+      "message": "#currentvalueatpath($.MESSAGE)",
+
+      "next_exec_date": "#currentvalueatpath($.NEXTEXECDATE)",
+
+      "pay_in_full": "#currentvalueatpath($.PAYINFULL)",
+
+      "pay_method": "#currentvalueatpath($.PAYMETHOD)",
+
+      "po_number": "#currentvalueatpath($.PONUMBER)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "recur_due_date": "#currentvalueatpath($.RECURDUEDATE)",
+
+      "recur_payment_key": "#currentvalueatpath($.RECURPAYMENTKEY)",
+
+      "recur_record_no": "#currentvalueatpath($.RECUR_RECORDNO)",
+
+      "repeat_by": "#currentvalueatpath($.REPEATBY)",
+
+      "repeat_count": "#currentvalueatpath($.REPEATCOUNT)",
+
+      "schop_key": "#currentvalueatpath($.SCHOPKEY)",
+
+      "ship_to_contact_name": "#currentvalueatpath($.SHIPTO.CONTACTNAME)",
+
+      "ship_to_key": "#currentvalueatpath($.SHIPTOKEY)",
+
+      "ship_via": "#currentvalueatpath($.SHIPVIA)",
+
+      "start_date": "#currentvalueatpath($.STARTDATE)",
+
+      "status": "#currentvalueatpath($.STATUS)",
+
+      "sub_total": "#currentvalueatpath($.SUBTOTAL)",
+
+      "term_name": "#currentvalueatpath($.TERM.NAME)",
+
+      "term_key": "#currentvalueatpath($.TERMKEY)",
+
+      "total": "#currentvalueatpath($.TOTAL)",
+
+      "trx_sub_total": "#currentvalueatpath($.TRX_SUBTOTAL)",
+
+      "trx_total": "#currentvalueatpath($.TRX_TOTAL)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

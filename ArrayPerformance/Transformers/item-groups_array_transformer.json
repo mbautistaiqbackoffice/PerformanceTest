@@ -1,0 +1,29 @@
+{
+  "item-groups": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "description": "#currentvalueatpath($.DESCRIPTION)",
+
+      "dim_grp_comp": "#currentvalueatpath($.DIMGRPCOMP)",
+
+      "group_type": "#currentvalueatpath($.GROUPTYPE)",
+
+      "id": "#currentvalueatpath($.ID)",
+
+      "member_filters": "#currentvalueatpath($.MEMBERFILTERS)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "name": "#currentvalueatpath($.NAME)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "order-entry-price-lists": {
+
+    "#loop($.items)": {
+
+      "date_from": "#currentvalueatpath($.DATEFROM)",
+
+      "date_to": "#currentvalueatpath($.DATETO)",
+
+      "name": "#currentvalueatpath($.NAME)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "sale_purchase": "#currentvalueatpath($.SALEPURCHASE)",
+
+      "status": "#currentvalueatpath($.STATUS)"
+    }
+  }
+}

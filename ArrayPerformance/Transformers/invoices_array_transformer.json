@@ -1,0 +1,176 @@
+{
+  "invoices": {
+
+    "#loop($.items)": {
+
+      "cbc:PricingCurrencyCode": "#currentvalueatpath($.basecurr)",
+
+      "batch_key": "#currentvalueatpath($.batchkey)",
+
+      "cac:BillToParty": {
+
+        "cac:Contact": {
+
+          "cbc:Name": "#currentvalueatpath($.billto.contactname)"
+        }
+      },
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.currency)",
+
+      "cac:CustomerParty": {
+
+        "cbc:CustomerAssignedAccountID": "#currentvalueatpath($.customerid)"
+      },
+
+      "#ifgroup(#exists($.datecreated))": { "date_created": { "cbc:Date": { "cbc:Date": "#concat(#concat(#concat(#valueof($.datecreated.year),-),#concat(#valueof($.datecreated.month),-)),#valueof($.datecreated.day))" } } },
+
+      "date_due": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datedue.year),-),#concat(#currentvalueatpath($.datedue.month),-)),#currentvalueatpath($.datedue.day))"
+      },
+
+      "date_paid": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datepaid.year),-),#concat(#currentvalueatpath($.datepaid.month),-)),#currentvalueatpath($.datepaid.day))"
+      },
+
+      "date_posted": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.dateposted.year),-),#concat(#currentvalueatpath($.dateposted.month),-)),#currentvalueatpath($.dateposted.day))"
+      },
+
+      "cbc:Note": "#currentvalueatpath($.description)",
+
+      "cac:InvoiceLine": {
+
+        "line_item": {
+
+          "#loopwithincontext($.invoiceitems.lineitem)": {
+
+            "cbc:AccountingCostCode": "#currentvalueatpath($.accountlabel)",
+
+            "cbc:Amount": "#currentvalueatpath($.amount)",
+
+            "billable": "#currentvalueatpath($.billable)",
+
+            "class_key": "#currentvalueatpath($.classkey)",
+
+            "contract_key": "#currentvalueatpath($.contractkey)",
+
+            "currency": "#currentvalueatpath($.currency)",
+
+            "customer_key": "#currentvalueatpath($.customerkey)",
+
+            "cac:Party": {
+
+              "cac:PartyIdentification": {
+
+                "cbc:ID": "#currentvalueatpath($.departmentid)"
+              }
+            },
+
+            "employee_key": "#currentvalueatpath($.employeekey)",
+
+            "gl_account_no": {
+
+              "cbc:AccountingCostCode": "#currentvalueatpath($.glaccountno)"
+            },
+
+            "item_key": "#currentvalueatpath($.itemkey)",
+
+            "cac:AdditionalDocumentReference": {
+
+              "cbc:ID": "#currentvalueatpath($.key)"
+            },
+
+            "line_num": "#currentvalueatpath($.line_num)",
+
+            "cac:PhysicalLocation": {
+
+              "cbc:ID": "#currentvalueatpath($.locationid)"
+            },
+
+            "cbc:Note": "#currentvalueatpath($.memo)",
+
+            "offset_gl_account_no": {
+
+              "cbc:AccountingCostCode": "#currentvalueatpath($.offsetglaccountno)"
+            },
+
+            "project_key": "#currentvalueatpath($.projectkey)",
+
+            "total_due": {
+
+              "cbc:PriceAmount": "#currentvalueatpath($.totaldue)"
+            },
+
+            "total_paid": {
+
+              "cbc:PaidAmount": "#currentvalueatpath($.totalpaid)"
+            },
+
+            "trx_amount": "#currentvalueatpath($.trx_amount)",
+
+            "trx_total_due": "#currentvalueatpath($.trx_totaldue)",
+
+            "trx_total_paid": "#currentvalueatpath($.trx_totalpaid)",
+
+            "vendor_key": "#currentvalueatpath($.vendorkey)",
+
+            "warehouse_key": "#currentvalueatpath($.warehousekey)"
+          }
+        }
+      },
+
+      "invoice_no": "#currentvalueatpath($.invoiceno)",
+
+      "cac:AdditionalDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.key)"
+      },
+
+      "cac:OrderReference": {
+
+        "cbc:ID": "#currentvalueatpath($.ponumber)"
+      },
+
+      "cac:DeliveryAddress": {
+
+        "cbc:MarkAttention": "#currentvalueatpath($.shipto.contactname)"
+      },
+
+      "state": "#currentvalueatpath($.state)",
+
+      "sup_doc_id": {
+
+        "cac:AdditionalDocumentReference": {
+
+          "cbc:ID": "#currentvalueatpath($.supdocid)"
+        }
+      },
+
+      "cac:PaymentTerms": {
+
+        "cbc:Note": "#currentvalueatpath($.termname)"
+      },
+
+      "total_amount": "#currentvalueatpath($.totalamount)",
+
+      "total_due": "#currentvalueatpath($.totaldue)",
+
+      "total_paid": "#currentvalueatpath($.totalpaid)",
+
+      "total_selected": "#currentvalueatpath($.totalselected)",
+
+      "trx_total_amount": "#currentvalueatpath($.trx_totalamount)",
+
+      "trx_total_due": "#currentvalueatpath($.trx_totaldue)",
+
+      "trx_total_paid": "#currentvalueatpath($.trx_totalpaid)",
+
+      "trx_total_selected": "#currentvalueatpath($.trx_totalselected)",
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }
+}

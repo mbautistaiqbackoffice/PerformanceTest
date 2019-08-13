@@ -1,0 +1,85 @@
+{
+  "recurring-bills": {
+
+    "#loop($.items)": {
+
+      "base_curr": "#currentvalueatpath($.BASECURR)",
+
+      "contract_desc": "#currentvalueatpath($.CONTRACTDESC)",
+
+      "cac:Contract": {
+
+        "cbc:ID": "#currentvalueatpath($.CONTRACTID)"
+      },
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.CURRENCY)",
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "cac:AdditionalDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.DOCNUMBER)"
+      },
+
+      "entity": "#currentvalueatpath($.ENTITY)",
+
+      "mega_entity_id": "#currentvalueatpath($.MEGAENTITYID)",
+
+      "mega_entity_key": "#currentvalueatpath($.MEGAENTITYKEY)",
+
+      "mega_entity_name": "#currentvalueatpath($.MEGAENTITYNAME)",
+
+      "module_key": "#currentvalueatpath($.MODULEKEY)",
+
+      "cac:PayeeParty": {
+
+        "cac:PartyName": {
+
+          "cbc:Name": "#currentvalueatpath($.PAYTOCONTACTNAME)"
+        }
+      },
+
+      "record_id": "#currentvalueatpath($.RECORDID)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_type": "#currentvalueatpath($.RECORDTYPE)",
+
+      "cac:SellerSupplierParty": {
+
+        "cac:SellerContact": {
+
+          "cbc:Name": "#currentvalueatpath($.RETURNTOCONTACTNAME)"
+        }
+      },
+
+      "shop_key": "#currentvalueatpath($.SCHOPKEY)",
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.STATUS)"
+      },
+
+      "term_key": "#currentvalueatpath($.TERMKEY)",
+
+      "cac:PaymentTerms": {
+
+        "cbc:Note": "#currentvalueatpath($.TERMNAME)"
+      },
+
+      "total_entered": "#currentvalueatpath($.TOTALENTERED)",
+
+      "trx_total_entered": "#currentvalueatpath($.TRX_TOTALENTERED)",
+
+      "user_key": "#currentvalueatpath($.USERKEY)",
+
+      "username": "#currentvalueatpath($.USERNAME)",
+
+      "cbc:CompanyID": "#currentvalueatpath($.VENDORID)",
+
+      "vendor_name": "#currentvalueatpath($.VENDORNAME)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)"
+    }
+  }
+}

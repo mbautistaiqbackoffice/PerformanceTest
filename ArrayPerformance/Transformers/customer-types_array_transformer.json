@@ -1,0 +1,23 @@
+{
+  "customer-types": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "name": "#currentvalueatpath($.NAME)",
+
+      "parent_name": "#currentvalueatpath($.PARENT.NAME)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "status": "#currentvalueatpath($.STATUS)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

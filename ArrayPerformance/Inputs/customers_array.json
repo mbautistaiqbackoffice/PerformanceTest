@@ -1,0 +1,826 @@
+[
+  {
+    "deliveryoptions": {
+      "deliveryoption": [
+        "print",
+        "email"
+      ]
+    },
+    "contactlist": {
+      "contactitem": {
+        "category": "Bil To",
+        "contactname": "Sun Microsystems - La Jolla"
+      }
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 3481800,
+    "shippingmethod": "Delivery",
+    "recordno": 5,
+    "custtype": "Corporate",
+    "termname": "2/10 Net30",
+    "whenmodified": "07/30/2019 10:19:33",
+    "custrepid": "EMP-002",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 95112,
+          "country": "USA",
+          "city": "San Jose",
+          "address1": "1245 Williams Lane",
+          "state": "CA"
+        },
+        "printas": "Sun Microsystems - Executive Briefing Center",
+        "taxable": true,
+        "contactname": "Sun Microsystems - EBC(CCUST-00101)",
+        "email1": "sevans@intacct.com",
+        "companyname": "Sun Microsystems - EBC"
+      }
+    },
+    "customerid": "CUST-00101",
+    "name": "Sun Microsystems - EBC",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 970000,
+    "shippingmethod": "Delivery",
+    "recordno": 7,
+    "custtype": "Special Event",
+    "termname": "Upon Receipt",
+    "whenmodified": "07/31/2019 10:23:58",
+    "custrepid": "EMP-006",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "printas": "Santa Clara Convention Center",
+        "taxable": true,
+        "contactname": "Santa Clara Convention Center(CCUST-00102)",
+        "companyname": "Santa Clara Convention Center"
+      }
+    },
+    "customerid": "CUST-00102",
+    "name": "Santa Clara Convention Center",
+    "status": "inactive"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 1753825,
+    "shippingmethod": "Customer Pick Up",
+    "recordno": 6,
+    "custtype": "Retailer",
+    "termname": "Net15",
+    "whenmodified": "07/28/2019 10:22:16",
+    "custrepid": "EMP-015",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 95113,
+          "country": "USA",
+          "city": "San Jose",
+          "address1": "125 Market Street",
+          "state": "CA"
+        },
+        "printas": "AMC Theaters Mercado 20",
+        "taxable": true,
+        "contactname": "AMC Theaters(CCUST-00103)",
+        "companyname": "AMC Theaters Mercado 20"
+      }
+    },
+    "customerid": "CUST-00103",
+    "name": "AMC Theaters Mercado 20",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 0,
+    "shippingmethod": "Customer Pick Up",
+    "recordno": 8,
+    "custtype": "Retailer",
+    "termname": "2/10 Net30",
+    "whenmodified": "07/03/2013 07:30:53",
+    "custrepid": "EMP-004",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "printas": "San Jose Museum of Art",
+        "taxable": true,
+        "contactname": "San Jose Museum of Art(CCUST-00104)",
+        "companyname": "San Jose Museum of Art"
+      }
+    },
+    "customerid": "CUST-00104",
+    "name": "San Jose Museum of Art",
+    "status": "inactive"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 1133816,
+    "shippingmethod": "Customer Pick Up",
+    "recordno": 9,
+    "custtype": "Special Event",
+    "termname": "Upon Receipt",
+    "whenmodified": "08/11/2019 10:23:07",
+    "custrepid": "EMP-010",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "printas": "Premiere Event Services",
+        "taxable": true,
+        "contactname": "Premiere Event Services(CCUST-00105)",
+        "companyname": "Premiere Event Services"
+      }
+    },
+    "customerid": "CUST-00105",
+    "name": "Premiere Event Services",
+    "status": "inactive"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "restricted_locs": {
+        "LOCATIONID": 30
+      },
+      "visibility_type": "Restricted"
+    },
+    "totaldue": 3472.5,
+    "recordno": 10,
+    "custtype": "Retailer",
+    "whenmodified": "07/10/2013 13:58:00",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 95054,
+          "address2": "Suite 450",
+          "city": "Santa Clara",
+          "address1": "200 Mercado Circle",
+          "state": "CA"
+        },
+        "printas": "Mercado Sidewalk Cafe",
+        "taxable": false,
+        "contactname": "Mercado Sidewalk Cafe(CCUST-00106)",
+        "companyname": "Mercado Sidewalk Cafe"
+      }
+    },
+    "customerid": "CUST-00106",
+    "name": "Mercado Sidewalk Cafe",
+    "resaleno": 6516516,
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 0,
+    "recordno": 4,
+    "termname": "Net15",
+    "whenmodified": "07/03/2013 07:31:14",
+    "glaccountno": 4005,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "printas": "Business Unit 1",
+        "taxable": true,
+        "contactname": "Business Unit A(CCUST-00107)",
+        "companyname": "Business Unit 1"
+      }
+    },
+    "customerid": "CUST-00107",
+    "name": "Business Unit 1",
+    "status": "inactive"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 0,
+    "recordno": 2,
+    "termname": "Net15",
+    "whenmodified": "07/03/2013 07:31:24",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 37072,
+          "city": "Goodlettsville",
+          "address1": "100 Mission Ridge",
+          "state": "TN"
+        },
+        "printas": "Dollar General",
+        "taxable": true,
+        "phone1": "(615) 855-4000",
+        "contactname": "Dollar General(CCUST-00108)",
+        "companyname": "Dollar General"
+      }
+    },
+    "customerid": "CUST-00108",
+    "name": "Dollar General",
+    "status": "inactive"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "contactlist": {
+      "contactitem": [
+        {
+          "category": "Bill To",
+          "contactname": "Walgreen's - Keller"
+        },
+        {
+          "category": "Bill To",
+          "contactname": "Walgreen's - Haltom City"
+        },
+        {
+          "category": "Bill To",
+          "contactname": "Walgreen's - Watauga"
+        }
+      ]
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 0,
+    "recordno": 1,
+    "termname": "Net15",
+    "whenmodified": "07/03/2013 07:30:22",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 60015,
+          "city": "Deerfield",
+          "address1": "200 Wilmot Road",
+          "state": "IL"
+        },
+        "printas": "Walgreen's",
+        "taxable": true,
+        "phone1": "800-925-4733",
+        "contactname": "Walgreen's(CCUST-00109)",
+        "companyname": "Walgreen's"
+      }
+    },
+    "customerid": "CUST-00109",
+    "name": "Walgreen's",
+    "status": "inactive"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "onhold": "F",
+    "totaldue": 0,
+    "contactinfo": {
+      "contact": {
+        "printas": "Melody Williams",
+        "taxable": true,
+        "contactname": "Melody Williams(CCUST-00110)",
+        "companyname": "Melody Williams"
+      }
+    },
+    "customerid": "CUST-00110",
+    "name": "Melody Williams",
+    "recordno": 3,
+    "whenmodified": "07/03/2013 07:30:02",
+    "status": "inactive"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "contactlist": {
+      "contactitem": {
+        "category": "Bill To",
+        "contactname": "Sun Microsystems - La Jolla"
+      }
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 1500,
+    "shippingmethod": "Delivery",
+    "parentid": "CUST-00101",
+    "recordno": 11,
+    "custtype": "Corporate",
+    "termname": "2/10 Net30",
+    "whenmodified": "07/03/2013 07:46:27",
+    "custrepid": "EMP-002",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "billto": {
+      "contactname": "Sun Microsystems - La Jolla"
+    },
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 96002,
+          "country": "USA",
+          "city": "La Jolla",
+          "address1": "100 Bismark Lane",
+          "state": "CA"
+        },
+        "printas": "Sun Microsystems - La Jolla",
+        "taxable": true,
+        "contactname": "Suu Microsystems - La Jolla(CCUST-00111)",
+        "companyname": "Sun Microsystems - EBC"
+      }
+    },
+    "customerid": "CUST-00111",
+    "name": "Sun Microsystems - La Jolla",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 1719.24,
+    "shippingmethod": "Delivery",
+    "recordno": 12,
+    "custtype": "Corporate",
+    "termname": "2/10 Net30",
+    "whenmodified": "07/10/2013 13:56:16",
+    "custrepid": "EMP-002",
+    "glaccountno": 4000,
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 37405,
+          "city": "Chanttanooga",
+          "address1": "P.O. Box 4800",
+          "state": "TN"
+        },
+        "printas": "JIT Chemical Corp",
+        "taxable": false,
+        "contactname": "JIT Chemical Corp(CCUST-00112)",
+        "companyname": "JIT Chemical Corp"
+      }
+    },
+    "customerid": "CUST-00112",
+    "name": "JIT Chemical Corp",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 50,
+    "recordno": 13,
+    "custtype": "Retailer",
+    "whenmodified": "07/03/2013 07:44:22",
+    "custrepid": "EMP-015",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 75071,
+          "country": "USA",
+          "city": "Dallas",
+          "address1": "500 Temple Drive",
+          "state": "TX"
+        },
+        "firstname": "Sarah",
+        "printas": "Sarah Smith",
+        "taxable": true,
+        "lastname": "Smith",
+        "phone1": "212-898-8888",
+        "contactname": "Sarah Smith(CCUST-00113)",
+        "companyname": "Sarah Smith",
+        "cellphone": "212-898-0001"
+      }
+    },
+    "customerid": "CUST-00113",
+    "name": "Sarah Smith",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "onhold": "F",
+    "totaldue": -1250,
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 75023,
+          "country": "USA",
+          "city": "Dallas",
+          "address1": "500 Temple Drive",
+          "state": "TX"
+        },
+        "firstname": "Johnson",
+        "printas": "Jason Johnson",
+        "taxable": true,
+        "lastname": "Jason",
+        "phone1": "212-898-8888",
+        "contactname": "Jason Johnson(CCUST-00114)",
+        "companyname": "Jason Johnson",
+        "cellphone": "212-898-0001"
+      }
+    },
+    "customerid": "CUST-00114",
+    "name": "Jason Johnson",
+    "recordno": 14,
+    "custtype": "Retailer",
+    "whenmodified": "07/03/2013 07:44:47",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "onhold": "F",
+    "totaldue": -500,
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 75034,
+          "country": "USA",
+          "address2": "Apartment 340",
+          "city": "Dallas",
+          "address1": "5600 Ronald Reagan FWY",
+          "state": "TX"
+        },
+        "firstname": "Sherldon",
+        "printas": "Mary Sheldon",
+        "taxable": true,
+        "lastname": "Mary",
+        "phone1": "214-898-8888",
+        "contactname": "Mary Sheldon(CCUST-00115)",
+        "companyname": "Mary Sheldon",
+        "cellphone": "214-898-0001"
+      }
+    },
+    "customerid": "CUST-00115",
+    "name": "Mary Sheldon",
+    "recordno": 15,
+    "custtype": "Special Event",
+    "whenmodified": "07/03/2013 07:45:16",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 4775,
+    "shippingmethod": "UPS",
+    "recordno": 16,
+    "custtype": "Commercial",
+    "termname": "Net 30",
+    "whenmodified": "08/21/2013 13:36:11",
+    "custrepid": "EMP-001",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": "03801",
+          "country": "USA",
+          "city": "Portsmouth",
+          "address1": "280 Heritage Avenue",
+          "state": "NH"
+        },
+        "firstname": "Sam",
+        "printas": "Seacoast Security",
+        "taxable": true,
+        "lastname": "Smith",
+        "phone1": "555-55-5555",
+        "contactname": "Seacoast Security(CCUST-00116)",
+        "email1": "lpinion@intacct.com",
+        "companyname": "Seacoast Security"
+      }
+    },
+    "customerid": "CUST-00116",
+    "name": "Seacoast Security",
+    "territoryid": "East",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 159,
+    "shippingmethod": "UPS",
+    "recordno": 17,
+    "custtype": "Commercial",
+    "termname": "2/10 Net30",
+    "whenmodified": "07/03/2013 07:43:29",
+    "custrepid": "EMP-001",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": "04578",
+          "country": "USA",
+          "city": "Wiscasset",
+          "address1": "P O Box 1566",
+          "state": "ME"
+        },
+        "firstname": "John",
+        "printas": "Northeast Security Systems",
+        "taxable": true,
+        "lastname": "Jones",
+        "phone1": "555-55-5555",
+        "contactname": "Northeast Security Systems(CCUST-00117)",
+        "email1": "lpinion@intacct.com",
+        "companyname": "Northeast Security Systems"
+      }
+    },
+    "customerid": "CUST-00117",
+    "name": "Northeast Security Systems",
+    "territoryid": "East",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 0,
+    "recordno": 18,
+    "custtype": "Residential",
+    "whenmodified": "07/03/2013 07:52:33",
+    "custrepid": "EMP-002",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 78729,
+          "country": "USA",
+          "city": "Austin",
+          "address1": "3800 Quick Hill Road",
+          "state": "TX"
+        },
+        "firstname": "Mark",
+        "printas": "Texas Alarm Companies",
+        "taxable": true,
+        "lastname": "Williams",
+        "phone1": "555-55-5555",
+        "contactname": "Texas Alarm Companies(CCUST-00118)",
+        "email1": "lpinion@intacct.com",
+        "companyname": "Texas Alarm Companies"
+      }
+    },
+    "customerid": "CUST-00118",
+    "name": "Texas Alarm Companies",
+    "territoryid": "Central",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 8722,
+    "shippingmethod": "UPS",
+    "recordno": 19,
+    "custtype": "Commercial",
+    "termname": "2/10 Net30",
+    "whenmodified": "09/04/2013 08:21:33",
+    "custrepid": "EMP-002",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 78729,
+          "country": "USA",
+          "city": "Austin",
+          "address1": "12112 Roxie Drive",
+          "state": "TX"
+        },
+        "firstname": "Ralph",
+        "printas": "Tri Star",
+        "taxable": true,
+        "lastname": "Johnson",
+        "phone1": "555-55-5555",
+        "contactname": "Tri Star(CCUST-00119)",
+        "email1": "lpinion@intacct.com",
+        "companyname": "Tri Star"
+      }
+    },
+    "customerid": "CUST-00119",
+    "name": "Tri Star",
+    "territoryid": "Central",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 2859,
+    "shippingmethod": "UPS",
+    "recordno": 20,
+    "custtype": "Residential",
+    "termname": "Net15",
+    "whenmodified": "08/13/2013 08:05:09",
+    "custrepid": "EMP-006",
+    "pricelist": "American Alarm",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 92705,
+          "country": "USA",
+          "city": "Santa Ana",
+          "address1": "1101 South Grand Avenue",
+          "state": "CA"
+        },
+        "firstname": "Keith",
+        "printas": "American Alarm Systems",
+        "taxable": true,
+        "lastname": "Bonwell",
+        "phone1": "555-55-5555",
+        "contactname": "American Alarm Systems(CCUST-00120)",
+        "email1": "lpinion@intacct.com",
+        "companyname": "American Alarm Systems"
+      }
+    },
+    "customerid": "CUST-00120",
+    "name": "American Alarm Systems",
+    "territoryid": "West",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 10134,
+    "shippingmethod": "Delivery",
+    "recordno": 21,
+    "custtype": "Commercial",
+    "termname": "2/10 Net30",
+    "whenmodified": "08/02/2013 12:16:43",
+    "custrepid": "EMP-001",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 93313,
+          "country": "USA",
+          "city": "Bakersfield",
+          "address1": "5020 Lisa Marie Court",
+          "state": "CA"
+        },
+        "firstname": "Martin",
+        "printas": "Tel-Tec Security Systems",
+        "taxable": true,
+        "lastname": "Wilkerson",
+        "phone1": "555-55-5555",
+        "contactname": "Tel-Tec Security Systems(CCUST-00121)",
+        "email1": "lpinion@intacct.com",
+        "companyname": "Tel-Tec Security Systems"
+      }
+    },
+    "customerid": "CUST-00121",
+    "name": "Tel-Tec Security Systems",
+    "territoryid": "West",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 0,
+    "shippingmethod": "Delivery",
+    "recordno": 22,
+    "custtype": "Residential",
+    "termname": "2/10 Net30",
+    "whenmodified": "07/03/2013 08:00:31",
+    "custrepid": "EMP-006",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 33401,
+          "country": "USA",
+          "city": "West Palm Beach",
+          "address1": "P O Box 622",
+          "state": "FL"
+        },
+        "firstname": "Randy",
+        "printas": "American Security and Control",
+        "taxable": true,
+        "lastname": "Rogers",
+        "phone1": "555-55-5555",
+        "contactname": "American Security and Control(CCUST-00122)",
+        "email1": "lpinion@intacct.com",
+        "companyname": "American Security and Control"
+      }
+    },
+    "customerid": "CUST-00122",
+    "name": "American Security and Control",
+    "territoryid": "South",
+    "status": "active"
+  },
+  {
+    "deliveryoptions": {
+      "deliveryoption": "print"
+    },
+    "visibility": {
+      "visibility_type": "Unrestricted"
+    },
+    "totaldue": 1475,
+    "shippingmethod": "UPS",
+    "recordno": 23,
+    "custtype": "Residential",
+    "termname": "2/10 Net30",
+    "whenmodified": "10/09/2013 14:28:16",
+    "custrepid": "EMP-002",
+    "onhold": "F",
+    "contactinfo": {
+      "contact": {
+        "mailaddress": {
+          "zip": 33020,
+          "country": "USA",
+          "city": "Hollywood",
+          "address1": "2858 Stirling Road",
+          "state": "FL"
+        },
+        "firstname": "Wendy",
+        "printas": "A1 Security Supply",
+        "taxable": true,
+        "lastname": "Morgan",
+        "phone1": "555-55-5555",
+        "contactname": "A1 Security Supply(CCUST-00123)",
+        "email1": "sevans@intacct.com",
+        "companyname": "A1 Security Supply"
+      }
+    },
+    "customerid": "CUST-00123",
+    "name": "A1 Security Supply",
+    "territoryid": "South",
+    "status": "active"
+  }
+]

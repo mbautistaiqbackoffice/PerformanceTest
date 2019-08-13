@@ -1,0 +1,39 @@
+{
+  "acctgroups": {
+
+    "#loop($.items)": {
+
+      "apply_as_of": "#currentvalueatpath($.APPLYASOF)",
+
+      "as_of": "#currentvalueatpath($.ASOF)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "dbcr": "#currentvalueatpath($.DBCR)",
+
+      "how_created": "#currentvalueatpath($.HOWCREATED)",
+
+      "is_kpi": "#currentvalueatpath($.ISKPI)",
+
+      "is_leaf": "#currentvalueatpath($.ISLEAF)",
+
+      "member_type": "#currentvalueatpath($.MEMBERTYPE)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "name": "#currentvalueatpath($.NAME)",
+
+      "normal_balance": "#currentvalueatpath($.NORMAL_BALANCE)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "title": "#currentvalueatpath($.TITLE)",
+
+      "total_title": "#currentvalueatpath($.TOTALTITLE)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

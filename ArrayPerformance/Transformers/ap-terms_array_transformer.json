@@ -1,0 +1,55 @@
+{
+  "ap-terms": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "cbc:SettlementDiscountAmount": "#currentvalueatpath($.DISCAMOUNT)",
+
+      "disc_calc_on": {
+
+        "cbc:SettlementDiscountPercent": "#currentvalueatpath($.DISCCALCON)"
+      },
+
+      "disc_date": "#currentvalueatpath($.DISCDATE)",
+
+      "cac:SettlementPeriod": {
+
+        "cbc:StartDate": "#currentvalueatpath($.DISCFROM)"
+      },
+
+      "disc_fudge_days": "#currentvalueatpath($.DISCFUDGEDAYS)",
+
+      "cbc:SettlementDiscountPercent": "#currentvalueatpath($.DISCPERCAMN)",
+
+      "cbc:PaymentDueDate": "#currentvalueatpath($.DUEDATE)",
+
+      "cbc:StartDate": "#currentvalueatpath($.DUEFROM)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "cbc:Name": "#currentvalueatpath($.NAME)",
+
+      "cbc:Amount": "#currentvalueatpath($.PENAMOUNT)",
+
+      "pen_fudge_days": "#currentvalueatpath($.PENFUDGEDAYS)",
+
+      "cbc:PenaltySurchargePercent": "#currentvalueatpath($.PENPERCAMN)",
+
+      "cbc:DescriptionCode": "#currentvalueatpath($.PEN_TYPES)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.STATUS)"
+      },
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+}

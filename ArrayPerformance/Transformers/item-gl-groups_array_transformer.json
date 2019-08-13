@@ -1,0 +1,29 @@
+{
+  "item-gl-groups": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "default_rev_rec_templ_key": "#currentvalueatpath($.DEFAULTREVRECTEMPLKEY)",
+
+      "deferred_rev_acct_key": "#currentvalueatpath($.DEFERREDREVACCTKEY)",
+
+      "deferred_rev_acct_no": "#currentvalueatpath($.DEFERREDREVACCTNO)",
+
+      "deferred_rev_acct_title": "#currentvalueatpath($.DEFERREDREVACCTTITLE)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "name": "#currentvalueatpath($.NAME)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "rev_rec_templ_id": "#currentvalueatpath($.REVRECTEMPLID)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

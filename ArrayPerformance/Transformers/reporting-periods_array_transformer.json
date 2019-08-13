@@ -1,0 +1,22 @@
+{
+  "rptperiods": {
+    "#loop($.items)": {
+      "budgetable": "#currentvalueatpath($.budgetable)",
+      
+      "cbc:EndDate": "#concat(#concat(#concat(#currentvalueatpath($.enddate.year),-),#concat(#currentvalueatpath($.enddate.month),-)),#currentvalueatpath($.enddate.day))",
+      
+      "heading_title": "#currentvalueatpath($.headingtitle)",
+      
+      "heading_title_2": "#currentvalueatpath($.headingtitle2)",
+      
+      "cbc:Name": "#currentvalueatpath($.name)",
+      
+      "cbc:StartDate": "#concat(#concat(#concat(#currentvalueatpath($.startdate.year),-),#concat(#currentvalueatpath($.startdate.month),-)),#currentvalueatpath($.startdate.day))",
+      
+      "cac:Status": {
+      
+        "cbc:Text": "#currentvalueatpath($.status)"
+      }
+    }
+  }
+}

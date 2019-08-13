@@ -1,0 +1,23 @@
+{
+  "folders": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.createdby)",
+
+      "creation_date": "#currentvalueatpath($.creationdate)",
+
+      "description": "#currentvalueatpath($.description)",
+
+      "last_modified": "#currentvalueatpath($.lastmodified)",
+
+      "last_modified_by": "#currentvalueatpath($.lastmodifiedby)",
+
+      "name": "#currentvalueatpath($.name)",
+
+      "parent_folder": "#currentvalueatpath($.parentfolder)",
+
+      "status": "#currentvalueatpath($.status)"
+    }
+  }
+}

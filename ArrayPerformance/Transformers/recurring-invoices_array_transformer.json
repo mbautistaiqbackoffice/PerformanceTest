@@ -1,0 +1,94 @@
+{
+  "recurring-invoices": {
+
+    "#loop($.items)": {
+
+      "cbc:AccountTypeCode": "#currentvalueatpath($.ACCOUNTTYPE)",
+
+      "base_curr": "#currentvalueatpath($.BASECURR)",
+
+      "bill_to_contact_name": "#currentvalueatpath($.BILLTOCONTACTNAME)",
+
+      "contract_desc": "#currentvalueatpath($.CONTRACTDESC)",
+
+      "cac:Contract": {
+
+        "cbc:ID": "#currentvalueatpath($.CONTRACTID)"
+      },
+
+      "credit_card_type": "#currentvalueatpath($.CREDITCARDTYPE)",
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.CURRENCY)",
+
+      "cust_message_id": "#currentvalueatpath($.CUSTMESSAGEID)",
+
+      "cac:CustomerParty": {
+
+        "cbc:CustomerAssignedAccountID": "#currentvalueatpath($.CUSTOMERID)"
+      },
+
+      "customer_name": "#currentvalueatpath($.CUSTOMERNAME)",
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "cac:AdditionalDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.DOCNUMBER)"
+      },
+
+      "entity": "#currentvalueatpath($.ENTITY)",
+
+      "gl_account_key": "#currentvalueatpath($.GLACCOUNTKEY)",
+
+      "gl_acct_no": "#currentvalueatpath($.GLACCTNO)",
+
+      "gl_acct_title": "#currentvalueatpath($.GLACCTTITLE)",
+
+      "last_exec_date": "#currentvalueatpath($.LASTEXECDATE)",
+
+      "last_payment_result": "#currentvalueatpath($.LASTPAYMENTRESULT)",
+
+      "module_key": "#currentvalueatpath($.MODULEKEY)",
+
+      "pay_in_full": "#currentvalueatpath($.PAYINFULL)",
+
+      "cac:PaymentMeans": {
+
+        "cbc:PaymentMeansCode": "#currentvalueatpath($.PAYMETHOD)"
+      },
+
+      "record_id": "#currentvalueatpath($.RECORDID)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_type": "#currentvalueatpath($.RECORDTYPE)",
+
+      "recur_payment+key": "#currentvalueatpath($.RECURPAYMENTKEY)",
+
+      "shop_key": "#currentvalueatpath($.SCHOPKEY)",
+
+      "ship_to_contact_name": "#currentvalueatpath($.SHIPTOCONTACTNAME)",
+
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.STATUS)"
+      },
+
+      "term_key": "#currentvalueatpath($.TERMKEY)",
+
+      "cac:PaymentTerms": {
+
+        "cbc:Note": "#currentvalueatpath($.TERMNAME)"
+      },
+
+      "total_entered": "#currentvalueatpath($.TOTALENTERED)",
+
+      "trx_total_entered": "#currentvalueatpath($.TRX_TOTALENTERED)",
+
+      "user_key": "#currentvalueatpath($.USERKEY)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)"
+    }
+  }
+}

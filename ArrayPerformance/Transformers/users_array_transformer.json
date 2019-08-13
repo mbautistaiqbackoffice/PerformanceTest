@@ -1,0 +1,103 @@
+{
+  "users": {
+
+    "#loop($.items)": {
+           
+      "admin": "#currentvalueatpath($.ADMIN)",
+
+      "chatter_disabled": "#currentvalueatpath($.CHATTER_DISABLED)",
+
+      "cac:Contact": {
+
+        "cell_phone": "#currentvalueatpath($.CONTACTINFO.CELLPHONE)",
+
+        "cbc:Name": "#currentvalueatpath($.CONTACTINFO.CONTACTNAME)",
+
+        "email_1": {
+
+          "cbc:ElectronicMail": "#currentvalueatpath($.CONTACTINFO.EMAIL1)"
+        },
+
+        "email_2": {
+
+          "cbc:ElectronicMail": "#currentvalueatpath($.CONTACTINFO.EMAIL2)"
+        },
+
+        "cbc:FirstName": "#currentvalueatpath($.CONTACTINFO.FIRSTNAME)",
+
+        "cbc:FamilyName": "#currentvalueatpath($.CONTACTINFO.LASTNAME)",
+
+        "mail_address": {
+
+          "address_1": "#currentvalueatpath($.CONTACTINFO.MAILADDRESS.ADDRESS1)",
+
+          "city": "#currentvalueatpath($.CONTACTINFO.MAILADDRESS.CITY)",
+
+          "country": "#currentvalueatpath($.CONTACTINFO.MAILADDRESS.COUNTRY)",
+
+          "state": "#currentvalueatpath($.CONTACTINFO.MAILADDRESS.STATE)",
+
+          "zip": "#currentvalueatpath($.CONTACTINFO.MAILADDRESS.ZIP)"
+        },
+
+        "phone_1": "#currentvalueatpath($.CONTACTINFO.PHONE1)",
+
+        "print_as": "#currentvalueatpath($.CONTACTINFO.PRINTAS)"
+      },
+
+      "contact_key": "#currentvalueatpath($.CONTACTKEY)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "login_disabled": "#currentvalueatpath($.LOGINDISABLED)",
+
+      "cbc:Login": "#currentvalueatpath($.LOGINID)",
+
+      "mfa_enabled": "#currentvalueatpath($.MFA_ENABLED)",
+
+      "mfa_no_trust": "#currentvalueatpath($.MFA_NOTRUST)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "pwd_never_expires": "#currentvalueatpath($.PWDNEVEREXPIRES)",
+
+      "pwd_qly_not_enforced": "#currentvalueatpath($.PWDQLYNOTENFORCED)",
+
+      "cac:OrderReference": {
+
+        "cbc:ID": "#currentvalueatpath($.RECORDNO)"
+      },
+
+      "reset_password": "#currentvalueatpath($.RESETPASSWORD)",
+
+      "sso_company_enabled": "#currentvalueatpath($.SSO_COMPANY_ENABLED)",
+
+      "sso_enabled": "#currentvalueatpath($.SSO_ENABLED)",
+
+      "sso_federated_id": "#currentvalueatpath($.SSO_FEDERATED_ID)",
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.STATUS)"
+      },
+
+      "unrestricted": "#currentvalueatpath($.VISIBLE)",
+
+      "cac:PartyType": {
+
+        "cac:PartyName": {
+
+          "cbc:Name": "#currentvalueatpath($.USERTYPE)"
+        }
+      },
+
+      "visible": "#currentvalueatpath($.VISIBLE)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

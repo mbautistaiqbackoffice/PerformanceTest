@@ -1,0 +1,27 @@
+{
+  "unit-of-measures": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "inv_uom": "#currentvalueatpath($.INVUOM)",
+
+      "is_system": "#currentvalueatpath($.ISSYSTEM)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "name": "#currentvalueatpath($.NAME)",
+
+      "oe_uom": "#currentvalueatpath($.OEUOM)",
+
+      "po_uom": "#currentvalueatpath($.POUOM)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

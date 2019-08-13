@@ -1,0 +1,240 @@
+{
+  "checking-accounts": {
+
+    "#loop($.items)": {
+
+      "abo_email_id": "#currentvalueatpath($.ABO_EMAIL_ID)",
+
+      "abo_first_name": "#currentvalueatpath($.ABO_FIRST_NAME)",
+
+      "abo_last_name": "#currentvalueatpath($.ABO_LAST_NAME)",
+
+      "abo_middle_name": "#currentvalueatpath($.ABO_MIDDLE_NAME)",
+
+      "abo_phone_number": "#currentvalueatpath($.ABO_PHONE_NUMBER)",
+
+      "ach_bank_id": "#currentvalueatpath($.ACHBANKID)",
+
+      "ach_company_id": "#currentvalueatpath($.ACHCOMPANYID)",
+
+      "ach_enabled": "#currentvalueatpath($.ACHENABLED)",
+
+      "amex_check_num": "#currentvalueatpath($.AMEXCHECKNUM)",
+
+      "amex_payve_account_id": "#currentvalueatpath($.AMEX_PAYVE_ACCOUNTID)",
+
+      "automate_ach_pymt_conf": "#currentvalueatpath($.AUTOMATE_ACH_PYMT_CONF)",
+
+      "automate_ach_pymt_send": "#currentvalueatpath($.AUTOMATE_ACH_PYMT_SEND)",
+
+      "automate_check_print": "#currentvalueatpath($.AUTOMATE_CHECK_PRINT)",
+
+      "automate_pymt_conf": "#currentvalueatpath($.AUTOMATE_PYMT_CONF)",
+
+      "bank_account_id": "#currentvalueatpath($.BANKACCOUNTID)",
+
+      "bank_account_no": "#currentvalueatpath($.BANKACCOUNTNO)",
+
+      "bank_account_type": "#currentvalueatpath($.BANKACCOUNTTYPE)",
+
+      "bank_name": "#currentvalueatpath($.BANKNAME)",
+
+      "batch_id": "#currentvalueatpath($.BATCHID)",
+
+      "branch_id": "#currentvalueatpath($.BRANCHID)",
+
+      "check_info_contact": {
+
+        "company_name": "#currentvalueatpath($.CHECKINFOCONTACT.COMPANYNAME)",
+
+        "contact_name": "#currentvalueatpath($.CHECKINFOCONTACT.CONTACTNAME)",
+
+        "mail_address": {
+
+          "address_1": "#currentvalueatpath($.CHECKINFOCONTACT.MAILADDRESS.ADDRESS1)",
+
+          "address_2": "#currentvalueatpath($.CHECKINFOCONTACT.MAILADDRESS.ADDRESS2)",
+
+          "city": "#currentvalueatpath($.CHECKINFOCONTACT.MAILADDRESS.CITY)",
+
+          "country": "#currentvalueatpath($.CHECKINFOCONTACT.MAILADDRESS.COUNTRY)",
+
+          "country_code": "#currentvalueatpath($.CHECKINFOCONTACT.MAILADDRESS.COUNTRYCODE)",
+
+          "state": "#currentvalueatpath($.CHECKINFOCONTACT.MAILADDRESS.STATE)",
+
+          "zip": "#currentvalueatpath($.CHECKINFOCONTACT.MAILADDRESS.ZIP)"
+        },
+
+        "phone_1": "#currentvalueatpath($.CHECKINFOCONTACT.PHONE1)"
+      },
+
+      "check_layout": {
+
+        "bank_acct_align": "#currentvalueatpath($.CHECKLAYOUT.BANKACCTALIGN)",
+
+        "check_no_length": "#currentvalueatpath($.CHECKLAYOUT.CHECKNOLENGTH)",
+
+        "check_paper_format": "#currentvalueatpath($.CHECKLAYOUT.CHECKPAPERFORMAT)",
+
+        "check_print_format": "#currentvalueatpath($.CHECKLAYOUT.CHECKPRINTFORMAT)",
+
+        "company_logo": "#currentvalueatpath($.CHECKLAYOUT.COMPANY_LOGO)",
+
+        "dflt_cny_addr": "#currentvalueatpath($.CHECKLAYOUT.DFLTCNYADDR)",
+
+        "display_location_as": "#currentvalueatpath($.CHECKLAYOUT.DISPLAYLOCATIONAS)",
+
+        "micr_trans_code": "#currentvalueatpath($.CHECKLAYOUT.MICRTRANSCODE)",
+
+        "onus": "#currentvalueatpath($.CHECKLAYOUT.ONUS)",
+
+        "onus_32": "#currentvalueatpath($.CHECKLAYOUT.ONUS32)",
+
+        "print_cny_logo": "#currentvalueatpath($.CHECKLAYOUT.PRINTCNYLOGO)",
+
+        "print_line_items": "#currentvalueatpath($.CHECKLAYOUT.PRINTLINEITEMS)",
+
+        "sig_line_2_amount": "#currentvalueatpath($.CHECKLAYOUT.SIGLINE2AMOUNT)",
+
+        "signature_image1": "#currentvalueatpath($.CHECKLAYOUT.SIGNATUREIMAGE1)",
+
+        "signature_image2": "#currentvalueatpath($.CHECKLAYOUT.SIGNATUREIMAGE2)",
+
+        "spaces_to_append": "#currentvalueatpath($.CHECKLAYOUT.SPACESTOAPPEND)",
+
+        "usd_text": "#currentvalueatpath($.CHECKLAYOUT.USDTEXT)",
+
+        "use_cny_address": "#currentvalueatpath($.CHECKLAYOUT.USECNYADDRESS)",
+
+        "use_second_signature_checks": "#currentvalueatpath($.CHECKLAYOUT.USESECONDSIGNATURECHECKS)",
+
+        "use_sig_1_below_amt": "#currentvalueatpath($.CHECKLAYOUT.USESIG1BELOWAMT)",
+
+        "use_sig_2_below_amt": "#currentvalueatpath($.CHECKLAYOUT.USESIG2BELOWAMT)",
+
+        "void_text": "#currentvalueatpath($.CHECKLAYOUT.VOIDTEXT)"
+      },
+
+      "company_identification": "#currentvalueatpath($.COMPANYIDENTIFICATION)",
+
+      "company_name": "#currentvalueatpath($.COMPANYNAME)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "currency": "#currentvalueatpath($.CURRENCY)",
+
+      "cutoff_date": "#currentvalueatpath($.CUTOFFDATE)",
+
+      "department_id": "#currentvalueatpath($.DEPARTMENTID)",
+
+      "description": "#currentvalueatpath($.DESCRIPTION)",
+
+      "discretionary_data": "#currentvalueatpath($.DISCRETIONARYDATA)",
+
+      "doc_number_seq": "#currentvalueatpath($.DOCNUMBERSEQ)",
+
+      "financial_data": {
+
+        "ap_journal": "#currentvalueatpath($.FINANCIALDATA.APJOURNAL)",
+
+        "ar_journal": "#currentvalueatpath($.FINANCIALDATA.ARJOURNAL)",
+
+        "disable_iet": "#currentvalueatpath($.FINANCIALDATA.DISABLEIET)",
+
+        "recon_mode": "#currentvalueatpath($.FINANCIALDATA.RECONMODE)"
+      },
+
+      "financial_institution": "#currentvalueatpath($.FINANCIALINSTITUTION)",
+
+      "for_wfpm": "#currentvalueatpath($.FORWFPM)",
+
+      "fractional_routing_no": "#currentvalueatpath($.FRACTIONALROUTINGNO)",
+
+      "gl_account_key": "#currentvalueatpath($.GLACCOUNTKEY)",
+
+      "gl_account_no": "#currentvalueatpath($.GLACCOUNTNO)",
+
+      "interest_earned_account_label": "#currentvalueatpath($.INTERESTEARNEDACCOUNTLABEL)",
+
+      "interest_earned_gl_account": "#currentvalueatpath($.INTERESTEARNEDGLACCOUNT)",
+
+      "last_reconciled_balance": "#currentvalueatpath($.LASTRECONCILEDBALANCE)",
+
+      "last_reconciled_date": "#currentvalueatpath($.LASTRECONCILEDDATE)",
+
+      "location_id": "#currentvalueatpath($.LOCATIONID)",
+
+      "mail_address": {
+
+        "address_1": "#currentvalueatpath($.MAILADDRESS.ADDRESS1)",
+
+        "address_2": "#currentvalueatpath($.MAILADDRESS.ADDRESS2)",
+
+        "city": "#currentvalueatpath($.MAILADDRESS.CITY)",
+
+        "country": "#currentvalueatpath($.MAILADDRESS.COUNTRY)",
+
+        "country_code": "#currentvalueatpath($.MAILADDRESS.COUNTRYCODE)",
+
+        "state": "#currentvalueatpath($.MAILADDRESS.STATE)",
+
+        "zip": "#currentvalueatpath($.MAILADDRESS.ZIP)"
+      },
+
+      "mega_entity_id": "#currentvalueatpath($.MEGAENTITYID)",
+
+      "mega_entity_key": "#currentvalueatpath($.MEGAENTITYKEY)",
+
+      "mega_entity_name": "#currentvalueatpath($.MEGAENTITYNAME)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "name_on_the_account": "#currentvalueatpath($.NAMEONTHEACCOUNT)",
+
+      "next_check": "#currentvalueatpath($.NEXTCHECK)",
+
+      "object_restriction": "#currentvalueatpath($.OBJECTRESTRICTION)",
+
+      "originator_status_code": "#currentvalueatpath($.ORIGINATORSTATUSCODE)",
+
+      "outsource_ach": "#currentvalueatpath($.OUTSOURCEACH)",
+
+      "outsource_check": "#currentvalueatpath($.OUTSOURCECHECK)",
+
+      "phone": "#currentvalueatpath($.PHONE)",
+
+      "pm_check_template_id": "#currentvalueatpath($.PMCHECKTEMPLATEID)",
+
+      "print_on": "#currentvalueatpath($.PRINTON)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_type_code": "#currentvalueatpath($.RECORDTYPECODE)",
+
+      "record_url": "#currentvalueatpath($.RECORD_URL)",
+
+      "routing_no": "#currentvalueatpath($.ROUTINGNO)",
+
+      "service_charge_account_label": "#currentvalueatpath($.SERVICECHARGEACCOUNTLABEL)",
+
+      "service_charge_gl_account": "#currentvalueatpath($.SERVICECHARGEGLACCOUNT)",
+
+      "service_class_code": "#currentvalueatpath($.SERVICECLASSCODE)",
+
+      "share_check_no": "#currentvalueatpath($.SHARECHECKNO)",
+
+      "status": "#currentvalueatpath($.STATUS)",
+
+      "trace_number_seq": "#currentvalueatpath($.TRACENUMBERSEQ)",
+
+      "use_recommended_setup": "#currentvalueatpath($.USERECOMMENDEDSETUP)",
+
+      "use_trace_number": "#currentvalueatpath($.USETRACENUMBER)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

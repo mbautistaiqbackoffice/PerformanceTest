@@ -1,0 +1,125 @@
+{
+  "purchase-orders": {
+
+    "#loop($.items)": {
+
+      "cbc:PricingCurrencyCode": "#currentvalueatpath($.basecurr)",
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.currency)",
+
+      "cbc:IssueDate": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datecreated.year),-),#concat(#currentvalueatpath($.datecreated.month),-)),#currentvalueatpath($.datecreated.day))"
+      },
+
+      "cbc:EndDate": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datedue.year),-),#concat(#currentvalueatpath($.datedue.month),-)),#currentvalueatpath($.datedue.day))"
+      },
+
+      "cac:PricingExchangeRate": {
+
+        "cbc:SourceCurrencyBaseRate": "#currentvalueatpath($.exchrate)",
+
+        "cbc:Date": "#concat(#concat(#concat(#valueof($.exchratedate.year),-),#concat(#valueof($.exchratedate.month),-)),#valueof($.exchratedate.day))"
+
+      },
+
+      "cac:AdditionalDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.key)"
+      },
+
+      "cbc:Note": "#currentvalueatpath($.message)",
+
+      "payment_status": "#currentvalueatpath($.paymentstatus)",
+
+      "cac:PayeeParty": {
+
+        "cac:PartyName": {
+
+          "cbc:Name": "#currentvalueatpath($.payto.contactname)"
+        }
+      },
+
+      "po_trans_items": {
+
+        "po_trans_item": {
+
+          "#loopwithincontext($.potransitems.potransitem)": {
+
+            "cbc:Description": "#currentvalueatpath($.itemdesc)",
+
+            "cbc:ID": "#currentvalueatpath($.itemid)",
+
+            "key": "#currentvalueatpath($.key)",
+
+            "cac:PriceList": {
+
+              "cbc:ID": "#currentvalueatpath($.price)"
+            },
+
+            "cbc:Quantity": "#currentvalueatpath($.quantity)",
+
+            "retail_price": "#currentvalueatpath($.retailprice)",
+
+            "total_amount": "#currentvalueatpath($.totalamount)",
+
+            "unit": "#currentvalueatpath($.unit)",
+
+            "cac:StorageLocation": {
+
+              "cbc:ID": "#currentvalueatpath($.warehouseid)"
+            }
+          }
+        }
+      },
+
+      "cac:DocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.referenceno)"
+      },
+
+      "cac:SellerSupplierParty": {
+
+        "cac:SellerContact": {
+
+          "cbc:Name": "#currentvalueatpath($.returnto.contactname)"
+        }
+      },
+
+      "cac:TransportMeans": {
+
+        "cbc:TransportMeansTypeCode": "#currentvalueatpath($.shippingmethod)"
+      },
+
+      "sup_doc_id": {
+
+        "cac:AdditionalDocumentReference": {
+
+          "cbc:ID": "#currentvalueatpath($.supdocid)"
+        }
+      },
+
+      "cac:PaymentTerms": {
+
+        "cbc:Note": "#currentvalueatpath($.termname)"
+      },
+
+      "transaction_id": "#currentvalueatpath($.transactionid)",
+
+      "transaction_state": "#currentvalueatpath($.transactionstate)",
+
+      "cac:PaymentType": {
+
+        "cbc:ID": "#currentvalueatpath($.transactiontype)"
+      },
+
+      "vendor_doc_no": "#currentvalueatpath($.vendordocno)",
+
+      "cbc:CompanyID": "#currentvalueatpath($.vendorid)",
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }
+}

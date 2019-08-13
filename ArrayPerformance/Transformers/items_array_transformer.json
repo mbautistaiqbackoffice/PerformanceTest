@@ -1,0 +1,228 @@
+{
+  "items": {
+
+    "#loop($.items)": {
+
+      "average_cost": "#currentvalueatpath($.averagecost)",
+
+      "base_price": "#currentvalueatpath($.baseprice)",
+
+      "cn_billing_template": "#currentvalueatpath($.cnbillingtemplate)",
+
+      "cn_expense_2_template": "#currentvalueatpath($.cnexpense2template)",
+
+      "cn_expense_template": "#currentvalueatpath($.cnexpensetemplate)",
+
+      "cn_revenue_2_template": "#currentvalueatpath($.cnrevenue2template)",
+
+      "cn_revenue_template": "#currentvalueatpath($.cnrevenuetemplate)",
+
+      "cogs_account": "#currentvalueatpath($.cogsaccount)",
+
+      "comp_line_items": {
+
+        "comp_line_item": {
+
+          "#loopwithincontext($.complineitems.complineitem)": {
+
+            "component_key": "#currentvalueatpath($.componentkey)",
+
+            "kcdlvr_status": "#currentvalueatpath($.kcdlvrstatus)",
+
+            "kcrev_def_status": "#currentvalueatpath($.kcrevdefstatus)",
+
+            "quantity": "#currentvalueatpath($.quantity)",
+
+            "std_uom": "#currentvalueatpath($.std_uom)"
+          }
+        }
+      },
+
+      "compute_for_short_term": "#currentvalueatpath($.computeforshortterm)",
+
+      "cost_method": "#currentvalueatpath($.costmethod)",
+
+      "default_no_of_periods": "#currentvalueatpath($.defaultnoofperiods)",
+
+      "default_whse": "#currentvalueatpath($.defaultwhse)",
+
+      "cac:FinancialAccount": {
+
+        "cbc:ID": "#currentvalueatpath($.defrevaccount)"
+      },
+
+      "drop_ship": "#currentvalueatpath($.dropship)",
+
+      "enable_bins": "#currentvalueatpath($.enable_bins)",
+
+      "expense_account": "#currentvalueatpath($.expenseaccount)",
+
+      "ext_description": "#currentvalueatpath($.extdescription)",
+
+      "gl_group_name": "#currentvalueatpath($.glgroupname)",
+
+      "has_start_end_dates": "#currentvalueatpath($.hasstartenddates)",
+
+      "income_account": "#currentvalueatpath($.incomeaccount)",
+
+      "inv_account": "#currentvalueatpath($.invaccount)",
+
+      "inventory_precision": "#currentvalueatpath($.inventory_precision)",
+
+      "cbc:ID": "#currentvalueatpath($.itemid)",
+
+      "item_name": "#currentvalueatpath($.itemname)",
+
+      "cac:ItemType": {
+
+        "cbc:Description": "#currentvalueatpath($.itemtype)"
+      },
+
+      "mrr": "#currentvalueatpath($.mrr)",
+
+      "note": "#currentvalueatpath($.note)",
+
+      "offset_oe_gl_account": "#currentvalueatpath($.offsetoeglaccount)",
+
+      "offset_po_gl_account": "#currentvalueatpath($.offsetpoglaccount)",
+
+      "product_line_id": "#currentvalueatpath($.productlineid)",
+
+      "purchasing_precision": "#currentvalueatpath($.purchasing_precision)",
+
+      "purchasing_unit": "#currentvalueatpath($.purchasingunit)",
+
+      "purchasing_unit_factor": "#currentvalueatpath($.purchasingunitfactor)",
+
+      "record_no": "#currentvalueatpath($.recordno)",
+
+      "revenue_posting": "#currentvalueatpath($.revenue_posting)",
+
+      "sales_precision": "#currentvalueatpath($.sales_precision)",
+
+      "sales_unit": "#currentvalueatpath($.salesunit)",
+
+      "sales_unit_factor": "#currentvalueatpath($.salesunitfactor)",
+
+      "ship_weight": "#currentvalueatpath($.shipweight)",
+
+      "standard_cost": "#currentvalueatpath($.standardcost)",
+
+      "standard_unit": "#currentvalueatpath($.standardunit)",
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.status)"
+      },
+
+      "substitute_id": "#currentvalueatpath($.substituteid)",
+
+      "cac:ApplicableTaxCategory": {
+
+        "cbc:ID": "#currentvalueatpath($.taxable)"
+      },
+
+      "tax_code": "#currentvalueatpath($.taxcode)",
+
+      "tax_group": "#currentvalueatpath($.taxgroup)",
+
+      "term_period": "#currentvalueatpath($.termperiod)",
+
+      "total_periods": "#currentvalueatpath($.totalperiods)",
+
+      "uom": "#currentvalueatpath($.uom)",
+
+      "uom_grp": "#currentvalueatpath($.uomgrp)",
+
+      "upc": "#currentvalueatpath($.upc)",
+
+      "vend_line_items": {
+
+        "vend_line_item": {
+
+          "#loopwithincontext($.vendlineitems.vendlineitem)": {
+
+            "econ_order_qty": "#currentvalueatpath($.econorderqty)",
+
+            "lead_time": "#currentvalueatpath($.leadtime)",
+
+            "stock_no": "#currentvalueatpath($.stockno)",
+
+            "vendor_id": "#currentvalueatpath($.vendorid)"
+          }
+        }
+      },
+
+      "cac:SupportingDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.vsoecategory)"
+      },
+
+      "TransportationStatus": {
+
+        "cbc:Description": "#currentvalueatpath($.vsoedlvrstatus)"
+      },
+
+      "cbc:InstructionNote": "#currentvalueatpath($.vsoerevdefstatus)",
+
+      "when_last_received": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.whenlastreceived.year),-),#concat(#currentvalueatpath($.whenlastreceived.month),-)),#currentvalueatpath($.whenlastreceived.day))"
+      },
+
+      "when_last_sold": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.whenlastsold.year),-),#concat(#currentvalueatpath($.whenlastsold.month),-)),#currentvalueatpath($.whenlastsold.day))"
+      },
+
+      "when_modified": "#currentvalueatpath($.whenmodified)",
+
+      "whs_line_items": {
+
+        "whs_line_item": {
+
+          "#loopwithincontext($.whslineitems.whslineitem)": {
+
+            "aisle_id": "#currentvalueatpath($.aisleid)",
+
+            "avg_cost": "#currentvalueatpath($.avgcost)",
+
+            "bin_id": "#currentvalueatpath($.binid)",
+
+            "cycle": "#currentvalueatpath($.cycle)",
+
+            "date_last_recvd": "#currentvalueatpath($.datelastrecvd)",
+
+            "date_last_sold": "#currentvalueatpath($.datelastsold)",
+
+            "default_sub_section": "#currentvalueatpath($.defaultsubsection)",
+
+            "economy_order_qty": "#currentvalueatpath($.economyorderqty)",
+
+            "last_cost": "#currentvalueatpath($.lastcost)",
+
+            "max_order_qty": "#currentvalueatpath($.maxorderqty)",
+
+            "max_stock": "#currentvalueatpath($.maxstock)",
+
+            "min_order_qty": "#currentvalueatpath($.minorderqty)",
+
+            "min_stock": "#currentvalueatpath($.minstock)",
+
+            "re_order": "#currentvalueatpath($.reorder)",
+
+            "reorder_method": "#currentvalueatpath($.reordermethod)",
+
+            "row_key": "#currentvalueatpath($.rowkey)",
+
+            "std_cost": "#currentvalueatpath($.stdcost)",
+
+            "whs_id": "#currentvalueatpath($.whsid)",
+
+            "whs_line_items_std_cost_entries": "#currentvalueatpath($.whslineitemsstdcostentries)"
+          }
+        }
+      }
+    }
+  }
+}

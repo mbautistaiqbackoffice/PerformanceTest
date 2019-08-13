@@ -1,0 +1,59 @@
+{
+  "deposits": {
+
+    "#loop($.items)": {
+
+      "au_when_created": "#currentvalueatpath($.AUWHENCREATED)",
+
+      "bank_name": "#currentvalueatpath($.BANKNAME)",
+
+      "base_curr": "#currentvalueatpath($.BASECURR)",
+
+      "cleared": "#currentvalueatpath($.CLEARED)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "currency": "#currentvalueatpath($.CURRENCY)",
+
+      "cbc:InstructionID": "#currentvalueatpath($.DEPOSITID)",
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "financial_entity": "#currentvalueatpath($.FINANCIALENTITY)",
+
+      "mega_entity_id": "#currentvalueatpath($.MEGAENTITYID)",
+
+      "mega_entity_key": "#currentvalueatpath($.MEGAENTITYKEY)",
+
+      "mega_entity_name": "#currentvalueatpath($.MEGAENTITYNAME)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "raw_state": "#currentvalueatpath($.RAWSTATE)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_type": "#currentvalueatpath($.RECORDTYPE)",
+
+      "record_url": "#currentvalueatpath($.RECORD_URL)",
+
+      "reversal_date": "#currentvalueatpath($.REVERSALDATE)",
+
+      "reversal_key": "#currentvalueatpath($.REVERSALKEY)",
+
+      "reversed_date": "#currentvalueatpath($.REVERSEDDATE)",
+
+      "reversed_key": "#currentvalueatpath($.REVERSEDKEY)",
+
+      "state": "#currentvalueatpath($.STATE)",
+
+      "total_entered": "#currentvalueatpath($.TOTALENTERED)",
+
+      "trx_total_entered": "#currentvalueatpath($.TRX_TOTALENTERED)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

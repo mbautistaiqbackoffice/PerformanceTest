@@ -1,0 +1,85 @@
+{
+  "ledger-accounts": {
+
+    "#loop($.items)": {
+
+      "require_gldim_channel": "#currentvalueatpath($.REQUIREGLDIMCHANNEL)",
+
+      "cbc:AccountTypeCode": "#currentvalueatpath($.accounttype)",
+
+      "alternative_account": "#currentvalueatpath($.alternativeaccount)",
+
+      "cac:ClassificationCategory": {
+
+        "cbc:CodeValue": "#currentvalueatpath($.category)"
+      },
+
+      "cbc:EndpointID": "#currentvalueatpath($.closingaccountno)",
+
+      "cbc:CustomizationID": "#currentvalueatpath($.closingtype)",
+
+      "custom_fields": {
+
+        "custom_field": {
+
+          "#loopwithincontext($.customfields.customfield)": {
+
+            "cbc:Name": "#currentvalueatpath($.customfieldname)",
+
+            "cbc:Value": "#currentvalueatpath($.customfieldvalue)"
+          }
+        }
+      },
+
+      "cbc:AccountingCostCode": "#currentvalueatpath($.glaccountno)",
+
+      "mrc_code": "#currentvalueatpath($.mrccode)",
+
+      "normal_balance": "#currentvalueatpath($.normalbalance)",
+
+      "cac:OrderReference": {
+
+        "cbc:ID": "#currentvalueatpath($.recordno)"
+      },
+
+      "require_class": "#currentvalueatpath($.requireclass)",
+
+      "require_contract": "#currentvalueatpath($.requirecontract)",
+
+      "require_customer": "#currentvalueatpath($.requirecustomer)",
+
+      "require_dept": "#currentvalueatpath($.requiredept)",
+
+      "require_employee": "#currentvalueatpath($.requireemployee)",
+
+      "require_item": "#currentvalueatpath($.requireitem)",
+
+      "require_loc": "#currentvalueatpath($.requireloc)",
+
+      "require_project": "#currentvalueatpath($.requireproject)",
+
+      "require_vendor": "#currentvalueatpath($.requirevendor)",
+
+      "require_warehouse": "#currentvalueatpath($.requirewarehouse)",
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.status)"
+      },
+
+      "taxable": "#currentvalueatpath($.taxable)",
+
+      "tax_code": "#currentvalueatpath($.taxcode)",
+
+      "title": {
+
+        "cac:ClassificationCategory": {
+
+          "cbc:CodeValue": "#currentvalueatpath($.title)"
+        }
+      },
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }
+}

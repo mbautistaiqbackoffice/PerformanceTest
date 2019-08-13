@@ -1,0 +1,109 @@
+[
+  {
+    "CONTACT": {
+      "CONTACTNAME": "Sarah Smith(CCUST-00113)"
+    },
+    "RECURPAYMENTKEY": 4,
+    "STARTDATE": "08/14/2019",
+    "DOCSTATUS": "Active",
+    "BILLTO": {
+      "CONTACTNAME": "Sarah Smith(CCUST-00113)"
+    },
+    "TERM": {
+      "NAME": "Upon Receipt"
+    },
+    "SHIPTO": {
+      "CONTACTNAME": "Sarah Smith(CCUST-00113)"
+    },
+    "MEGAENTITYNAME": "Texas #10",
+    "TRX_SUBTOTAL": 1400,
+    "WHENMODIFIED": "08/13/2019",
+    "DOCID": "Sales Credit Memo",
+    "RECORDNO": 1,
+    "STATUS": "active",
+    "BASECURR": "USD",
+    "CUSTOMERID": "CUST-00113",
+    "ENTITY": "CCUST-00113",
+    "SUBTOTAL": 1400,
+    "BILLTOKEY": 222,
+    "DESCRIPTION": 1,
+    "FREQUENCY": "Weeks",
+    "SCHOPKEY": 105,
+    "CUSTENTITY": "CCUST-00113",
+    "MEGAENTITYID": 10,
+    "MEGAENTITYKEY": 8,
+    "PAYMETHOD": "None",
+    "SHIPTOKEY": 222,
+    "DOCPARKEY": 10,
+    "CURRENCY": "USD",
+    "INTERVAL": 2,
+    "TERMKEY": 6,
+    "TRX_TOTAL": 1400,
+    "NEXTEXECDATE": "08/14/2019",
+    "RECURDUEDATE": "08/14/2019",
+    "PAYINFULL": true,
+    "REPEATBY": "W",
+    "EXECCOUNT": 0,
+    "RECUR_RECORDNO": 1,
+    "REPEATCOUNT": 2,
+    "CUSTOMERNAME": "Sarah Smith",
+    "CONTACTKEY": 222,
+    "EXCHRATE": 1
+  },
+  {
+    "CONTACT": {
+      "CONTACTNAME": "Tri Star(CCUST-00119)",
+      "EMAIL1": "lpinion@intacct.com"
+    },
+    "RECURPAYMENTKEY": 5,
+    "STARTDATE": "08/31/2019",
+    "DOCSTATUS": "Active",
+    "BILLTO": {
+      "CONTACTNAME": "Tri Star(CCUST-00119)",
+      "EMAIL1": "lpinion@intacct.com"
+    },
+    "TERM": {
+      "NAME": "2/10 Net30"
+    },
+    "SHIPTO": {
+      "CONTACTNAME": "Tri Star(CCUST-00119)",
+      "EMAIL1": "lpinion@intacct.com"
+    },
+    "MEGAENTITYNAME": "Texas #10",
+    "TRX_SUBTOTAL": 179,
+    "WHENMODIFIED": "08/13/2019",
+    "DOCID": "Sales Credit Memo",
+    "RECORDNO": 2,
+    "MESSAGE": "Thanks for your business!",
+    "STATUS": "active",
+    "BASECURR": "USD",
+    "CUSTOMERID": "CUST-00119",
+    "ENTITY": "CCUST-00119",
+    "SUBTOTAL": 179,
+    "BILLTOKEY": 229,
+    "DESCRIPTION": 2,
+    "FREQUENCY": "End Of Month",
+    "SCHOPKEY": 106,
+    "CUSTENTITY": "CCUST-00119",
+    "MEGAENTITYID": 10,
+    "MEGAENTITYKEY": 8,
+    "PAYMETHOD": "None",
+    "SHIPTOKEY": 229,
+    "SHIPVIA": "UPS",
+    "DOCPARKEY": 10,
+    "CURRENCY": "USD",
+    "INTERVAL": 2,
+    "TERMKEY": 4,
+    "TRX_TOTAL": 179,
+    "NEXTEXECDATE": "08/31/2019",
+    "RECURDUEDATE": "09/30/2019",
+    "PAYINFULL": true,
+    "REPEATBY": "E",
+    "EXECCOUNT": 0,
+    "RECUR_RECORDNO": 2,
+    "REPEATCOUNT": 2,
+    "CUSTOMERNAME": "Tri Star",
+    "CONTACTKEY": 229,
+    "EXCHRATE": 1
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "sales-receipts": {
+
+    "#loop($.items)": {
+
+      "au_when_created": "#currentvalueatpath($.AUWHENCREATED)",
+
+      "bank_account_curr": "#currentvalueatpath($.BANKACCOUNTCURR)",
+
+      "bank_account_id": "#currentvalueatpath($.BANKACCOUNTID)",
+
+      "bank_account_name": "#currentvalueatpath($.BANKACCOUNTNAME)",
+
+      "base_curr": "#currentvalueatpath($.BASECURR)",
+
+      "cleared": "#currentvalueatpath($.CLEARED)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "currency": "#currentvalueatpath($.CURRENCY)",
+
+      "deposit_date": "#currentvalueatpath($.DEPOSITDATE)",
+
+      "deposit_to": "#currentvalueatpath($.DEPOSITTO)",
+
+      "description": "#currentvalueatpath($.DESCRIPTION)",
+
+      "description_2": "#currentvalueatpath($.DESCRIPTION2)",
+
+      "doc_number": "#currentvalueatpath($.DOCNUMBER)", 
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "parent_payment": "#currentvalueatpath($.PARENTPAYMENT)",
+
+      "pay_method": "#currentvalueatpath($.PAYMETHOD)",
+
+      "pr_batch_key": "#currentvalueatpath($.PRBATCHKEY)",
+
+      "raw_state": "#currentvalueatpath($.RAWSTATE)",
+      
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_type": "#currentvalueatpath($.RECORDTYPE)",
+
+      "total_entered": "#currentvalueatpath($.TOTALENTERED)",
+
+      "trx_total_entered": "#currentvalueatpath($.TRX_TOTALENTERED)",
+
+      "undep_acct_no": "#currentvalueatpath($.UNDEPACCTNO)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)",
+
+      "when_paid": "#currentvalueatpath($.WHENPAID)"
+    }
+  }
+}

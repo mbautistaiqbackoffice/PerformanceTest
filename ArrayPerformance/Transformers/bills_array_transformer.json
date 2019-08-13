@@ -1,0 +1,160 @@
+{
+  "bills": {
+
+    "#loop($.items)": {
+
+      "cbc:PricingCurrencyCode": "#currentvalueatpath($.basecurr)",
+
+      "batch_key": "#currentvalueatpath($.batchkey)",
+
+      "cac:Item": {
+
+        "cac:LineItem": {
+
+          "#loopwithincontext($.billitems.lineitem)": {
+
+            "cbc:AccountingCostCode": "#currentvalueatpath($.accountlabel)",
+
+            "cbc:Amount": "#currentvalueatpath($.amount)",
+
+            "cac:ClassificationCategory": {
+
+              "cbc:CodeValue": "#currentvalueatpath($.classid)"
+            },
+
+            "contract_id": "#currentvalueatpath($.contractid)",
+
+            "cac:CustomerParty": {
+
+              "cbc:CustomerAssignedAccountID": "#currentvalueatpath($.customerid)"
+            },
+
+            "cac:Party": {
+
+              "cac:PartyIdentification": {
+
+                "cbc:ID": "#currentvalueatpath($.departmentid)"
+              }
+            },
+
+            "cbc:IdentificationID": "#currentvalueatpath($.employeeid)",
+
+            "gl_account_no": {
+
+              "cbc:AccountingCostCode": "#currentvalueatpath($.glaccountno)"
+            },
+
+            "cbc:ID": "#currentvalueatpath($.itemid)",
+
+            "cac:PhysicalLocation": {
+
+              "cbc:ID": "#currentvalueatpath($.locationid)"
+            },
+
+            "cbc:Note": "#currentvalueatpath($.memo)",
+
+            "cac:ProjectReference": {
+
+              "cbc:ID": "#currentvalueatpath($.projectid)"
+            },
+
+            "cbc:CompanyID": "#currentvalueatpath($.vendorid)",
+
+            "cac:StorageLocation": {
+
+              "cbc:ID": "#currentvalueatpath($.warehouseid)"
+            }
+          }
+        }
+      },
+
+      "cac:BillingReference": {
+
+        "cbc:ID": "#currentvalueatpath($.billno)"
+      },
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.currency)",
+
+      "cbc:IssueDate": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datecreated.year),-),#concat(#currentvalueatpath($.datecreated.month),-)),#currentvalueatpath($.datecreated.day))"
+      },
+
+      "cbc:EndDate": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datedue.year),-),#concat(#currentvalueatpath($.datedue.month),-)),#currentvalueatpath($.datedue.day))"
+      },
+
+      "date_paid": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datepaid.year),-),#concat(#currentvalueatpath($.datepaid.month),-)),#currentvalueatpath($.datepaid.day))"
+      },
+
+      "cbc:StartDate": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.dateposted.year),-),#concat(#currentvalueatpath($.dateposted.month),-)),#currentvalueatpath($.dateposted.day))"
+      },
+
+      "cbc:Note": "#currentvalueatpath($.description)",
+
+      "cac:AdditionalDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.key)"
+      },
+
+      "cac:CurrentStatus": {
+
+        "cbc:ConditionCode": "#currentvalueatpath($.onhold)"
+      },
+
+      "cac:PayeeParty": {
+
+        "cac:PartyName": {
+
+          "cbc:Name": "#currentvalueatpath($.payto.contactname)"
+
+        }
+      },
+
+      "cac:OrderReference": {
+
+        "cbc:ID": "#currentvalueatpath($.ponumber)"
+      },
+
+      "cac:SellerSupplierParty": {
+
+        "cac:SellerContact": {
+
+          "cbc:Name": "#currentvalueatpath($.returnto.contactname)"
+        }
+      },
+
+      "state": "#currentvalueatpath($.state)",
+
+      "cac:PaymentTerms": {
+
+        "cbc:Note": "#currentvalueatpath($.termname)"
+      },
+
+      "total_amount": "#currentvalueatpath($.totalamount)",
+
+      "cbc:PriceAmount": "#currentvalueatpath($.totaldue)",
+
+      "cbc:PaidAmount": "#currentvalueatpath($.totalpaid)",
+
+      "total_selected": "#currentvalueatpath($.totalselected)",
+
+      "trx_total_amount": "#currentvalueatpath($.trx_totalamount)",
+
+      "trx_total_due": "#currentvalueatpath($.trx_totaldue)",
+
+      "trx_total_paid": "#currentvalueatpath($.trx_totalpaid)",
+
+      "trx_total_selected": "#currentvalueatpath($.trx_totalselected)",
+
+      "cbc:CompanyID": "#currentvalueatpath($.vendorid)",
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }
+}

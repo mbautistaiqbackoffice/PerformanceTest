@@ -1,0 +1,42 @@
+{
+  "allocations": {
+
+    "#loop($.items)": {
+
+      "cac:DocumentDistribution": {
+
+        "cbc:PrintQualifier": "#currentvalueatpath($.ALLOCATIONID)"
+      },
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "doc_number": {
+
+        "cac:AdditionalDocumentReference": {
+
+          "cbc:ID": "#currentvalueatpath($.DOCNUMBER)"
+        }
+      },
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "cac:OrderReference": {
+
+        "cbc:ID": "#currentvalueatpath($.RECORDNO)"
+      },
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.STATUS)"
+      },
+
+      "cbc:InvoiceTypeCode": "#currentvalueatpath($.TYPE)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

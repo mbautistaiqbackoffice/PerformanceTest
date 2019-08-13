@@ -1,0 +1,60 @@
+{
+  "terms": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.createdby)",
+
+      "cbc:Note": "#currentvalueatpath($.description)",
+
+      "cbc:SettlementDiscountPercent": "#currentvalueatpath($.disccalcon)",
+
+      "discount": {
+
+        "amount": "#currentvalueatpath($.discount.amount)",
+
+        "day_of_month": "#currentvalueatpath($.discount.dayofmonth)",
+
+        "days_forward": "#currentvalueatpath($.discount.daysforward)",
+
+        "grace_days": "#currentvalueatpath($.discount.gracedays)",
+
+        "months_forward": "#currentvalueatpath($.discount.monthsforward)",
+
+        "percent_amount": "#currentvalueatpath($.discount.percentamount)"
+      },
+
+      "due": {
+
+        "day_of_month": "#currentvalueatpath($.due.dayofmonth)",
+
+        "days_forward": "#currentvalueatpath($.due.daysforward)",
+
+        "months_forward": "#currentvalueatpath($.due.monthsforward)"
+      },
+
+      "modified_by": "#currentvalueatpath($.modifiedby)",
+
+      "cbc:Name": "#currentvalueatpath($.name)",
+
+      "penalty": {
+
+        "amount": "#currentvalueatpath($.penalty.amount)",
+
+        "grace_days": "#currentvalueatpath($.penalty.gracedays)",
+
+        "penalty_cycle": "#currentvalueatpath($.penalty.penaltycycle)",
+
+        "percent_amount": "#currentvalueatpath($.penalty.percentamount)"
+      },
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.status)"
+      },
+
+      "when_created": "#currentvalueatpath($.whencreated)",
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }

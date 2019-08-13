@@ -1,0 +1,27 @@
+{
+  "roles": {
+
+    "#loop($.items)": {
+
+      "apply_to": "#currentvalueatpath($.APPLYTO)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "description": "#currentvalueatpath($.DESCRIPTION)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "name": "#currentvalueatpath($.NAME)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_url": "#currentvalueatpath($.RECORD_URL)",
+
+      "type": "#currentvalueatpath($.TYPE)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

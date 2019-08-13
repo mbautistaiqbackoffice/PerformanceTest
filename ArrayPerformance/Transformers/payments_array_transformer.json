@@ -1,0 +1,131 @@
+{
+  "payments": {
+
+    "#loop($.items)": {
+
+      "ar_payment_item_details": {
+
+        "ar_payment_item_detail": {
+
+          "#loopwithincontext($.arpaymentitemdetails.arpaymentitemdetail)": {
+
+            "cbc:Amount": "#currentvalueatpath($.amount)",
+
+            "ar_payment_item_key": "#currentvalueatpath($.arpaymentitemkey)",
+
+            "invoice_line_item_key": "#currentvalueatpath($.invoicelineitemkey)"
+          }
+        }
+      },
+
+      "ar_payment_items": {
+
+        "ar_payment_item": {
+
+          "#loopwithincontext($.arpaymentitems.arpaymentitem)": {
+
+            "cbc:Amount": "#currentvalueatpath($.amount)",
+
+            "invoice_key": "#currentvalueatpath($.invoicekey)"
+          }
+        },
+
+        "batch_key": "#currentvalueatpath($.batchkey)",
+
+        "batch_title": "#currentvalueatpath($.batchtitle)",
+
+        "cac:CustomerParty": {
+
+          "cbc:CustomerAssignedAccountID": "#currentvalueatpath($.customerid)"
+        },
+
+        "cbc:ReceivedDate": {
+
+          "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.datereceived.year),-),#concat(#currentvalueatpath($.datereceived.month),-)),#currentvalueatpath($.datereceived.day))"
+        },
+
+        "cac:AdditionalDocumentReference": {
+
+          "cbc:ID": "#currentvalueatpath($.key)"
+        },
+
+        "line_items": {
+
+          "line_item": {
+
+            "#loopwithincontext($.lineitems.lineitem)": {
+
+              "accountlabel": "#currentvalueatpath($.accountlabel)",
+
+              "amount": "#currentvalueatpath($.amount)",
+
+              "billable": "#currentvalueatpath($.billable)",
+
+              "class_key": "#currentvalueatpath($.classkey)",
+
+              "contract_key": "#currentvalueatpath($.contractkey)",
+
+              "currency": "#currentvalueatpath($.currency)",
+
+              "customer_key": "#currentvalueatpath($.customerkey)",
+
+              "department_id": "#currentvalueatpath($.departmentid)",
+
+              "employee_key": "#currentvalueatpath($.employeekey)",
+
+              "gl_account_no": "#currentvalueatpath($.glaccountno)",
+
+              "item_key": "#currentvalueatpath($.itemkey)",
+
+              "key": "#currentvalueatpath($.key)",
+
+              "line_num": "#currentvalueatpath($.line_num)",
+
+              "location_id": "#currentvalueatpath($.locationid)",
+
+              "memo": "#currentvalueatpath($.memo)",
+
+              "offset_gl_account_no": "#currentvalueatpath($.offsetglaccountno)",
+
+              "project_key": "#currentvalueatpath($.projectkey)",
+
+              "total_due": "#currentvalueatpath($.totaldue)",
+
+              "total_paid": "#currentvalueatpath($.totalpaid)",
+
+              "trx_amount": "#currentvalueatpath($.trx_amount)",
+
+              "trx_total_due": "#currentvalueatpath($.trx_totaldue)",
+
+              "trx_total_paid": "#currentvalueatpath($.trx_totalpaid)",
+
+              "vendor_key": "#currentvalueatpath($.vendorkey)",
+
+              "warehouse_key": "#currentvalueatpath($.warehousekey)"
+            }
+          }
+        },
+
+        "payment_amount": "#currentvalueatpath($.paymentamount)",
+
+        "payment_applied": "#currentvalueatpath($.paymentapplied)",
+
+        "payment_method": "#currentvalueatpath($.paymentmethod)",
+
+        "payment_unapplied": "#currentvalueatpath($.paymentunapplied)",
+
+        "ref_id": "#currentvalueatpath($.refid)",
+
+        "state": "#currentvalueatpath($.state)",
+
+        "undep_account_label": "#currentvalueatpath($.undepaccountlabel)",
+
+        "undep_gl_account_no": "#currentvalueatpath($.undepglaccountno)",
+
+        "undeposited": "#currentvalueatpath($.undeposited)",
+
+        "when_modified": "#currentvalueatpath($.whenmodified)"
+      }
+    }
+  }
+}

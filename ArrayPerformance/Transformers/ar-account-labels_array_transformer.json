@@ -1,0 +1,52 @@
+{
+  "ar-account-labels": {
+
+    "#loop($.items)": {
+
+      "account_label": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.ACCOUNTLABEL)"
+      },
+
+      "deferred_rev_acct_key": "#currentvalueatpath($.DEFERREDREVACCTKEY)",
+
+      "defrr_account_no": "#currentvalueatpath($.DEFRRACCOUNTNO)",
+
+      "defrr_account_title": "#currentvalueatpath($.DEFRRACCOUNTTITLE)",
+
+      "cbc:Note": "#currentvalueatpath($.DESCRIPTION)",
+
+      "gl_account_no": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.GLACCOUNTNO)"
+
+      },
+
+      "gl_account_title": "#currentvalueatpath($.GLACCOUNTTITLE)",
+
+      "is_tax": "#currentvalueatpath($.ISTAX)",
+
+      "cbc:AccountingCostCode": "#currentvalueatpath($.OFFSETGLACCOUNTNO)",
+
+      "offset_gl_account_title": "#currentvalueatpath($.OFFSETGLACCOUNTTITLE)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "rev_rec_templ_key": "#currentvalueatpath($.REVRECTEMPLKEY)",
+
+      "rev_rec_templ_title": "#currentvalueatpath($.REVRECTEMPLTITLE)",
+
+      "cac:Status": {
+
+        "cbc:Desciption": "#currentvalueatpath($.STATUS)"
+
+      },
+
+      "sub_total": "#currentvalueatpath($.SUBTOTAL)",
+
+      "taxable": "#currentvalueatpath($.TAXABLE)",
+
+      "tax_group_name": "#currentvalueatpath($.TAXGROUP.NAME)"
+    }
+  }
+}

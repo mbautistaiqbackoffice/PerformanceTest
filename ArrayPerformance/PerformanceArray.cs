@@ -27,9 +27,57 @@ namespace ArrayPerformance
 
         [Params("acctgroup", "invoice", "vendor")]
         public string Type;
-        private readonly string[] _types = { "acctgroup", "invoice", "vendor" };
+        private readonly string[] _types =  
+        {
+            "account-groups",
+            "ach-bank-configurations",
+            "allocations",
+            "ap-account-labels",
+            "ap-terms",
+            "ar-account-labels",
+            "bills",
+            "bills-payments",
+            "checking-accounts",
+            "classes",
+            //"credit-memos",       // No available data, need to create
+            "customer-types",
+            "customers",
+            //"debit-memos",        // No available data, need to create
+            "department-groups",
+            "departments",
+            "deposits",
+            "folders",
+            "inventory-control-price-lists",
+            "invoices",
+            "item-gl-groups",
+            "item-groups",
+            "item-tax-groups",
+            "items",
+            "ledger-accounts",
+            "location-groups",
+            "locations",
+            "order-entry-price-lists",
+            "order-entry-transaction-definitions",
+            "order-entry-transactions",
+            "payments",
+            "purchase-orders",
+            "purchasing-price-lists",
+            "purchasing-transaction-definitions",
+            "recurring-bills",
+            "recurring-invoices",
+            "recurring-order-entry-transactions",
+            "reporting-periods",
+            "roles",
+            "sales-receipts",
+            "terms",
+            "unit-of-measures",
+            "user-groups",
+            "users",
+            "vendors",
+            "warehouses"
+        };
 
-        public bool ParseArray = true;
+        public bool ParseArray = false;
         public ConcurrentBag<string> OutputList = new ConcurrentBag<string>();
         public ConcurrentDictionary<string, JToken> TransformerTokens = new ConcurrentDictionary<string, JToken>();
         public static string InputJson;
@@ -80,7 +128,7 @@ namespace ArrayPerformance
             {
                 var outputs = new ConcurrentBag<string>();
                 var itemArray = JArray.Parse(InputJson);
-                //Parallel.ForEach(itemArray, item => { outputs.Add(JsonTransformer.Transform(TransformerToken, item.ToString(), new JUSTContext())); });
+
                 foreach (var item in itemArray)
                 {
                     outputs.Add(JsonTransformer.Transform(TransformerToken, item.ToString()));
@@ -90,7 +138,7 @@ namespace ArrayPerformance
             }
             else
             {
-                var modifiedInput = $"{{ \"{Type}s\":" + InputJson + " }";
+                var modifiedInput = "{ \"items\": " + InputJson + " }";                
                 OutputList.Add(JsonTransformer.Transform(TransformerToken, modifiedInput));
             }
 
@@ -116,7 +164,10 @@ namespace ArrayPerformance
         {
             lock (TransformerTokens)
             {
-                var input = File.ReadAllText(Path.Combine(CurrentDirectory, "Inputs", fileType + "_array.json"));
+                var input =
+                    File.ReadAllText(Path.Combine(CurrentDirectory, "Inputs", fileType + "_array.json"))
+                    .Replace("\\\"", "\"").Replace("\"{", "{").Replace("}\"", "}");
+
                 if (TransformerTokens.ContainsKey(fileType))
                     return (input, TransformerTokens[fileType]);
 

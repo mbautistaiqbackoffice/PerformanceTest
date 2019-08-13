@@ -1,0 +1,275 @@
+{
+  "customers": {
+
+    "#loop($.items)": {
+
+      "account_label": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.accountlabel)"
+      },
+
+      "cac:BillToParty": {
+
+        "cbc:Name": "#currentvalueatpath($.billto.contactname)"
+      },
+
+      "cbc:Comment": "#currentvalueatpath($.comments)",
+
+      "cac:Contact": {
+
+        "cac:Contact": {
+
+          "cell_phone": {
+
+            "cbc:Telephone": "#currentvalueatpath($.contactinfo.contact.cellphone)"
+          },
+
+          "cbc:CompanyID": "#currentvalueatpath($.contactinfo.contact.companyname)",
+
+          "cbc:Name": "#currentvalueatpath($.contactinfo.contact.contactname)",
+
+          "email_1": {
+
+            "cbc:ElectronicMail": "#currentvalueatpath($.contactinfo.contact.email1)"
+          },
+
+          "email_2": {
+
+            "cbc:ElectronicMail": "#currentvalueatpath($.contactinfo.contact.email2)"
+          },
+
+          "cbc:Telefax": "#currentvalueatpath($.contactinfo.contact.fax)",
+
+          "cbc:FirstName": "#currentvalueatpath($.contactinfo.contact.firstname)",
+
+          "cbc:MiddleName": "#currentvalueatpath($.contactinfo.contact.initial)",
+
+          "cbc:FamilyName": "#currentvalueatpath($.contactinfo.contact.lastname)",
+
+          "cac:DeliveryAddress": {
+
+            "address_1": {
+
+              "cbc:StreetName": "#currentvalueatpath($.contactinfo.contact.mailaddress.address1)"
+            },
+
+            "address_2": {
+
+              "cbc:StreetName": "#currentvalueatpath($.contactinfo.contact.mailaddress.address2)"
+            },
+
+            "cbc:CityName": "#currentvalueatpath($.contactinfo.contact.mailaddress.city)",
+
+            "cac:Country": {
+
+              "cbc:Name": "#currentvalueatpath($.contactinfo.contact.mailaddress.country)",
+
+              "cbc:IdentificationCode": "#currentvalueatpath($.contactinfo.contact.mailaddress.isocountrycode)"
+            },
+
+            "cbc:LatitudeDirectionCode": "#currentvalueatpath($.contactinfo.contact.mailaddress.latitude)",
+
+            "cbc:LongitudeDirectionCode": "#currentvalueatpath($.contactinfo.contact.mailaddress.longitude)",
+
+            "cbc:CountrySubentityCode": "#currentvalueatpath($.contactinfo.contact.mailaddress.state)",
+
+            "cbc:PostalZone": "#currentvalueatpath($.contactinfo.contact.mailaddress.zip)"
+          },
+
+          "cac:OtherCommunication": {
+
+            "cbc:Value": "#currentvalueatpath($.contactinfo.contact.pager)"
+          },
+
+          "phone_1": {
+
+            "cbc:Telephone": "#currentvalueatpath($.contactinfo.contact.phone1)"
+          },
+
+          "phone_2": {
+
+            "cbc:Telephone": "#currentvalueatpath($.contactinfo.contact.phone2)"
+          },
+
+          "cbc:Title": "#currentvalueatpath($.contactinfo.contact.prefix)",
+
+          "cbc:PrintQualifier": "#currentvalueatpath($.contactinfo.contact.printas)",
+
+          "cac:Status": {
+
+            "cbc:Description": "#currentvalueatpath($.contactinfo.contact.status)"
+          },
+
+          "cac:ApplicableTaxCategory": {
+
+            "cbc:ID": "#currentvalueatpath($.contactinfo.contact.taxable)"
+          },
+
+          "cac:ClassifiedTaxCategory": {
+
+            "cbc:Name": "#currentvalueatpath($.contactinfo.contact.taxgroup)"
+          },
+
+          "cac:TaxCategory": {
+
+            "cbc:ID": "#currentvalueatpath($.contactinfo.contact.taxid)"
+          },
+
+          "url_1": {
+
+            "cbc:WebsiteURI": "#currentvalueatpath($.contactinfo.contact.url1)"
+          },
+
+          "url_2": {
+
+            "cbc:WebsiteURI": "#currentvalueatpath($.contactinfo.contact.url2)"
+          }
+        }
+      },
+
+      "contact_list": {
+
+        "contact_item": {
+
+          "#loopwithincontext($.contactlist.contactitem)": {
+
+            "category": "#currentvalueatpath($.category)",
+
+            "contact_name": "#currentvalueatpath($.contactname)"
+          }
+        }
+      },
+
+      "cbc:CreditLineAmount": "#currentvalueatpath($.creditlimit)",
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.currency)",
+
+      "cac:CustomerParty": {
+
+        "cbc:CustomerAssignedAccountID": "#currentvalueatpath($.customerid)"
+      },
+
+      "cbc:CustomizationID": {
+
+        "custom_field": {
+
+          "#loopwithincontext($.customfields.customfield)": {
+
+            "cbc:Name": "#currentvalueatpath($.customfieldname)",
+
+            "cbc:Value": "#currentvalueatpath($.customfieldvalue)"
+          }
+        }
+      },
+
+      "cust_rep_id": "#currentvalueatpath($.custrepid)",
+
+      "cbc:AccountTypeCode": "#currentvalueatpath($.custtype)",
+
+      "delivery_options": {
+
+        "delivery_option": "#currentvalueatpath($.deliveryoptions.deliveryoption)"
+      },
+
+      "gl_account_no": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.glaccountno)"
+      },
+
+      "gl_group": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.glgroup)"
+      },
+
+      "cbc:Name": "#currentvalueatpath($.name)",
+
+      "offset_gl_account_no": {
+
+        "cbc:AccountingCostCode": "#currentvalueatpath($.offsetglaccountno)"
+      },
+
+      "cac:CurrentStatus": {
+
+        "cbc:ConditionCode": "#currentvalueatpath($.onhold)"
+      },
+
+      "cbc:PrimaryAccountNumberID": "#currentvalueatpath($.parentid)",
+
+      "price_list": "#currentvalueatpath($.pricelist)",
+
+      "cac:SignatoryContact": {
+
+        "cbc:Name": "#currentvalueatpath($.primary.contactname)"
+      },
+
+      "record_no": "#currentvalueatpath($.recordno)",
+
+      "resale_no": "#currentvalueatpath($.resaleno)",
+
+      "cac:TransportMeans": {
+
+        "cbc:TransportMeansTypeCode": "#currentvalueatpath($.shippingmethod)"
+      },
+
+      "cac:DeliveryAddress": {
+
+        "cbc:Name": "#currentvalueatpath($.shipto.contactname)"
+      },
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.status)"
+      },
+
+      "cac:AdditionalDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.supdocid)"
+      },
+
+      "cac:TaxCategory": {
+
+        "cbc:ID": "#currentvalueatpath($.taxid)"
+      },
+
+      "cac:PaymentTerms": {
+
+        "cbc:Note": "#currentvalueatpath($.termname)"
+      },
+
+      "territory_id": "#currentvalueatpath($.territoryid)",
+
+      "total_due": "#currentvalueatpath($.totaldue)",
+
+      "visibility": {
+
+        "restricted_depts": {
+
+          "department_id": {
+
+            "#loopwithincontext($.visibility.restricted_depts)": {
+
+              "department_id": "#currentvalueatpath($.DEPARTMENTID)"
+            }
+          }
+        },
+
+        "restricted_locs": {
+
+          "location_id": {
+
+            "#loopwithincontext($.visibility.restricted_locs)": {
+
+              "location_id": "#currentvalueatpath($.LOCATIONID)"
+            }
+          }
+        },
+
+        "visibility_type": "#currentvalueatpath($.visibility.visibility_type)"
+      },
+
+      "vsoe_price_list": "#currentvalueatpath($.vsoepricelist)",
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }
+}

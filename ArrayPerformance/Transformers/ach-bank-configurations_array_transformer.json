@@ -1,0 +1,41 @@
+{
+  "ach-bank-configurations": {
+
+    "#loop($.items)": {
+
+      "ach_bank_id": "#currentvalueatpath($.ACHBANKID)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "destination_id": "#currentvalueatpath($.DESTINATIONID)",
+
+      "destination_name": "#currentvalueatpath($.DESTINATIONNAME)",
+
+      "eof_marker": "#currentvalueatpath($.EOFMARKER)",
+
+      "mega_entity_id": "#currentvalueatpath($.MEGAENTITYID)",
+
+      "mega_entity_key": "#currentvalueatpath($.MEGAENTITYKEY)",
+
+      "mega_entity_name": "#currentvalueatpath($.MEGAENTITYNAME)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "origin_id": "#currentvalueatpath($.ORIGINID)",
+
+      "origin_name": "#currentvalueatpath($.ORIGINNAME)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_url": "#currentvalueatpath($.RECORD_URL)",
+
+      "reference_code": "#currentvalueatpath($.REFERENCECODE)",
+
+      "status": "#currentvalueatpath($.STATUS)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}

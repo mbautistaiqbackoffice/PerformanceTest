@@ -1,0 +1,96 @@
+{
+  "bills-payments": {
+
+    "#loop($.items)": {
+
+      "auwhencreated": "#currentvalueatpath($.AUWHENCREATED)",
+
+      "cbc:PricingCurrencyCode": "#currentvalueatpath($.BASECURR)",
+
+      "bill_to_pay_to_contact_name": "#currentvalueatpath($.BILLTOPAYTOCONTACTNAME)",
+
+      "bill_to_pay_to_key": "#currentvalueatpath($.BILLTOPAYTOKEY)",
+
+      "bta_account": "#currentvalueatpath($.BTACCOUNT)",
+
+      "bt_original_bill_payment_id": "#currentvalueatpath($.BTORIGINALBILLPAYMENTID)",
+
+      "bt_ready": "#currentvalueatpath($.BTREADY)",
+
+      "cleared": "#currentvalueatpath($.CLEARED)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.CURRENCY)",
+
+      "description": "#currentvalueatpath($.DESCRIPTION)",
+
+      "doc_number": "#currentvalueatpath($.DOCNUMBER)",
+
+      "entity": "#currentvalueatpath($.ENTITY)",
+
+      "financial_account_currency": "#currentvalueatpath($.FINANCIALACCOUNTCURRENCY)",
+
+      "financial_account_name": "#currentvalueatpath($.FINANCIALACCOUNTNAME)",
+
+      "financial_entity": "#currentvalueatpath($.FINANCIALENTITY)",
+
+      "financial_entity_type": "#currentvalueatpath($.FINANCIALENTITYTYPE)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "cac:PaymentMeans": {
+
+        "cbc:PaymentMeansCode": "#currentvalueatpath($.PAYMENTMETHOD)"
+      },
+
+      "payment_method_key": "#currentvalueatpath($.PAYMENTMETHODKEY)",
+
+      "payment_priority": "#currentvalueatpath($.PAYMENTPRIORITY)",
+
+      "pr_batch": "#currentvalueatpath($.PRBATCH)",
+
+      "pr_batch_key": "#currentvalueatpath($.PRBATCHKEY)",
+
+      "raw_state": "#currentvalueatpath($.RAWSTATE)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "record_type": "#currentvalueatpath($.RECORDTYPE)",
+
+      "state": "#currentvalueatpath($.STATE)",
+
+      "status": "#currentvalueatpath($.STATUS)",
+
+      "system_generated": "#currentvalueatpath($.SYSTEMGENERATED)",
+
+      "total_due": "#currentvalueatpath($.TOTALDUE)",
+
+      "total_entered": "#currentvalueatpath($.TOTALENTERED)",
+
+      "total_paid": "#currentvalueatpath($.TOTALPAID)",
+
+      "total_selected": "#currentvalueatpath($.TOTALSELECTED)",
+
+      "trx_total_due": "#currentvalueatpath($.TRX_TOTALDUE)",
+
+      "trx_total_entered": "#currentvalueatpath($.TRX_TOTALENTERED)",
+
+      "trx_total_paid": "#currentvalueatpath($.TRX_TOTALPAID)",
+
+      "trx_total_selected": "#currentvalueatpath($.TRX_TOTALSELECTED)",
+
+      "user_key": "#currentvalueatpath($.USERKEY)",
+
+      "cbc:CompanyID": "#currentvalueatpath($.VENDORID)",
+
+      "vendorname": "#currentvalueatpath($.VENDORNAME)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "whenmodified": "#currentvalueatpath($.WHENMODIFIED)",
+
+      "whenpaid": "#currentvalueatpath($.WHENPAID)"
+    }
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "vendors": {
+
+    "#loop($.items)": {
+
+      "account_label": "#currentvalueatpath($.accountlabel)",
+
+      "cac:PayeeFinancialAccount": {
+
+        "cbc:ID": "#currentvalueatpath($.achaccountnumber)"
+      },
+
+      "ach_account_type": "#currentvalueatpath($.achaccounttype)",
+
+      "ach_bank_routing_number": "#currentvalueatpath($.achbankroutingnumber)",
+
+      "ach_enabled": "#currentvalueatpath($.achenabled)",
+
+      "ach_remittance_type": "#currentvalueatpath($.achremittancetype)",
+
+      "billing_type": "#currentvalueatpath($.billingtype)",
+
+      "check_enabled": "#currentvalueatpath($.checkenabled)",
+               
+      "cac:EventComment": {
+
+        "cbc:Comment": "#currentvalueatpath($.comments)"
+      },
+
+      "contact_info": {
+
+        "contact": {
+
+          "cellphone": "#currentvalueatpath($.contactinfo.contact.cellphone)",
+
+          "company_name": "#currentvalueatpath($.contactinfo.contact.companyname)",
+
+          "contact_name": "#currentvalueatpath($.contactinfo.contact.contactname)",
+
+          "email_1": "#currentvalueatpath($.contactinfo.contact.email1)",
+
+          "email_2": "#currentvalueatpath($.contactinfo.contact.email2)",
+
+          "fax": "#currentvalueatpath($.contactinfo.contact.fax)",
+
+          "first_name": "#currentvalueatpath($.contactinfo.contact.firstname)",
+
+          "initial": "#currentvalueatpath($.contactinfo.contact.initial)",
+
+          "last_name": "#currentvalueatpath($.contactinfo.contact.lastname)",
+
+          "mail_address": {
+
+            "address_1": "#currentvalueatpath($.contactinfo.contact.mailaddress.address1)",
+
+            "address_2": "#currentvalueatpath($.contactinfo.contact.mailaddress.address2)",
+
+            "city": "#currentvalueatpath($.contactinfo.contact.mailaddress.city)",
+
+            "country": "#currentvalueatpath($.contactinfo.contact.mailaddress.country)",
+
+            "iso_country_code": "#currentvalueatpath($.contactinfo.contact.mailaddress.isocountrycode)",
+
+            "latitude": "#currentvalueatpath($.contactinfo.contact.mailaddress.latitude)",
+
+            "longitude": "#currentvalueatpath($.contactinfo.contact.mailaddress.longitude)",
+
+            "state": "#currentvalueatpath($.contactinfo.contact.mailaddress.state)",
+
+            "zip": "#currentvalueatpath($.contactinfo.contact.mailaddress.zip)"
+          },
+
+          "pager": "#currentvalueatpath($.contactinfo.contact.pager)",
+
+          "phone_1": "#currentvalueatpath($.contactinfo.contact.phone1)",
+
+          "phone2": "#currentvalueatpath($.contactinfo.contact.phone2)",
+
+          "prefix": "#currentvalueatpath($.contactinfo.contact.prefix)",
+
+          "print_as": "#currentvalueatpath($.contactinfo.contact.printas)",
+
+          "status": "#currentvalueatpath($.contactinfo.contact.status)",
+
+          "taxable": "#currentvalueatpath($.contactinfo.contact.taxable)",
+
+          "tax_group": "#currentvalueatpath($.contactinfo.contact.taxgroup)",
+
+          "tax_id": "#currentvalueatpath($.contactinfo.contact.taxid)",
+
+          "url_1": "#currentvalueatpath($.contactinfo.contact.url1)",
+
+          "url_2": "#currentvalueatpath($.contactinfo.contact.url2)"
+        }
+      },
+
+      "contact_list": {
+
+        "contact_item": {
+
+          "#loopwithincontext($.contactlist.contactitem)": {
+
+            "category": "#currentvalueatpath($.category)",
+
+            "contact_name": "#currentvalueatpath($.contactname)"
+          }
+        }
+      },
+
+      "contact_to_1099": {
+
+        "contact_name": "#currentvalueatpath($.contactto1099.contactname)"
+      },
+
+      "cbc:CreditLineAmount": "#currentvalueatpath($.creditlimit)",
+
+      "cbc:CurrencyCode": "#currentvalueatpath($.currency)",
+
+      "display_term_discount": "#currentvalueatpath($.displaytermdiscount)",
+
+      "disploc_acct_no_check": "#currentvalueatpath($.displocacctnocheck)",
+
+      "do_not_cut_check": "#currentvalueatpath($.donotcutcheck)",
+
+      "form_1099": "#currentvalueatpath($.form1099)",
+
+      "cac:TaxCategoryType": {
+
+        "cbc:ID": "#currentvalueatpath($.form1099box)"
+      },
+
+      "cac:ApplicableTaxCategory": {
+
+        "cbc:ID": "#currentvalueatpath($.form1099type)"
+      },
+
+      "gl_account_no": "#currentvalueatpath($.glaccountno)",
+
+      "merge_payment_req": "#currentvalueatpath($.mergepaymentreq)",
+
+      "cbc:Name": "#currentvalueatpath($.name)",
+
+      "cac:TaxCategory": {
+
+        "cbc:ID": "#currentvalueatpath($.name1099)"
+      },
+
+      "cbc:AccountingCostCode": "#currentvalueatpath($.offsetglaccountno)",
+
+      "cbc:OneTimeChargeType": "#currentvalueatpath($.onetime)",
+
+      "cac:CurrentStatus": {
+
+        "cbc:ConditionCode": "#currentvalueatpath($.onhold)"
+      },
+
+      "cbc:PrimaryAccountNumberID": "#currentvalueatpath($.parentid)",
+
+      "payment_notify": "#currentvalueatpath($.paymentnotify)",
+
+      "pay_to": {
+
+        "cac:PayeeParty": {
+
+          "cac:PartyName": {
+
+            "cbc:Name": "#currentvalueatpath($.payto.contactname)"
+
+          }
+        }
+      },
+
+      "pm_plus_email": "#currentvalueatpath($.pmplusemail)",
+
+      "pm_plus_fax": "#currentvalueatpath($.pmplusfax)",
+
+      "pm_plus_remittance_type": "#currentvalueatpath($.pmplusremittancetype)",
+
+      "primary": {
+
+        "contact_name": "#currentvalueatpath($.primary.contactname)"
+      },
+
+      "record_no": "#currentvalueatpath($.recordno)",
+
+      "return_to": {
+
+        "cac:SellerSupplierParty": {
+
+          "cac:Party": {
+
+            "cac:PartyName": {
+
+              "cbc:Name": "#currentvalueatpath($.returnto.contactname)"
+            }
+          }
+        }
+      },
+
+      "service_state": "#currentvalueatpath($.servicestate)",
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.status)"
+      },
+
+      "cac:AdditionalDocumentReference": {
+
+        "cbc:ID": "#currentvalueatpath($.supdocid)"
+      },
+
+      "tax_id": {
+
+        "cac:TaxCategory": {
+
+          "cbc:ID": "#currentvalueatpath($.taxid)"
+        }
+      },
+
+      "cac:PaymentTerms": {
+
+        "cbc:Note": "#currentvalueatpath($.termname)"
+      },
+
+      "total_due": "#currentvalueatpath($.totaldue)",
+
+      "vendor_account_no": "#currentvalueatpath($.vendoraccountno)",
+
+      "cbc:CompanyID": "#currentvalueatpath($.vendorid)",
+
+      "vend_type": "#currentvalueatpath($.vendtype)",
+
+      "visibility": {
+
+        "visibility_type": "#currentvalueatpath($.visibility.visibility_type)"
+      },
+
+      "when_modified": "#currentvalueatpath($.whenmodified)",
+
+      "wire_account_number": "#currentvalueatpath($.wireaccountnumber)",
+
+      "wire_account_type": "#currentvalueatpath($.wireaccounttype)",
+
+      "wire_bank_name": "#currentvalueatpath($.wirebankname)",
+
+      "wire_bank_routing_number": "#currentvalueatpath($.wirebankroutingnumber)",
+
+      "wire_enabled": "#currentvalueatpath($.wireenabled)"
+    }
+  }
+}

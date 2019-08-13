@@ -1,0 +1,17 @@
+{
+  "classes": {
+
+    "#loop($.items)": {
+
+      "description": "#currentvalueatpath($.description)",
+
+      "key": "#currentvalueatpath($.key)",
+
+      "name": "#currentvalueatpath($.name)",
+
+      "status": "#currentvalueatpath($.status)",
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }
+}

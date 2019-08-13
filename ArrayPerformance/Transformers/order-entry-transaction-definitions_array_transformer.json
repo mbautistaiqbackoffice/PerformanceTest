@@ -1,0 +1,138 @@
+{
+  "order-entry-transaction-definitions": {
+
+    "#loop($.items)": {
+
+      "allowed_it_bill_to": "#currentvalueatpath($.ALLOWEDITBILLTO)",
+
+      "allowed_it_ship_to": "#currentvalueatpath($.ALLOWEDITSHIPTO)",
+
+      "category": "#currentvalueatpath($.CATEGORY)",
+
+      "contact_title_1": "#currentvalueatpath($.CONTACTTITLE1)",
+
+      "contact_title_2": "#currentvalueatpath($.CONTACTTITLE2)",
+
+      "conv_type": "#currentvalueatpath($.CONVTYPE)",
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "create_type": "#currentvalueatpath($.CREATETYPE)",
+
+      "credit_limit_check": "#currentvalueatpath($.CREDITLIMITCHECK)",
+
+      "cust_vend": "#currentvalueatpath($.CUST_VEND)",
+
+      "del_type": "#currentvalueatpath($.DELTYPE)",
+
+      "dept_override": "#currentvalueatpath($.DEPTOVERRIDE)",
+
+      "description": "#currentvalueatpath($.DESCRIPTION)",
+
+      "discount_on_extended_price": "#currentvalueatpath($.DISCOUNT_ON_EXTENDEDPRICE)",
+
+      "display_base_currency": "#currentvalueatpath($.DISPLAY_BASECURRENCY)",
+
+      "doc_class": "#currentvalueatpath($.DOCCLASS)",
+
+      "doc_id": "#currentvalueatpath($.DOCID)",
+
+      "edit_type": "#currentvalueatpath($.EDITTYPE)",
+
+      "enable_override_tax": "#currentvalueatpath($.ENABLEOVERRIDETAX)",
+
+      "enable_payments": "#currentvalueatpath($.ENABLEPAYMENTS)",
+
+      "enable_project_actual_billings": "#currentvalueatpath($.ENABLEPROJECTACTUALBILLINGS)",
+
+      "enable_renewals": "#currentvalueatpath($.ENABLERENEWALS)",
+
+      "enable_rev_rec": "#currentvalueatpath($.ENABLEREVREC)",
+
+      "enable_schedule": "#currentvalueatpath($.ENABLESCHEDULE)",
+
+      "enable_costing": "#currentvalueatpath($.ENABLE_COSTING)",
+
+      "enable_discount_charge": "#currentvalueatpath($.ENABLE_DISCOUNT_CHARGE)",
+
+      "enable_seq_num": "#currentvalueatpath($.ENABLE_SEQNUM)",
+
+      "exch_rate_types": {
+
+        "name": "#currentvalueatpath($.EXCHRATETYPES.NAME)"
+      },
+
+      "exch_rate_type_id": "#currentvalueatpath($.EXCH_RATE_TYPE_ID)",
+
+      "inherit_source_doc_no": "#currentvalueatpath($.INHERIT_SOURCE_DOCNO)",
+
+      "in_out": "#currentvalueatpath($.IN_OUT)",
+
+      "loc_override": "#currentvalueatpath($.LOCOVERRIDE)",
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "override_exch_rate_type": "#currentvalueatpath($.OVERRIDE_EXCH_RATE_TYPE)",
+
+      "override_price": "#currentvalueatpath($.OVERRIDE_PRICE)",
+
+      "prc_list_key": "#currentvalueatpath($.PRCLISTKEY)",
+
+      "preserve_seq_num": "#currentvalueatpath($.PRESERVE_SEQNUM)",
+
+      "price_list_id": "#currentvalueatpath($.PRICELISTID)",
+
+      "print_title": "#currentvalueatpath($.PRINTTITLE)",
+
+      "record_no": "#currentvalueatpath($.RECORDNO)",
+
+      "renew_only_converted_line": "#currentvalueatpath($.RENEWONLYCONVERTEDLINE)",
+
+      "require_discount_memo": "#currentvalueatpath($.REQUIRE_DISCOUNT_MEMO)",
+
+      "sale_pur_trans": "#currentvalueatpath($.SALE_PUR_TRANS)",
+
+      "sequence": "#currentvalueatpath($.SEQUENCE)",
+
+      "show_expanded_totals": "#currentvalueatpath($.SHOWEXPANDEDTOTALS)",
+
+      "show_title_1": "#currentvalueatpath($.SHOWTITLE1)",
+
+      "show_title_2": "#currentvalueatpath($.SHOWTITLE2)",
+
+      "show_totals": "#currentvalueatpath($.SHOW_TOTALS)",
+
+      "spcl_prc_list_key": "#currentvalueatpath($.SPCLPRCLISTKEY)",
+
+      "special_price_list_id": "#currentvalueatpath($.SPECIAL_PRICELISTID)",
+
+      "status": "#currentvalueatpath($.STATUS)",
+
+      "td_creation_rule": "#currentvalueatpath($.TD_CREATION_RULE)",
+
+      "term_key": "#currentvalueatpath($.TERMKEY)",
+
+      "term_name": "#currentvalueatpath($.TERM_NAME)",
+
+      "updates_gl": "#currentvalueatpath($.UPDATES_GL)",
+
+      "updates_inv": "#currentvalueatpath($.UPDATES_INV)",
+
+      "updates_price_list_id": "#currentvalueatpath($.UPDATES_PRICELISTID)",
+
+      "upd_prc_list_key": "#currentvalueatpath($.UPDPRCLISTKEY)",
+
+      "user_perm": "#currentvalueatpath($.USERPERM)",
+
+      "warehouse_sel_method": "#currentvalueatpath($.WAREHOUSESELMETHOD)",
+
+      "warn_on_low_qty": "#currentvalueatpath($.WARNONLOWQTY)",
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)",
+
+      "xsl_template": "#currentvalueatpath($.XSLTEMPLATE)"
+    }
+  }
+}

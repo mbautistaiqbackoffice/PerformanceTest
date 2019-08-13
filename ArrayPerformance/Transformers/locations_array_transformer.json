@@ -1,0 +1,45 @@
+{
+  "locations": {
+
+    "#loop($.items)": {
+
+      "cbc:EndDate": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.enddate.year),-),#concat(#currentvalueatpath($.enddate.month),-)),#currentvalueatpath($.enddate.day))"
+      },
+
+      "cac:PhysicalLocation": {
+
+        "cbc:ID": "#currentvalueatpath($.locationid)"
+      },
+
+      "cbc:Name": "#currentvalueatpath($.name)",
+
+      "cbc:PrimaryAccountNumberID": "#currentvalueatpath($.parentid)",
+
+      "cac:SignatoryContact": {
+
+        "cbc:Name": "#currentvalueatpath($.primary.contactname)"
+      },
+
+      "cac:DeliveryAddress": {
+
+        "cbc:Name": "#currentvalueatpath($.shipto.contactname)"
+      },
+
+      "cbc:StartDate": {
+
+        "cbc:Date": "#concat(#concat(#concat(#currentvalueatpath($.startdate.year),-),#concat(#currentvalueatpath($.startdate.month),-)),#currentvalueatpath($.startdate.day))"
+      },
+
+      "cac:Status": {
+
+        "cbc:Description": "#currentvalueatpath($.status)"
+      },
+
+      "cbc:OriginalOriginalJobID": "#currentvalueatpath($.supervisorid)",
+
+      "when_modified": "#currentvalueatpath($.whenmodified)"
+    }
+  }
+}

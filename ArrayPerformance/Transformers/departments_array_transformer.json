@@ -1,0 +1,50 @@
+{
+  "departments": {
+
+    "#loop($.items)": {
+
+      "created_by": "#currentvalueatpath($.CREATEDBY)",
+
+      "cbc:JobTitle": "#currentvalueatpath($.CUSTTITLE)",
+
+      "cac:Party": {
+
+        "cac:PartyIdentification": {
+
+          "cbc:ID": "#currentvalueatpath($.DEPARTMENTID)"
+        }
+      },
+
+      "modified_by": "#currentvalueatpath($.MODIFIEDBY)",
+
+      "cbc:PrimaryAccountNumberID": "#currentvalueatpath($.PARENTID)",
+
+      "parent_key": "#currentvalueatpath($.PARENTKEY)",
+
+      "cac:OrderReference": {
+
+        "cbc:ID": "#currentvalueatpath($.RECORDNO)"
+      },
+
+      "cac:Status": {
+
+        "cbc:Text": "#currentvalueatpath($.STATUS)"
+      },
+
+      "cbc:OriginalOriginalJobID": "#currentvalueatpath($.SUPERVISORID)",
+
+      "supervisor_key": "#currentvalueatpath($.SUPERVISORKEY)",
+
+      "supervisor_name": "#currentvalueatpath($.SUPERVISORNAME)",
+
+      "cac:ClassificationCategory": {
+
+        "cbc:Name": "#currentvalueatpath($.TITLE)"
+      },
+
+      "when_created": "#currentvalueatpath($.WHENCREATED)",
+
+      "when_modified": "#currentvalueatpath($.WHENMODIFIED)"
+    }
+  }
+}
