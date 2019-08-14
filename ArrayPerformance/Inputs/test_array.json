@@ -1,0 +1,21 @@
+﻿[{
+  "RECORDNO": 1,
+  "CREATEDBY": "Created By 1",
+  "ARRAYDATA": [{
+      "RECORDNO": 2,
+      "CREATEDBY": "Created By 2",
+      "MODIFIEDBY": "Modified By 2"
+    },
+    {
+      "RECORDNO": 3,
+      "CREATEDBY": "Created By 3"
+    },
+    {
+      "RECORDNO": 4,
+      "MODIFIEDBY": "Modified By 4"
+    },
+    {
+      "RECORDNO": 5
+    }
+  ]
+}]
