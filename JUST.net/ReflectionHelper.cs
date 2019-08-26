@@ -3,6 +3,9 @@
 
 // ReSharper disable StringLiteralTypo
 // ReSharper disable InconsistentlySynchronizedField
+
+using System.Collections.Generic;
+
 namespace JUST
 {
     #region Usings
@@ -133,11 +136,26 @@ namespace JUST
             if (!convertParameters)
                 return methodInfo.Invoke(instance, parameters);
 
+            var typedParameters = new List<object>();
             var parameterInfos = methodInfo.GetParameters();
+            for (var i = 0; i < parameterInfos.Length; i++)
+            {
+                var pType = parameterInfos[i].ParameterType;
+                typedParameters.Add(GetTypedValue(pType, parameters[i], context.EvaluationMode));
+            }
 
-            return methodInfo.Invoke(instance,
-                                     parameterInfos.Select((t, i) => GetTypedValue(t.ParameterType, parameters[i], context.EvaluationMode))
-                                                   .ToArray());
+            try
+            {
+                return methodInfo.Invoke(instance, typedParameters.ToArray());
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    throw ex.InnerException;
+                }
+                throw;
+            }
         }
 
         private static object GetInstance(Type type, object val = null)

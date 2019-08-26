@@ -124,19 +124,19 @@ namespace ArrayPerformance
         public void TransformTypeArray()
         {
             OutputList = new ConcurrentBag<string>();
-            if (ParseArray)
-            {
-                var outputs = new ConcurrentBag<string>();
-                var itemArray = JArray.Parse(InputJson);
-
-                foreach (var item in itemArray)
-                {
-                    outputs.Add(JsonTransformer.Transform(TransformerToken, item.ToString()));
-                }
-
-                OutputList.Add($"{{ \"{Type}s\": [ " + string.Join(",", outputs) + " ] }");
-            }
-            else
+//            if (ParseArray)
+//            {
+//                var outputs = new ConcurrentBag<string>();
+//                var itemArray = JArray.Parse(InputJson);
+//
+//                foreach (var item in itemArray)
+//                {
+//                    outputs.Add(JsonTransformer.Transform(TransformerToken, item.ToString()));
+//                }
+//
+//                OutputList.Add($"{{ \"{Type}s\": [ " + string.Join(",", outputs) + " ] }");
+//            }
+//            else
             {
                 var modifiedInput = "{ \"items\": " + InputJson + " }";                
                 OutputList.Add(JsonTransformer.Transform(TransformerToken, modifiedInput));

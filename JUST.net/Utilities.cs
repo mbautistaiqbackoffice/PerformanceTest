@@ -2,6 +2,7 @@
 
 namespace JUST
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -12,7 +13,7 @@ namespace JUST
     /// <summary>
     ///     Utilities for the JUST.NET package.
     /// </summary>
-    public class Utilities
+    public static class Utilities
     {
         /// <summary>
         ///     Flatten a JSON string to the corresponding paths and values.
@@ -200,5 +201,24 @@ namespace JUST
 
             return resultObj;
         }
+        
+        public static JToken GetNestedData(object item)
+        {
+            var result = new JArray();
+            if (item is Array items)
+            {
+                foreach (var innerItem in items)
+                {
+                    result.Add(GetNestedData(innerItem));
+                }
+            }
+            else
+            {
+                return JToken.FromObject(item);
+            }
+            
+            return result;
+        }
+
     }
 }

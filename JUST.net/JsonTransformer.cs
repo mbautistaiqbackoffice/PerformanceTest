@@ -97,10 +97,12 @@ namespace JUST
             return result;
         }
 
-        public static JObject Transform(JObject transformer, JObject input, JUSTContext localContext = null)
+        public static JObject Transform(JObject transformer, JToken input, JUSTContext localContext = null)
         {
+            (localContext ?? GlobalContext).Input = input;
             var inputJson = JsonConvert.SerializeObject(input);
-            return Transform(transformer, inputJson, localContext);
+            RecursiveEvaluate(transformer, inputJson, null, null, localContext);
+            return transformer;
         }
 
         public static JObject Transform(JObject transformerToken, string inputJson, JUSTContext localContext = null)
@@ -556,34 +558,11 @@ namespace JUST
                                         JToken childToken,
                                         ref List<string> loopProperties)
         {
-            var arrayTokenString = property.Name.Substring(6, property.Name.Length - 7);
+            ExpressionHelper.TryParseFunctionNameAndArguments(property.Name, out var functionName, out var arguments);
+            var token = currentArrayToken != null && functionName == "loopwithincontext" ? currentArrayToken : JsonConvert.DeserializeObject<JToken>(inputJson);
+            var arrayTokenString = ParseArgument(inputJson, parentArray, currentArrayToken, arguments, localContext) as string;
 
-            var jsonToLoad = inputJson;
-            if (currentArrayToken != null && property.Name.Contains("#loopwithincontext"))
-            {
-                arrayTokenString = property.Name.Substring(19, property.Name.Length - 20);
-                jsonToLoad = JsonConvert.SerializeObject(currentArrayToken);
-            }
-
-            JToken token = JsonConvert.DeserializeObject<JObject>(jsonToLoad);
             JToken arrayToken;
-            if (arrayTokenString.Contains("#"))
-            {
-                var hashIndex = arrayTokenString.IndexOf("#", StringComparison.Ordinal);
-                var preHashString = arrayTokenString.Substring(0, hashIndex);
-                var indexOfEndFunction = GetIndexOfFunctionEnd(arrayTokenString);
-                if (indexOfEndFunction > hashIndex && hashIndex > 0)
-                {
-                    var sub2 = arrayTokenString.Substring(indexOfEndFunction + 1, arrayTokenString.Length - indexOfEndFunction - 1);
-                    var functionResult = ParseFunction(arrayTokenString.Substring(hashIndex, indexOfEndFunction - hashIndex + 1),
-                                                       inputJson,
-                                                       parentArray,
-                                                       currentArrayToken,
-                                                       localContext).ToString();
-                    arrayTokenString = preHashString + functionResult + sub2;
-                }
-            }
-
             try
             {
                 arrayToken = token.SelectToken(arrayTokenString);
@@ -628,39 +607,41 @@ namespace JUST
             loopProperties.Add(property.Name);
         }
 
-        private static void RecursiveEvaluate(JToken parentToken,
-                                                                                                                                                                                                              string inputJson,
+        private static void RecursiveEvaluate(JToken parentToken, string inputJson,
                                               JArray parentArray,
                                               JToken currentArrayToken,
                                               JUSTContext localContext)
         {
             if (parentToken == null)
                 return;
-
-            var tokens = parentToken.Children().ToArray();
-
+            
+            List<JToken> tokensToAdd = null;
             List<JToken> tokensToCopy = null;
-            Dictionary<string, JToken> tokensToReplace = null;
             List<JToken> tokensToDelete = null;
+            List<JToken> tokensToForm = null;
+            Dictionary<string, JToken> tokensToReplace = null;
+
             List<string> loopProperties = null;
             JArray arrayToForm = null;
-            List<JToken> tokensToForm = null;
-            List<JToken> tokensToAdd = null;
+            
+            var tokens = parentToken.Children().ToArray();
             var tokensLength = tokens.Length;
 
             // Note: Optimized for performance (foreach is slower)
             for (var i = 0; i < tokensLength; i++)
             {
                 var childToken = tokens[i];
-                if (childToken.Type == JTokenType.Array && (parentToken as JProperty).Name.Trim() != "#")
+                if (childToken.Type == JTokenType.Array && (parentToken as JProperty)?.Name.Trim() != "#")
                 {
+                    var arrayToken = childToken as JArray;
                     var itemsToAdd = new List<object>();
+                    object itemToAdd;
                     var childTokens = childToken.Children().ToArray();
                     var childTokensLength = childTokens.Length;
                     for (var j = 0; j < childTokensLength; j++)
                     {
                         var arrEl = childTokens[j];
-                        object itemToAdd = arrEl.Value<JToken>();
+                        itemToAdd = arrEl.Value<JToken>();
 
                         if (arrEl.Type == JTokenType.String && arrEl.ToString().Trim().StartsWith("#"))
                             itemToAdd = ParseFunction(arrEl.ToString(), inputJson, parentArray, currentArrayToken, localContext);
@@ -668,47 +649,66 @@ namespace JUST
                         itemsToAdd.Add(itemToAdd);
                     }
 
-                    var arrayToken = new JArray(itemsToAdd);
+                    arrayToken.RemoveAll();
+                    for (var j = 0; j < itemsToAdd.Count; ++j)
+                    {
+                        itemToAdd = itemsToAdd[j];
+                        if (itemToAdd is Array items)
+                        {
+                            foreach (var item in items)
+                            {
+                                arrayToken.Add(Utilities.GetNestedData(item));
+                            }
+                        }
+                        else
+                        {
+                            arrayToken.Add(JToken.FromObject(itemToAdd));
+                        }
+                    }
                 }
-
+                
                 var isLoop = false;
                 if (childToken.Type == JTokenType.Property)
                 {
                     var property = childToken as JProperty;
-                    if (property.Name == null)
-                        continue;
-
-                    if (property.Name == "#" && property.Value.Type == JTokenType.Array)
-                        ProcessArray(inputJson, localContext, property, ref tokensToCopy, ref tokensToReplace, ref tokensToDelete);
-
-                    if (property.Value.ToString().Trim().StartsWith("#")
-                        && !property.Name.Contains("#eval")
-                        && !property.Name.Contains("#ifgroup")
-                        && !property.Name.Contains("#loop"))
+                    if (property.Name != null)
                     {
-                        var newValue = ParseFunction(property.Value.ToString(), inputJson, parentArray, currentArrayToken, localContext);
-                        property.Value = GetToken(newValue, localContext);
+                        if (property.Name == "#" && property.Value.Type == JTokenType.Array)
+                            ProcessArray(inputJson, localContext, property, ref tokensToCopy, ref tokensToReplace,
+                                         ref tokensToDelete);
+
+                        if (property.Value.ToString().Trim().StartsWith("#")
+                            && !property.Name.Contains("#eval")
+                            && !property.Name.Contains("#ifgroup")
+                            && !property.Name.Contains("#loop"))
+                        {
+                            var newValue = ParseFunction(property.Value.ToString(), inputJson, parentArray,
+                                                         currentArrayToken, localContext);
+                            property.Value = GetToken(newValue, localContext);
+                        }
+
+                        /* For looping*/
+                        isLoop = false;
+
+                        if (property.Name.Contains("#eval"))
+                            ProcessEval(inputJson, localContext, property, ref loopProperties, ref tokensToAdd);
+
+                        if (property.Name.Contains("#ifgroup"))
+                        {
+                            ProcessGroup(inputJson, parentArray, currentArrayToken, localContext, property,
+                                         ref loopProperties, childToken, ref tokensToForm);
+                            isLoop = true;
+                        }
+
+                        if (property.Name.Contains("#loop"))
+                        {
+                            ProcessLoop(inputJson, parentArray, currentArrayToken, localContext, property,
+                                        ref arrayToForm, childToken, ref loopProperties);
+                            isLoop = true;
+                        }
+
+                        /*End looping */
                     }
-
-                    /* For looping*/
-                    isLoop = false;
-
-                    if (property.Name.Contains("#eval"))
-                        ProcessEval(inputJson, localContext, property, ref loopProperties, ref tokensToAdd);
-
-                    if (property.Name.Contains("#ifgroup"))
-                    {
-                        ProcessGroup(inputJson, parentArray, currentArrayToken, localContext, property, ref loopProperties, childToken, ref tokensToForm);
-                        isLoop = true;
-                    }
-
-                    if (property.Name.Contains("#loop"))
-                    {
-                        ProcessLoop(inputJson, parentArray, currentArrayToken, localContext, property, ref arrayToForm, childToken, ref loopProperties);
-                        isLoop = true;
-                    }
-
-                    /*End looping */
                 }
 
                 if (childToken.Type == JTokenType.String
